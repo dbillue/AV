@@ -1,0 +1,5 @@
+DECLARE
+	v_msg VARCHAR2(50) := '';
+BEGIN
+	DBMS_OUTPUT.PUT_LINE(v_msg);
+END;

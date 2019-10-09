@@ -1,0 +1,72 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : HPLaptop
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+   DNS Suffix Search List. . . . . . : hsd1.ga.comcast.net.
+
+Ethernet adapter Ethernet:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) Ethernet Connection I218-LM
+   Physical Address. . . . . . . . . : 5C-B9-01-AC-BE-2F
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Local Area Connection* 1:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter
+   Physical Address. . . . . . . . . : 80-19-34-02-DF-2E
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Local Area Connection* 2:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter #2
+   Physical Address. . . . . . . . . : 82-19-34-02-DF-2D
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . : hsd1.ga.comcast.net.
+   Description . . . . . . . . . . . : Intel(R) Dual Band Wireless-N 7260
+   Physical Address. . . . . . . . . : 80-19-34-02-DF-2D
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   IPv6 Address. . . . . . . . . . . : 2601:ce:4001:2160:65c7:2c36:5bca:a8af(Preferred) 
+   Temporary IPv6 Address. . . . . . : 2601:ce:4001:2160:709a:a599:70be:1af(Preferred) 
+   Link-local IPv6 Address . . . . . : fe80::65c7:2c36:5bca:a8af%13(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.0.14(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : Wednesday, May 29, 2019 10:18:34 AM
+   Lease Expires . . . . . . . . . . : Wednesday, May 29, 2019 11:48:36 AM
+   Default Gateway . . . . . . . . . : fe80::9e3d:cfff:fedf:24bb%13
+                                       192.168.0.1
+   DHCP Server . . . . . . . . . . . : 192.168.0.1
+   DHCPv6 IAID . . . . . . . . . . . : 159390004
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-24-5D-BF-F1-5C-B9-01-AC-BE-2F
+   DNS Servers . . . . . . . . . . . : 2001:558:feed::1
+                                       2001:558:feed::2
+                                       75.75.75.75
+                                       75.75.76.76
+                                       2001:558:feed::1
+                                       2001:558:feed::2
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Ethernet adapter Bluetooth Network Connection:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Bluetooth Device (Personal Area Network)
+   Physical Address. . . . . . . . . : 80-19-34-02-DF-31
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
