@@ -86,4 +86,18 @@ SELECT TRIM(LEADING '*' FROM '**ORACLE**') FROM dual;
 SELECT TRIM(TRAILING '*' FROM '**ORACLE**') FROM dual;
 SELECT TRIM(BOTH '*' FROM '**ORACLE**') FROM dual;
 
+-- <><><><><><><><><><*>--<
+
+-- LENGTH --
+SELECT 
+    CONCAT(first_name, ' ' || last_name) "Full Name", 
+    LENGTH(CONCAT(first_name, ' ' || last_name)) "Name Length" 
+FROM employees ORDER BY last_name;
+
+-- <><><><><><><><><><*>--<
+
+-- INSTR --
+SELECT INSTR('Coca Cola', 'Co', 1, 1) FROM dual;
+SELECT INSTR('Coca Cola', 'Co', -1, 1) FROM dual;
+
 SELECT * FROM orders;
