@@ -93,3 +93,27 @@ BEGIN
   CLOSE c_dept_cursor;
 END;
 /
+
+--===========================--
+--     Reference Cursors     --
+--===========================--
+DECLARE
+  TYPE EmpCurType IS REF CURSOR;      -- weak REFERENCE cursor
+  emp_cv EmpCurType;                  -- cursor variable
+  emp_rec employees%ROWTYPE;          -- conposite variable
+  sql_stmt VARCHAR2(200);
+  my_job VARCHAR2(10) := 'ST_CLERK';  -- to beused as bind variable
+BEGIN
+	sql_stmt :=   'SELECT * FROM employees 
+                WHERE job_id = :j';
+  
+  -- Open cursor
+  OPEN emp_cv FOR sql_stmt USING my_job;  -- OPEN - FOR statement
+  LOOP
+    FETCH emp_cv INTO emp_rec;
+    EXIT WHEN emp_cv%NOTFOUND;
+      dbms_output.put_line(emp_rec.employee_id || ', ' || emp_rec.first_name || emp_rec.last_name || ', ' || emp_rec.department_id);
+  END LOOP;
+  CLOSE emp_cv;
+END;
+/
