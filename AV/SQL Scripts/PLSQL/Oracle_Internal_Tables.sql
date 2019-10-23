@@ -23,7 +23,7 @@ Alter Session Container
 /*==========================--
 Alter Session Schema
 --==========================*/
---ALTER SESSION SET CURRENT_SCHEMA = <schema name<
+--ALTER SESSION SET CURRENT_SCHEMA = <schema name>
 
 /*==========================--
 Unlock User (performed by user SYS) / Reset Password
@@ -79,3 +79,9 @@ dba_users
 ****/
 DESC dba_users;
 SELECT * FROM dba_users;
+
+/****
+USER_SYS_PRIVS
+****/
+DESC USER_SYS_PRIVS;
+SELECT * from user_sys_privs;
