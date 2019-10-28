@@ -141,62 +141,86 @@ END job_pkg;
 --===============<><>==================--
 
 CREATE OR REPLACE PACKAGE emp_pkg IS
-PROCEDURE print_employee
-(
-  emp_record EMPLOYEES%ROWTYPE
-);
-PROCEDURE add_employee
-(
-  p_first_name employees.first_name%TYPE,
-  p_last_name employees.last_name%TYPE,
-  p_email employees.email%TYPE,
-  p_job employees.job_id%TYPE DEFAULT 'IT',
-  p_mgr employees.manager_id%TYPE DEFAULT 145,
-  p_sal employees.salary%TYPE DEFAULT 1000,
-  p_comm employees.commission_pct%TYPE DEFAULT 0,
-  p_deptid employees.department_id%TYPE DEFAULT 60
-);
-PROCEDURE add_employee
-(
-  p_first_name employees.first_name%TYPE,
-  p_last_name employees.last_name%TYPE,
-  p_dept_id employees.department_id%TYPE
-);
-PROCEDURE get_employee
-(
-  p_empid IN employees.employee_id%TYPE,
-  p_sal OUT employees.salary%TYPE,
-  p_job OUT employees.job_id%TYPE
-);
-FUNCTION get_employee (p_emp_id IN employees.employee_id%TYPE) RETURN EMPLOYEES%ROWTYPE;
-FUNCTION get_employee (p_family_name IN employees.last_name%TYPE) RETURN EMPLOYEES%ROWTYPE;
-FUNCTION valid_deptid(p_deptid IN departments.department_id%TYPE) RETURN BOOLEAN;
-END emp_pkg;
-/
-
-CREATE OR REPLACE PACKAGE BODY emp_pkg IS
-  FUNCTION valid_deptid
+  PROCEDURE init_departments;
+  
+  PROCEDURE print_employee
   (
-    p_deptid IN departments.department_id%TYPE
-  ) RETURN BOOLEAN IS v_dummy PLS_INTEGER;
-  BEGIN
-    SELECT 1 INTO v_dummy FROM departments WHERE Department_Id IN (p_deptid);
-    RETURN TRUE;
-    EXCEPTION
-      WHEN NO_DATA_FOUND THEN
-        RETURN FALSE;
-  END valid_deptid;
+    emp_record EMPLOYEES%ROWTYPE
+  );
   
   PROCEDURE add_employee
   (
     p_first_name employees.first_name%TYPE,
     p_last_name employees.last_name%TYPE,
-    p_email employees.email%TYPE,
     p_job employees.job_id%TYPE DEFAULT 'IT',
+    p_deptid employees.department_id%TYPE DEFAULT 60,
+    p_email employees.email%TYPE,
     p_mgr employees.manager_id%TYPE DEFAULT 145,
     p_sal employees.salary%TYPE DEFAULT 1000,
-    p_comm employees.commission_pct%TYPE DEFAULT 0,
-    p_deptid employees.department_id%TYPE DEFAULT 60
+    p_comm employees.commission_pct%TYPE DEFAULT 0
+  );
+  
+  PROCEDURE add_employee
+  (
+    p_first_name employees.first_name%TYPE,
+    p_last_name employees.last_name%TYPE,
+    p_job_id employees.job_id%TYPE,
+    p_dept_id employees.department_id%TYPE
+  );
+  
+  PROCEDURE get_employee
+  (
+    p_empid IN employees.employee_id%TYPE,
+    p_sal OUT employees.salary%TYPE,
+    p_job OUT employees.job_id%TYPE
+  );
+  
+  FUNCTION get_employee (p_emp_id IN employees.employee_id%TYPE) RETURN EMPLOYEES%ROWTYPE;
+  FUNCTION get_employee (p_family_name IN employees.last_name%TYPE) RETURN EMPLOYEES%ROWTYPE;
+  FUNCTION valid_deptid(p_deptid IN departments.department_id%TYPE) RETURN BOOLEAN;
+END emp_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY emp_pkg IS
+  TYPE boolean_tab_type IS TABLE OF BOOLEAN INDEX BY BINARY_INTEGER;
+  valid_departments boolean_tab_type;
+  
+  -- PROCEDURE init_departments
+  PROCEDURE init_departments
+  IS
+  BEGIN
+    FOR rec IN (SELECT department_id FROM departments)
+      LOOP
+        valid_departments(rec.department_id) := TRUE;
+      END LOOP;
+  END init_departments;
+
+  -- PROCEDURE print_employee
+  PROCEDURE print_employee
+  (
+    emp_record EMPLOYEES%ROWTYPE
+  )
+  IS
+  BEGIN
+    Dbms_Output.Put_Line(emp_record.department_id || ', ' 
+                        || emp_record.employee_id || ', '
+                        || emp_record.first_name || ', '
+                        || emp_record.last_name || ', '
+                        || emp_record.job_id || ', '
+                        || emp_record.salary);
+  END print_employee;
+  
+  -- PROCEDURE add_employee
+  PROCEDURE add_employee
+  (
+    p_first_name employees.first_name%TYPE,
+    p_last_name employees.last_name%TYPE,
+    p_job employees.job_id%TYPE DEFAULT 'IT',
+    p_deptid employees.department_id%TYPE DEFAULT 60,
+    p_email employees.email%TYPE,
+    p_mgr employees.manager_id%TYPE DEFAULT 145,
+    p_sal employees.salary%TYPE DEFAULT 1000,
+    p_comm employees.commission_pct%TYPE DEFAULT 0
   ) IS
   BEGIN
     /*
@@ -215,24 +239,29 @@ CREATE OR REPLACE PACKAGE BODY emp_pkg IS
     END IF;
   END add_employee;
   
+  -- PROCEDURE add_employee
   PROCEDURE add_employee
   (
     p_first_name employees.first_name%TYPE,
     p_last_name employees.last_name%TYPE,
+    p_job_id employees.job_id%TYPE,
     p_dept_id employees.department_id%TYPE
   ) IS
     v_email employees.email%TYPE;
   BEGIN
     v_email := SUBSTR(INITCAP(p_first_name), 1, 1) || SUBSTR(UPPER(p_last_name), 1, 7);
-    --Dbms_Output.Put_Line('add_employee.H1 ' || v_email);
+    Dbms_Output.Put_Line('p_first_name: ' || p_first_name || ' p_last_name: ' || p_last_name || ' p_job: ' || p_job_id || ' v_email: ' || v_email || ' p_dept_id: ' || p_dept_id);
     emp_pkg.add_employee
     (
       p_first_name,
       p_last_name,
+      p_job_id,
+      p_dept_id,
       v_email
     );
-  END add_employee;  
+  END add_employee;
   
+  -- PROCEDURE get_employee
   PROCEDURE get_employee
   (
     p_empid IN employees.employee_id%TYPE,
@@ -243,6 +272,7 @@ CREATE OR REPLACE PACKAGE BODY emp_pkg IS
     SELECT salary, job_id INTO p_sal, p_job FROM employees WHERE employee_id = p_empid;
   END get_employee;
   
+  -- FUNCTION get_employee
   FUNCTION get_employee
   (
     p_emp_id employees.employee_id%TYPE
@@ -252,6 +282,7 @@ CREATE OR REPLACE PACKAGE BODY emp_pkg IS
     RETURN rec_employee;
   END get_employee;
   
+  -- FUNCTION get_employee
   FUNCTION get_employee
   (
     p_family_name employees.last_name%TYPE
@@ -262,20 +293,21 @@ CREATE OR REPLACE PACKAGE BODY emp_pkg IS
     RETURN emp_record;
   END get_employee;
   
-  PROCEDURE print_employee
+  -- FUNCTION valid_deptid
+  FUNCTION valid_deptid
   (
-    emp_record EMPLOYEES%ROWTYPE
-  )
-  IS
+    p_deptid IN departments.department_id%TYPE
+  ) RETURN BOOLEAN IS v_dummy PLS_INTEGER;
   BEGIN
-    Dbms_Output.Put_Line(emp_record.department_id || ', ' 
-                        || emp_record.employee_id || ', '
-                        || emp_record.first_name || ', '
-                        || emp_record.last_name || ', '
-                        || emp_record.job_id || ', '
-                        || emp_record.salary);
-  END;  
+    RETURN valid_departments.exists(p_deptid);
+    RETURN TRUE;
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+        RETURN FALSE;
+  END valid_deptid;
   
+  BEGIN
+    init_departments;
 END emp_pkg;
 /
 
