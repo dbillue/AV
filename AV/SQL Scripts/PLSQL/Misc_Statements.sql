@@ -15,3 +15,37 @@ Description:  Misc Statements
 -- CREATE TABLE employee_names (full_name VARCHAR2(250));
 -- DROP TABLE departments;
 -- DROP TABLE employees;
+
+-- DBMS_DB_VERSION --
+---------------------
+SET SERVEROUTPUT ON
+BEGIN
+	DBMS_OUTPUT.PUT_LINE(DBMS_DB_VERSION.VERSION);
+END;
+
+-- ACID (Atomicity, Consistency, Isolation, and Durability) KEYWORDS --
+------------------------------------------------------------------------
+COMMIT
+ROLLBACK
+SAVEPOINT (name)
+ROLLBACK TO SAVEPOINT (name)
+
+-- PREPROCESSOR / CONDITIONAL COMPILE --
+----------------------------------------
+-- $IF, $THEN, $ELSE, $END
+
+-- Obfuscated Code --
+---------------------
+DBMS_DDL.CREATE_WRAPPPED
+
+-- Encrypted Code --
+--------------------
+WRAP utility --(11G only)
+
+-- Database Job Start / Stop --
+--------------------------------
+DBMS_SCHEDULER.RUN_JOB('SCHEMA.JOB_NAME');
+DBMS_SCHEDULER.STOP_JOB('SCHEMA.JOB_NAME');
+DBMS_SCHEDULER.DROP_JOB('SCHEMA.JOB_NAME');
+
+

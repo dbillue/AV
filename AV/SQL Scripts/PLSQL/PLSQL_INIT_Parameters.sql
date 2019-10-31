@@ -44,5 +44,6 @@ NLS_LENGTH_SEMANTICS
 ========================--*/
 
 /*--======================
-PLSQL_CCFLAGS
+PLSQL_CCFLAGS (Conditional Compilation)
 ========================--*/
+ALTER SESSION SET PLSQL_CCFLAGS = 'plsql_ccflags:true, debug:true, debug:0';

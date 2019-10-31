@@ -7,31 +7,6 @@ Description:  Oracle Internal Tables
 SET SERVEROUTPUT ON;
 SET AUTOPRINT ON;
 
-/*==========================--
-Alter Users Password
---==========================*/
---SHOW user;
--- *Change password* 
---ALTER USER sys IDENTIFIED BY <password>;
-
-/*==========================--
-Alter Session Container
---==========================*/
---ALTER SESSION SET CONTAINER = <container>
---ALTER SESSION SET CONTAINER = <orclpgdb>
-
-/*==========================--
-Alter Session Schema
---==========================*/
---ALTER SESSION SET CURRENT_SCHEMA = <schema name>
-
-/*==========================--
-Unlock User (performed by user SYS) / Reset Password
---==========================*/
---ALTER USER <user> ACCOUNT UNLOCK
---ALTER USER <user> IDENTIFIED BY <password>
-
-
 /**********
 V$VERSION;
 **********/
@@ -91,3 +66,11 @@ USER_SYS_PRIVS
 ****/
 DESC USER_SYS_PRIVS;
 SELECT * from user_sys_privs;
+
+/****
+USER_DEPENDENCIES
+****/
+DESC USER_DEPENDENCIES;
+SELECT name, type, referenced_name, referenced_type
+FROM user_dependencies
+WHERE referenced_name IN ('Employees');
