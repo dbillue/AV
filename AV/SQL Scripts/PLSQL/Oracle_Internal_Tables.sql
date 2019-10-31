@@ -51,6 +51,12 @@ desc v$instance;
 SELECT name, cdb, con_id FROM v$instance;
 
 /****
+USER_PLSQL_OBJECT_SETTINGS
+****/
+desc USER_PLSQL_OBJECT_SETTINGS;
+SELECT * FROM user_plsql_object_settings;
+
+/****
 USER_OBJECT
 ****/
 desc user_object;
