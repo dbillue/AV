@@ -74,3 +74,9 @@ DESC USER_DEPENDENCIES;
 SELECT name, type, referenced_name, referenced_type
 FROM user_dependencies
 WHERE referenced_name IN ('Employees');
+
+/****
+USER_COLL_TYPES
+****/
+DESC USER_COLL_TYPES;
+SELECT * from USER_COLL_TYPES;
