@@ -54,6 +54,7 @@ USER_TABLES
 ****/ 
 DESC user_tables;
 SELECT table_name FROM user_tables;
+SELECT * FROM user_tables;
 
 /****
 dba_users
@@ -80,3 +81,9 @@ USER_COLL_TYPES
 ****/
 DESC USER_COLL_TYPES;
 SELECT * from USER_COLL_TYPES;
+
+/****
+ALL_DIRECTORIES
+****/
+DESC ALL_DIRECTORIES;
+SELECT * from ALL_DIRECTORIES;
