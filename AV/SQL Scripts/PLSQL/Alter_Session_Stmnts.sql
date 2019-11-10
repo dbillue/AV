@@ -30,3 +30,8 @@ Unlock User (performed by user SYS) / Reset Password
 --==========================*/
 --ALTER USER <user> ACCOUNT UNLOCK
 --ALTER USER <user> IDENTIFIED BY <password>
+
+/*==========================--
+Compilation Type
+--==========================*/
+--ALTER SYSTEM SET PLSQL_CODE_TYPE = NATIVE / COMPILED
