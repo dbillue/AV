@@ -6,6 +6,7 @@ Description:  Oracle Internal Tables
 
 SET SERVEROUTPUT ON;
 SET AUTOPRINT ON;
+SET TIMING ON;
 
 /**********
 V$VERSION;
@@ -24,6 +25,19 @@ V$INSTANCE;
 **********/
 desc v$instance;
 SELECT name, cdb, con_id FROM v$instance;
+SELECT status, database_status from v$instance;
+
+/**********
+V$PARAMETER;
+**********/
+desc V$PARAMETER;
+SELECT name, value FROM v$parameter;
+
+/**********
+v$result_cache_statitics
+**********/
+desc v$result_cache_statitics;
+SELECT * FROM v$result_cache_statitics;
 
 /****
 ALL_PLSQL_OBJECT_SETTINGS
@@ -54,6 +68,19 @@ SELECT * FROM user_source
 WHERE
   1 = 1
   --AND name = 'objectname'
+  
+/****
+USER_ARGUMENTS
+****/
+DESC USER_ARGUMENTS;
+SELECT * FROM USER_ARGUMENTS
+
+  
+/****
+USER_PROCEDURES
+****/
+DESC USER_PROCEDURES;
+SELECT * FROM USER_PROCEDURES
 
 /****
 USER_TABLES
@@ -61,6 +88,23 @@ USER_TABLES
 DESC user_tables;
 SELECT table_name FROM user_tables;
 SELECT * FROM user_tables;
+
+/****
+USER_IDENTIFIERS
+****/ 
+DESC USER_IDENTIFIERS;
+SELECT * FROM USER_IDENTIFIERS
+WHERE 1 = 1
+  AND USAGE = 'DECLARATION'
+ORDER BY OBJECT_TYPE, USAGE_ID
+
+/****
+USER_DEPENDENCIES
+****/
+DESC USER_DEPENDENCIES;
+SELECT name, type, referenced_name, referenced_type
+FROM user_dependencies
+WHERE referenced_name IN ('Employees');
 
 /****
 dba_users
@@ -75,14 +119,6 @@ DESC USER_SYS_PRIVS;
 SELECT * from user_sys_privs;
 
 /****
-USER_DEPENDENCIES
-****/
-DESC USER_DEPENDENCIES;
-SELECT name, type, referenced_name, referenced_type
-FROM user_dependencies
-WHERE referenced_name IN ('Employees');
-
-/****
 USER_COLL_TYPES
 ****/
 DESC USER_COLL_TYPES;
@@ -93,3 +129,14 @@ ALL_DIRECTORIES
 ****/
 DESC ALL_DIRECTORIES;
 SELECT * from ALL_DIRECTORIES;
+
+/****
+ALL_ARGUMENTS
+****/
+DESC ALL_ARGUMENTS;
+SELECT * from ALL_ARGUMENTS
+WHERE 1 = 1
+  AND package_name IN ('CREDIT_CARD_PKG');
+
+SELECT DISTINCT(PACKAGE_NAME) FROM ALL_ARGUMENTS
+ORDER BY 1
