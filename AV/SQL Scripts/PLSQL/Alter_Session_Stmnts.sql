@@ -6,6 +6,7 @@ Description:  ALTER Session Statements
 
 SET SERVEROUTPUT ON;
 SET AUTOPRINT ON;
+SET TIMING ON;
 
 /*==========================--
 Alter Users Password
@@ -35,3 +36,14 @@ Unlock User (performed by user SYS) / Reset Password
 Compilation Type
 --==========================*/
 --ALTER SYSTEM SET PLSQL_CODE_TYPE = NATIVE / COMPILED
+
+/*==========================--
+ALTER DATABASE OPEN
+--==========================*/
+--ALTER DATABASE OPEN;
+--SELECT status, database_status from v$instance;
+
+/*==========================--
+PL SCOPE
+--==========================*/
+--ALTER SESSION SET PLSCOPE_SETTINGS = 'IDENTIFIERS: ALL';
