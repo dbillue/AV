@@ -5,6 +5,11 @@ Description:  Package Credit Card Package w/ Nested Table
 *****************************/
 
 CREATE OR REPLACE PACKAGE credit_card_pkg IS
+  FUNCTION cust_card_info
+  (
+    p_cust_id NUMBER, 
+    p_card_info IN OUT typ_cr_card_nst 
+  ) RETURN BOOLEAN;
   PROCEDURE update_card_info
   (
     p_cust_id NUMBER,
@@ -19,6 +24,27 @@ END credit_card_pkg;
 /
 
 CREATE OR REPLACE PACKAGE BODY credit_card_pkg IS
+  FUNCTION cust_card_info
+  (
+    p_cust_id NUMBER, 
+    p_card_info IN OUT typ_cr_card_nst
+  ) RETURN BOOLEAN 
+  IS
+    v_card_info_exists BOOLEAN;
+  BEGIN
+      SELECT credit_cards INTO p_card_info
+      FROM customers
+      WHERE customer_id = p_cust_id;
+      
+      IF p_card_info.EXISTS(1) THEN
+        v_card_info_exists := TRUE;
+      ELSE
+        v_card_info_exists := FALSE;
+      END IF;
+      
+      RETURN v_card_info_exists;
+  END cust_card_info;
+  
   PROCEDURE update_card_info
   (
     p_cust_id NUMBER,
@@ -26,14 +52,9 @@ CREATE OR REPLACE PACKAGE BODY credit_card_pkg IS
     p_card_no VARCHAR2
   ) IS
     v_card_info typ_cr_card_nst;
-    i INTEGER;
+    i SIMPLE_INTEGER := 0;
   BEGIN
-    SELECT credit_cards INTO v_card_info
-    FROM customers
-    WHERE customer_id = p_cust_id;
-  
-    
-    IF v_card_info.EXISTS(1) THEN
+    IF cust_card_info(p_cust_id, v_card_info) THEN
       i := v_card_info.LAST;
       v_card_info.EXTEND(1);
       v_card_info(i+1) := typ_cr_card(p_card_type, p_card_no);
@@ -41,9 +62,7 @@ CREATE OR REPLACE PACKAGE BODY credit_card_pkg IS
       UPDATE customers
         SET credit_cards = v_card_info
         WHERE customer_id = p_cust_id;
-        
     ELSE
-    
       UPDATE customers
         SET credit_cards = typ_cr_card_nst(
                                 typ_cr_card(p_card_type, p_card_no))
@@ -57,19 +76,13 @@ CREATE OR REPLACE PACKAGE BODY credit_card_pkg IS
     p_cust_id NUMBER
   ) IS
     v_card_info typ_cr_card_nst;
-    i INTEGER;
+    i SIMPLE_INTEGER := 0;
   BEGIN
-    SELECT credit_cards INTO v_card_info
-    FROM customers
-    WHERE customer_id = p_cust_id;
-    
-    IF v_card_info.EXISTS(1) THEN
-      i := v_card_info.FIRST;
-      WHILE i IS NOT NULL LOOP
-        DBMS_OUTPUT.PUT_LINE('Card Type: ' || v_card_info(i).card_type ||
-                              ' Card No: ' || v_card_info(i).card_num);
-        i := v_card_info.NEXT(i);
-      END LOOP;
+    IF cust_card_info(p_cust_id, v_card_info) THEN
+        FOR idx IN v_card_info.FIRST .. v_card_info.LAST LOOP
+        DBMS_OUTPUT.PUT_LINE('Card Type: ' || v_card_info(idx).card_type ||
+                              ' Card No: ' || v_card_info(idx).card_num);
+        END LOOP;
     ELSE
       DBMS_OUTPUT.PUT_LINE('Customer has no credit card on file');
     END IF;
