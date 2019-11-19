@@ -4,7 +4,7 @@
 # Description:	File open and read / print to output
 ##############################
 
-$opened = open(FH, '<', 'C:\Data\Resume_files\trace.html');
+$opened = open(FH, '<', 'C:\Data\Orders\Closed_Orders.csv');
 $line = <FH>;
 #print ("First Line: "  $line);
 while(<FH>)
