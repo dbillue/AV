@@ -11,7 +11,7 @@ public class JDBC_Procedure_Call
         CallableStatement cstmt = null;
         
         String procSQL = "";
-        Integer customer_id = 149;
+        Integer customer_id = 108;
         Integer order_count = 0;
         
         try
