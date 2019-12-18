@@ -7,12 +7,16 @@ class JDBC_Query_UDT
 {
     public static void main(String args[]) throws SQLException
     {
+        SQLWarning warning = null;
         Connection conn = null;
         Statement stmt = null;
         ResultSet rset = null;
         
         try
         {
+            // Utils.
+            JDBC_Utils_Warning printWarning = new JDBC_Utils_Warning();
+            
             // Connect to database.
             OracleDataSource ods = new OracleDataSource();
             ods.setURL("jdbc:oracle:thin:JC/GreenMile@192.168.0.4:1521/orclpdb");
@@ -21,6 +25,18 @@ class JDBC_Query_UDT
             // Query database.
             stmt = conn.createStatement();
             rset = stmt.executeQuery("select * from stores order by store_no");
+            
+            warning = stmt.getWarnings();
+            if (warning != null)
+            {
+                printWarning.printWarnings(warning);
+            }
+            
+            warning = rset.getWarnings();
+            if (warning != null)
+            {
+                printWarning.printWarnings(warning);
+            }
             
             // Write data to console.
             while(rset.next())
@@ -88,9 +104,10 @@ class JDBC_Query_UDT
             }
         } catch (Exception e) {
             System.out.println("-------------");
-            System.out.println("Error: " + e.getMessage());   
+            System.out.println("Error: " + e.getMessage());
+            
         } finally {
-             // Close / release database objects.
+            // Close / release database objects.
             if(conn != null)
             {
                 conn.close();
