@@ -10,7 +10,9 @@ class File_Read
         String[] strData = null;
         FileReader fleRead = null;
         Scanner fleScanner = null;
+        List<String> personList = new ArrayList();
         JDBC_File_Insert oDataInsert = new JDBC_File_Insert();
+        JDBC_Batch_Insert oBatchInsert = new JDBC_Batch_Insert();
         
         String flePath = "C:\\Source\\AV\\Java\\Java21\\src\\org\\av\\out.csv";
         String personId = null, lastName = null, firstName = null, data = null;
@@ -39,6 +41,8 @@ class File_Read
            {
              data = fleScanner.nextLine();
              strData = data.split(",");
+             
+             /*
              for(iRead = 0; iRead <= strData.length; iRead++)
              {
                  switch(iRead)
@@ -56,14 +60,20 @@ class File_Read
                          break;
                  }
              }
+             */
+             
+             // Add data to list.
+             personList.add(data);
              
              // Write data to console.
-             System.out.println(personId + "," + lastName + "," + firstName);
+             //System.out.println(personId + "," + lastName + "," + firstName);
 
-             
              // Write data to database.  Call JDBC_File_Insert.java.
-             insertSuccess = oDataInsert.InsertData(Integer.parseInt(personId), lastName, firstName);
+             // insertSuccess = oDataInsert.InsertData(Integer.parseInt(personId), lastName, firstName);
            }
+           
+           // Write to database using batch class. Call JDBC_Batch_Insert.java.
+           oBatchInsert.InsertData(personList);
            
            // Close Scanner class.
            fleScanner.close(); 
