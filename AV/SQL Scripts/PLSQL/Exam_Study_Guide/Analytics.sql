@@ -6,9 +6,14 @@ Description:  Exam Study Guide Having Clause Section
 
 SELECT * FROM aircraft_types;
 
--- LAG :: Begin row processing at specified value.
+-- LAG :: Begin row processing at beginning of recordset at specified value.
 SELECT act_name, act_body_style, act_seats,
-LAG(act_seats, 1) OVER (ORDER BY act_seats) 
+LAG(act_seats, 2, 0) OVER (ORDER BY act_seats) 
+FROM aircraft_types;
+
+-- LEAD :: Begin row processing at end of recordset at specified value.
+SELECT act_body_style, act_seats,
+LEAD(act_seats, 1, 0) OVER (ORDER BY act_seats) LEAD_BY_STYLE
 FROM aircraft_types;
 
 -- PERCENTILE_CONT
@@ -26,11 +31,6 @@ SELECT act_name, act_body_style, act_seats,
 AVG(act_seats) OVER (PARTITION BY act_body_style ORDER BY act_seats) AS AVG_BY_STYLE
 from aircraft_types
 WHERE ACT_BODY_STYLE = 'Narrow';
-
--- LEAD
-SELECT act_body_style, act_seats,
-LEAD(act_seats, 1, 0) OVER (ORDER BY act_seats) LEAD_BY_STYLE
-FROM aircraft_types;
 
 -- LISTAGG
 SELECT LISTAGG(act_name, ': ')
