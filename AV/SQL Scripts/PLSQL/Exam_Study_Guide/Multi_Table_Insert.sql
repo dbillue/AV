@@ -39,7 +39,7 @@ TRUNCATE TABLE emps_unknown;
 
 SELECT SYSDATE FROM dual;
 
-SELECT emp_first || ' ' || emp_last AS "Name", 
+SELECT emp_first || ' ' || emp_last AS "Name",
       TRUNC(MONTHS_BETWEEN(SYSDATE, start_date), 0) AS "Months_Employed",
       TRUNC(MONTHS_BETWEEN(SYSDATE, start_date)/12, 0) AS "Years_Employed"
 FROM employees ORDER BY "Months_Employed";
