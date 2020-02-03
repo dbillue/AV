@@ -26,17 +26,17 @@ CREATE TABLE dbo.Persons
 	[Country] VARCHAR(50) NOT NULL,
 	[City] VARCHAR(50) NOT NULL,
 	[StateId] INT NOT NULL,
-	[DateOfBirth] DATE NOT NULL,
+	[DateOfBirth] DATETIME NOT NULL,
 	[CreateDate] DATETIME DEFAULT GETDATE()
 )
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'States')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'BirthState')
 
 BEGIN
-	DROP TABLE States
+	DROP TABLE BirthState
 END
 
-CREATE TABLE dbo.States
+CREATE TABLE dbo.BirthState
 (
 	[StateId] INT IDENTITY(1,1) PRIMARY KEY,
 	[State] VARCHAR(50) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE dbo.PetTypes
 -- Begin Create Relationships
 
 ALTER TABLE [dbo].[Persons]  WITH CHECK ADD  CONSTRAINT [FK_Persons_States] FOREIGN KEY([StateId])
-REFERENCES [dbo].[States] ([StateId])
+REFERENCES [dbo].[BirthState] ([StateId])
 GO
 
 ALTER TABLE [dbo].[Persons] CHECK CONSTRAINT [FK_Persons_States]
