@@ -48,3 +48,14 @@ dotnet_resources.txt
 dotnet_3.0.3.txt
 dotnet.txt
 cscHelp.txt
+/AV/VS/FamilyDemoAPIv2/.config
+/AV/VS/FamilyDemoAPIv2/.vs/FamilyDemoAPIv2
+/AV/VS/FamilyDemoAPIv2/bin
+/AV/VS/FamilyDemoAPIv2/obj
+/AV/VS/FamilyDemoAPIv2/Properties
+/AV/VS/FamilyDemoAPIv2/web.config
+/AV/VS/FamilyDemoAPIv2/FamilyDemoAPIv2.xml
+/AV/VS/FamilyDemoAPIv2/FamilyDemoAPIv2.csproj.user
+/AV/VS/FamilyDemoAPIv2/FamilyDemoAPIv2.csproj
+/AV/VS/FamilyDemoAPIv2/appsettings.json
+/AV/VS/FamilyDemoAPIv2/appsettings.Development.json
