@@ -1,1 +1,1 @@
-Code repo to assit with daily coding efforts pulling on example apps and tutorials.
+Code repo to assist with daily coding efforts pulling on example apps and tutorials.
