@@ -65,3 +65,8 @@ cscHelp.txt
 /AV/VS/UnitTest/NUnitDemo.Tests/bin/Debug/netcoreapp2.1
 /AV/VS/UnitTest/NUnitDemo.Tests/obj/Debug/netcoreapp2.1
 /AV/VS/UnitTest/NUnitDemo.Tests/obj
+/AV/VS/MockUnitTesting/.vs
+/AV/VS/MockUnitTesting/Loans/bin/Debug/netcoreapp2.1
+/AV/VS/MockUnitTesting/Loans/obj
+/AV/VS/MockUnitTesting/Loans.Tests/bin/Debug/netcoreapp2.1
+/AV/VS/MockUnitTesting/Loans.Tests/obj
