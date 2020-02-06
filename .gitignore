@@ -59,3 +59,9 @@ cscHelp.txt
 /AV/VS/FamilyDemoAPIv2/FamilyDemoAPIv2.csproj
 /AV/VS/FamilyDemoAPIv2/appsettings.json
 /AV/VS/FamilyDemoAPIv2/appsettings.Development.json
+/AV/VS/UnitTest/.vs
+/AV/VS/UnitTest/Demo/bin/Debug/netcoreapp2.1
+/AV/VS/UnitTest/Demo/obj
+/AV/VS/UnitTest/NUnitDemo.Tests/bin/Debug/netcoreapp2.1
+/AV/VS/UnitTest/NUnitDemo.Tests/obj/Debug/netcoreapp2.1
+/AV/VS/UnitTest/NUnitDemo.Tests/obj
