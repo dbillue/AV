@@ -70,3 +70,14 @@ cscHelp.txt
 /AV/VS/MockUnitTesting/Loans/obj
 /AV/VS/MockUnitTesting/Loans.Tests/bin/Debug/netcoreapp2.1
 /AV/VS/MockUnitTesting/Loans.Tests/obj
+/AV/VS/TDD/DeskBooker/.vs/DeskBooker
+/AV/VS/TDD/DeskBooker/DeskBooker.Core/bin
+/AV/VS/TDD/DeskBooker/DeskBooker.Core/obj
+/AV/VS/TDD/DeskBooker/DeskBooker.Core.Tests/obj
+/AV/VS/TDD/DeskBooker/DeskBooker.DataAccess/bin
+/AV/VS/TDD/DeskBooker/DeskBooker.DataAccess/obj
+/AV/VS/TDD/DeskBooker/DeskBooker.DataAccess.Tests/obj
+/AV/VS/TDD/DeskBooker/DeskBooker.Web/bin
+/AV/VS/TDD/DeskBooker/DeskBooker.Web/obj
+/AV/VS/TDD/DeskBooker/DeskBooker.Web/Properties
+/AV/VS/TDD/DeskBooker/DeskBooker.Web.Tests/obj
