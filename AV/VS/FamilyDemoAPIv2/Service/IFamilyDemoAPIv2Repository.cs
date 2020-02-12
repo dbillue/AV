@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FamilyDemoAPIv2.Entities;
+﻿using FamilyDemoAPIv2.Entities;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.ResourceParameters;
+using System;
 
 
 namespace FamilyDemoAPIv2.Service
