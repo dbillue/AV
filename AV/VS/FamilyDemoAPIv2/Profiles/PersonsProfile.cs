@@ -1,6 +1,4 @@
-﻿using System;
-using FamilyDemoAPIv2.Models;
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace FamilyDemoAPIv2.Profiles
 {

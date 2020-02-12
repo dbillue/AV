@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
-using FamilyDemoAPIv2.Entities;
+﻿using AutoMapper;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.Models;
 using FamilyDemoAPIv2.ResourceParameters;
 using FamilyDemoAPIv2.Service;
-using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace FamilyDemoAPIv2.Controllers
 {
@@ -23,12 +20,16 @@ namespace FamilyDemoAPIv2.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IFamilyDemoAPIv2Repository _familyDemoAPIv2Repository;
+        private readonly ILogger _logger;
+        private readonly Logger _log;
 
         // ctor.
-        public PersonsController(IFamilyDemoAPIv2Repository familyDemoAPIv2Repository, IMapper mapper)
+        public PersonsController(IFamilyDemoAPIv2Repository familyDemoAPIv2Repository, IMapper mapper, ILogger<PersonsController> logger)
         {
             _familyDemoAPIv2Repository = familyDemoAPIv2Repository;
             _mapper = mapper;
+            _logger = logger;
+            _log = new Logger(_logger);
         }
 
         /// <summary>
@@ -40,19 +41,31 @@ namespace FamilyDemoAPIv2.Controllers
         [HttpPost(Name = "AddPerson")]
         public ActionResult<AddPersonDTO> AddPerson(AddPersonDTO person)
         {
-            var personEntity = _mapper.Map<Entities.Person>(person); // Map to entity.
-            _familyDemoAPIv2Repository.AddPerson(personEntity); // Add.
-            _familyDemoAPIv2Repository.Save(); // Save.
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:Persons,API:GetPersons,DateTime:" + DateTime.Now.ToString());
 
-            var personToReturn = _mapper.Map<AddPersonDTO>(personEntity); // Map to DTO.
+            try
+            { 
+                var personEntity = _mapper.Map<Entities.Person>(person); // Map to entity.
+                _familyDemoAPIv2Repository.AddPerson(personEntity); // Add.
+                _familyDemoAPIv2Repository.Save(); // Save.
 
-            // Return person added.
-            // return Ok(personToReturn);
+                var personToReturn = _mapper.Map<AddPersonDTO>(personEntity); // Map to DTO.
 
-            // Return link in header.
-            return CreatedAtRoute("GetPerson",
-                new { personToReturn.PersonId },
-                personToReturn);
+                // Log addition of new person.
+                _log.WriteInformation("New person added", personToReturn);
+
+                // Return person added.
+                // return Ok(personToReturn);
+
+                // Return link in header.
+                return CreatedAtRoute("GetPerson",
+                    new { personToReturn.PersonId },
+                    personToReturn);
+            } catch (Exception ex) {
+                _log.WriteError(ex.Message, ex.InnerException);
+                return NoContent();
+            }
         }
 
         /// <summary>
@@ -138,6 +151,9 @@ namespace FamilyDemoAPIv2.Controllers
         [HttpGet(Name = "GetPersons")]
         public ActionResult<IEnumerable<GetPersonDTO>> GetPersons([FromQuery] PersonResourceParameters authorsResourceParameters) // Pass in paged parameters via URI.
         {
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:Persons,API:GetPersons,DateTime:" + DateTime.Now.ToString());
+
             // Obtain list of persons (PagedList<T>) using paged parameter values.
             var personsFromRepo = _familyDemoAPIv2Repository.GetPersons(authorsResourceParameters);
 

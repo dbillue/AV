@@ -81,3 +81,10 @@ cscHelp.txt
 /AV/VS/TDD/DeskBooker/DeskBooker.Web/obj
 /AV/VS/TDD/DeskBooker/DeskBooker.Web/Properties
 /AV/VS/TDD/DeskBooker/DeskBooker.Web.Tests/obj
+/AV/VS/NetCoreLogging/.vs/AspNetCore-Effective-Logging
+/AV/VS/NetCoreLogging/BookClub.API/obj
+/AV/VS/NetCoreLogging/BookClub.API/BookClub.API.csproj.user
+/AV/VS/NetCoreLogging/BookClub.Data/obj
+/AV/VS/NetCoreLogging/BookClub.Entities/obj
+/AV/VS/NetCoreLogging/BookClub.UI/obj
+/AV/VS/NetCoreLogging/BookClub.UI/BookClub.UI.csproj.user
