@@ -1,0 +1,3 @@
+﻿scaffold-dbcontext 
+	-provider Microsoft.EntityFrameworkCore.SqlServer 
+	-connection "Data Source=MACHINE-NAME\\SQLSERVER-NAME;Initial Catalog=DATABASE-NAME;Integrated Security=False;User=DBUSER;Password=DBPASSWORD;Connection Timeout=180"
