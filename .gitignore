@@ -81,3 +81,14 @@ cscHelp.txt
 /AV/VS/TDD/DeskBooker/DeskBooker.Web/obj
 /AV/VS/TDD/DeskBooker/DeskBooker.Web/Properties
 /AV/VS/TDD/DeskBooker/DeskBooker.Web.Tests/obj
+/AV/VS/FamilyAPIDemoEFCore/.vs/FamilyAPIDemoEFCore/v15/Server/sqlite3
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore/obj/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Data/bin/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Data/obj/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Domain/bin/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Domain/obj/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyDemoAPIDemoEFCore.UI/bin/Debug
+/AV/VS/FamilyAPIDemoEFCore/FamilyDemoAPIDemoEFCore.UI/obj/Debug
+/AV/VS/FamilyAPIDemoEFCore/packages
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore
+/AV/VS/FamilyAPIDemoEFCoreStandard

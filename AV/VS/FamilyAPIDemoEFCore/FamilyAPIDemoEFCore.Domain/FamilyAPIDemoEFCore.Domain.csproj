@@ -97,10 +97,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battle.cs" />
-    <Compile Include="Family.cs" />
+    <Compile Include="Battles.cs" />
+    <Compile Include="Families.cs" />
+    <Compile Include="FamilyBattles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quote.cs" />
+    <Compile Include="Quotes.cs" />
+    <Compile Include="SecretIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
