@@ -21,8 +21,6 @@ AV/CSharp/OraConn/OraConn/obj/OraConn.csproj.nuget.dgspec.json
 AV/CSharp/OraConn/OraConn/obj/OraConn.csproj.nuget.g.props
 AV/CSharp/OraConn/OraConn/obj/OraConn.csproj.nuget.g.targets
 AV/CSharp/OraConn/OraConn/obj/project.assets.json
-AV/Java/Java21/build/built-jar.properties
-AV/Java/Java21/build/built-jar.properties
 AV/Java/Java21/build/classes/com/java21days/ComicBooks.rs
 AV/Java/Java21/build/classes/org/av/Out.csv
 AV/Java/Java21/build/classes/org/av/Out.dat
@@ -49,9 +47,5 @@ dotnet_3.0.3.txt
 dotnet.txt
 cscHelp.txt
 AV/Java/Java21/build/built-jar.properties
-AV/Java/Java21/build/built-jar.properties
-AV/Java/Java21/dist/Java21.jar
 AV/Java/Java21/src/Calc_Tax.java
 AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
-AV/Java/Java21/dist/Java21.jar
-AV/Java/Java21/build/built-jar.properties
