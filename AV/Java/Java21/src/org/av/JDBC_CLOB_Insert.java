@@ -19,7 +19,8 @@ class JDBC_CLOB_Insert
         {
             // Connect to database.
             OracleDataSource ods = new OracleDataSource();
-            ods.setURL("jdbc:oracle:thin:JC/GreenMile@192.168.0.4:1521/orclpdb");
+            // ods.setURL("jdbc:oracle:thin:JC/GreenMile@192.168.0.4:1521/orclpdb");
+            ods.setURL("jdbc:oracle:thin:JC/GreenMile@localhost:1521/orclpdb");
             conn = ods.getConnection();
             
             Clob clob = conn.createClob();

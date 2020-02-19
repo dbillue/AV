@@ -17,13 +17,18 @@ class JDBC_Prepared_Statement_DDL
         {
             // Connect to database.
             OracleDataSource ods = new OracleDataSource();
-            ods.setURL("jdbc:oracle:thin:AV/Alli3@192.168.0.4:1521/orclpdb");
+            ods.setURL("jdbc:oracle:thin:JC/GreenMile@192.168.0.4:1521/orclpdb");
             conn = ods.getConnection();
             
             // Create and execute DDL statement.
-            ddlSQL = "CREATE TABLE Estate(Address varchar2(250), Name varchar2(100))";
+            ddlSQL = "CREATE TYPE MANAGER AS OBJECT " +
+                    "(MGR_ID INTEGER, LAST_NAME " +
+                    "VARCHAR(40), " +
+                    "FIRST_NAME VARCHAR(40), " +
+                    "PHONE PHONE_NO)";
             stmt = conn.createStatement();
             stmt.executeUpdate(ddlSQL);
+            System.out.println("Type created.");
         } catch (Exception e) {
             System.out.println("-------------");
             System.out.println("Error: " + e.getMessage());

@@ -16,8 +16,8 @@ class JDBC_Driver_Version
     {
         // Connect to database.
         OracleDataSource ods = new OracleDataSource();
-        ods.setURL("jdbc:oracle:thin:AV/Alli3@192.168.0.4:1521/orclpdb");
-        //ods.setURL("jdbc:oracle:thin:C##NetBeans/BrightLight@192.168.0.4:1521/orcl");
+        //ods.setURL("jdbc:oracle:thin:AV/Alli3@127.0.0.1:1521/orclpdb");
+        ods.setURL("jdbc:oracle:thin:C##NetBeans/BrightLight@192.168.0.4:1521/orcl");
         conn = ods.getConnection();
 
         // Create Oracle DatabaseMetaData object

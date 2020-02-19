@@ -26,6 +26,7 @@ class JDBC_Query_UDT
             stmt = conn.createStatement();
             rset = stmt.executeQuery("select * from stores order by store_no");
             
+            // Check and display SQL warnings.
             warning = stmt.getWarnings();
             if (warning != null)
             {
