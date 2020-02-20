@@ -16,6 +16,7 @@ USE [AV]
 Persons
 ************/
 sp_help Persons
+sp_helpindex Persons
 
 SELECT * FROM Persons ORDER BY LastName, FirstName
 
@@ -42,6 +43,7 @@ WHERE 1 = 1
 Pets
 ************/
 sp_help Pets
+sp_helpindex Pets
 
 SELECT * FROM Pets ORDER BY Name
 
@@ -54,6 +56,7 @@ ORDER BY pettype.Type, pet.Name
 PetTypes
 ************/
 sp_help PetTypes
+sp_helpindex PetTypes
 
 SELECT * FROM PetTypes ORDER BY Type
 
@@ -62,5 +65,6 @@ SELECT * FROM PetTypes ORDER BY Type
 BirthState
 ************/
 sp_help BirthState
+sp_helpindex BirthState
 
 SELECT * FROM BirthState ORDER BY State
