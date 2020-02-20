@@ -2,6 +2,7 @@
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.ResourceParameters;
 using System;
+using System.Threading.Tasks;
 
 
 namespace FamilyDemoAPIv2.Service
@@ -12,7 +13,7 @@ namespace FamilyDemoAPIv2.Service
 
         bool PersonExists(Guid personId);
 
-        void AddPerson(Person person);
+        Task AddPerson(Person person);
 
         Person GetPerson(Guid personId);
 
@@ -22,6 +23,6 @@ namespace FamilyDemoAPIv2.Service
 
         void DeletePerson(Person person);
 
-        bool Save();
+        Task<bool> Save();
     }
 }

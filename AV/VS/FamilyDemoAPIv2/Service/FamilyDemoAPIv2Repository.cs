@@ -3,6 +3,7 @@ using FamilyDemoAPIv2.Entities;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.ResourceParameters;
 using System;
+using System.Threading.Tasks;
 using System.Linq;
 
 namespace FamilyDemoAPIv2.Service
@@ -31,7 +32,7 @@ namespace FamilyDemoAPIv2.Service
             return _context.Persons.Any(a => a.PersonId == personId);
         }
 
-        public void AddPerson(Person person)
+        public async Task AddPerson(Person person)
         {
             if (person == null)
             {
@@ -41,7 +42,7 @@ namespace FamilyDemoAPIv2.Service
             person.PersonId = Guid.NewGuid();
             person.CreateDate = DateTime.Parse(DateTime.Now.ToString());
 
-            _context.Persons.Add(person);
+            await _context.Persons.AddAsync(person);
         }
 
         public Person GetPerson(Guid personId)
@@ -83,9 +84,10 @@ namespace FamilyDemoAPIv2.Service
             _context.Persons.Remove(person);
         }
 
-        public bool Save()
+        public async Task<bool> Save()
         {
-            return (_context.SaveChanges() >= 0);
+            var result = await _context.SaveChangesAsync() >= 0;
+            return result;
         }
 
         public void Dispose()
