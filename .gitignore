@@ -96,3 +96,8 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore
 /AV/VS/FamilyAPIDemoEFCoreStandard
 >>>>>>> e1994a8942772bc6c2b93e9aff8a9032f2879cac
+/AV/SQL Scripts/SQLServer/CustomInsight
+/AV/CSharp/WebApiClient/WebApiClient/.vs/WebApiClient/v16/Server/sqlite3
+/AV/CSharp/WebApiClient/WebApiClient/bin/Debug/netcoreapp3.1
+/AV/CSharp/WebApiClient/WebApiClient/obj/Debug/netcoreapp3.1
+/AV/CSharp/WebApiClient/WebApiClient/obj
