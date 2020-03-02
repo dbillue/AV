@@ -9,6 +9,9 @@
 *.ide
 *.lock
 *.suo
+*.dtbcache
+*.nuget.dgspec.json
+*.project.assets.json
 AV/CSharp/OraConn/.vs/OraConn/DesignTimeBuild/.dtbcache
 AV/CSharp/OraConn/OraConn/bin/Debug/netcoreapp3.0/OraConn.deps.json
 AV/CSharp/OraConn/OraConn/bin/Debug/netcoreapp3.0/OraConn.dll.config
@@ -101,3 +104,5 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/CSharp/WebApiClient/WebApiClient/bin/Debug/netcoreapp3.1
 /AV/CSharp/WebApiClient/WebApiClient/obj/Debug/netcoreapp3.1
 /AV/CSharp/WebApiClient/WebApiClient/obj
+/AV/PowerShell/Scripts/Networking/outout
+/AV/VS/WebApiClient/.vs/WebApiClient/v16/Server/sqlite3
