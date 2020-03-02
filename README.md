@@ -18,4 +18,4 @@ Misc projects and snippets of code to assist with daily coding efforts pulling o
 * Perl
 
 ## Contact
-Created by [LinkedIn](https://www.linkedin.com/in/duanebillue/) - feel free to contact me!
+Created by [Duane Billue](https://www.linkedin.com/in/duanebillue/) - feel free to contact me!
