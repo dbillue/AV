@@ -35,8 +35,10 @@ VALUES ('Allison', 'Karly', 'Hope', 'Female', 34, 'USA', 'Unknown', 5, '1986-07-
 
 DELETE FROM Persons
 WHERE 1 = 1
-	--AND PersonId IN ('04D883A7-ACCD-4A91-A02B-DB0B881C59EB', 'CEE7DC75-5B99-4DCE-B74E-5863781C8E26')
-	AND FirstName IN ('A', 'J')
+	AND PersonId IN ('FCE84A41-5FD2-4253-82C9-8E152429ECA4', '998FB1EF-AF15-4032-AF53-B15B587B9142')
+	--AND FirstName IN ('A', 'J')
+
+DROP TABLE Family_Seed
 
 
 /************
