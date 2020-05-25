@@ -1,0 +1,85 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-25
+Description:	AngularJS Reference - [Simple Filters]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script>
+		var app = angular.module('filterApp', []);
+		
+		app.controller('filterController', function($scope) {
+			$scope.name = "allison avery",
+			$scope.locations = [{city:'Atlanta', state:'GA'},{city:'Richmond', state:'VA'},{city:'Miami', state:'FL'}],
+			$scope.price = 10.25,
+			$scope.cities = ['Atlanta','Chicago','Dallas','Seattle','Denver','Phoenix','Missoula','Grand Rapids']
+			$scope.sortTable = function(column) {
+				$scope.columnToOrderBy = column;
+			};
+		});
+	</script>
+</head>
+<body ng-app="filterApp" ng-controller="filterController">
+	<hr />
+	<h1>AngularJS Reference - Simple Filters</h1>
+	<hr />
+	<div class="exampleDiv">
+		<p>
+			Uppercase: <b>{{ name | uppercase}}</b><br />
+			Lowercase: <b>{{ name | lowercase}}</b><br />
+		</p>
+	</div>
+	<div class="exampleDiv">
+		<ul>
+			<li ng-repeat="location in locations | orderBy:'city'">
+				{{location.city + ", " + location.state}}
+			</li>
+		</ul>
+	</div>
+	<div class="exampleDiv">
+		Currency: <b>{{price | currency}}</b>
+	</div>
+	<div class="exampleDiv">
+		<ul>
+			<li ng-repeat="city in cities | filter : 'a'">
+				{{city}}
+			</li>
+		</ul>
+	</div>
+	<div class="exampleDiv">
+		<form>
+			Enter a value to filter by: <input type="text" ng-model="filterValue">
+			<ul>
+				<li ng-repeat="city in cities | filter : filterValue">
+					{{city}}
+				</li>
+			</ul>			
+		</form>
+	</div>
+	<div class="exampleDiv">
+		<table border="1" width="300px">
+			<tr>
+				<th ng-click="sortTable('city')">City</th>
+				<th ng-click="sortTable('state')">State</th>
+			</tr>
+			<tr ng-repeat="location in locations | orderBy:columnToOrderBy">
+				<td>{{location.city}}</td>
+				<td>{{location.state}}</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
