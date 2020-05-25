@@ -1,0 +1,45 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-24
+Description:	AngularJS Reference - [Simple Model Status]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleForm
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script>
+	var app = angular.module('simpleApp', []);
+	app.controller('simpleController', function($scope) {
+		$scope.name = "Harvey Edner";
+	});
+	</script>
+</head>
+<body>
+	<hr />
+	<h1>AngularJS Reference - Simple Model Status</h1>
+	<hr />
+	<form ng-app="simpleApp" ng-controller="simpleController" name="simpleForm" class="exampleForm">
+		<input type="text" name="txtName" ng-model="name" required />
+		<h1>Status</h1>
+		Valid: <b>{{simpleForm.txtName.$valid}}</b><br />
+		InValid: <b>{{simpleForm.txtName.$invalid}}</b><br />
+		Modified: <b>{{simpleForm.txtName.$dirty}}</b><br />
+		Received Focus: <b>{{simpleForm.txtName.$touched}}</b><br />
+		Not Received Focus: <b>{{simpleForm.txtName.$untouched}}</b><br />
+		Not Empty: <b>{{simpleForm.txtName.$not-empty}}</b><br />
+		Empty: <b>{{simpleForm.txtName.$empty}}</b><br />
+		Pending: <b>{{simpleForm.txtName.$pending}}</b><br />
+	</form>
+</body>
+</html>
