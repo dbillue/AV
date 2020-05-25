@@ -1,0 +1,44 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-25
+Description:	AngularJS Reference - [Simple Controller Function]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script>
+	var app = angular.module('ctrlFunctApp', []);
+	app.controller('functController', function($scope) {
+		$scope.firstName = "Adam";
+		$scope.lastName = "Allgood";
+		$scope.fullName = function() {
+			return $scope.firstName + " " + $scope.lastName;
+		}
+	});
+	</script>
+</head>
+<body>
+	<hr />
+	<h1>AngularJS Reference - Simple Controller Function</h1>
+	<hr />
+	<div class="exampleDiv" ng-app="ctrlFunctApp" ng-controller="functController">
+		<p>
+			<b>First Name:</b> {{firstName}}<br />
+			<b>Last Name:</b> {{lastName}}<br />
+			<b>Full Name:</b> {{fullName()}}		<!-- Variable function. -->
+		</p>
+	</div>
+</body>
+</html>
