@@ -1,0 +1,44 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-24
+Description:	AngularJS Reference - [Simple Controller]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+</head>
+<body>
+	<hr />
+	<h1>AngularJS Reference - Simple Controller</h1>
+	<hr />
+	<!-- Create AngularJS app with a Controller -->
+	<div ng-app="ReferenceAppController" ng-controller="promoCtrl">
+		<div class="exampleDiv">
+			<p>Promotion Name: <input type="text" ng-model="promoName" /></p>
+			<p>Promotion Code: <input type="text" ng-model="promoCode" /></p>
+			<br />
+			Promotion Name and Code: <b>{{promoName + " - " + promoCode}}</b>
+		</div>
+	</div>
+	<script>
+		var app = angular.module('ReferenceAppController', []);
+		app.controller('promoCtrl', function($scope)
+			{
+				$scope.promoName = "Summer Fun in 2020";
+				$scope.promoCode = "10-4200";
+			});
+	</script>
+</body>
+</html>
