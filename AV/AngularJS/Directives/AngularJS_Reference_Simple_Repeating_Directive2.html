@@ -1,0 +1,36 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-24
+Description:	AngularJS Reference - [Simple Repeating Directive]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+</head>
+<body>
+	<hr />
+	<h1>AngularJS Reference - Simple Repeating Directive</h1>
+	<hr />
+	<div class="exampleDiv" ng-app="" ng-init="names=[{firstName:'Alex',relation:'cousin'},
+													{firstName:'Amy',relation:'sister'},
+													{firstName:'Jason',relation:'brother-in-law'}]">
+		<ul>
+			<li ng-repeat="name in names">
+				{{"Name: " + name.firstName + " - Relationship: " + name.relation}}
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
