@@ -21,13 +21,36 @@ Description:	AngularJS Reference - [Simple Service Http]
 	<script>
 		var app = angular.module('servHttpApp', []);
 		
+		/*
+		// Debug.
+		app.controller('servHttpCtrl', function($scope) {
+			$scope.nameList = "Duane,Allie,Isreal,Isiah,Kiara";
+		});
+		*/
+		
+		app.controller('servHttpCtrl', function($scope, $http) {
+			$http.get("names.txt").then(function (response) {
+				$scope.data = response.data;
+				$scope.status = response.status;				
+				$scope.config = response.config;
+				$scope.headers = response.headers;				
+			}, function myError(response) {
+				$scope.data = "Error: " + response.statusText;
+				$scope.status = response.status;
+				$scope.config = response.config;
+				$scope.headers = response.headers;				
+			});
+		});
+		
+		/*
 		app.controller('servHttpCtrl', function($scope, $http) {
 		  $http({
 			method: 'GET',
-			url: 'welcome.htm'}).then(function (response) {
+			url: 'Chrome_Bookmarks_20190531.html'}).then(function (response) {
 			  $scope.nameList = response.data;
 		  });
 		});
+		*/
 	</script>
 </head>
 <body ng-app="servHttpApp" ng-controller="servHttpCtrl">
@@ -35,7 +58,16 @@ Description:	AngularJS Reference - [Simple Service Http]
 	<h1>AngularJS Reference - Simple Service Http</h1>
 	<hr />
 	<div class="exampleDiv">
-		{{nameList}}
+		Data: <b>{{data}}</b>
 	</div>
+	<div class="exampleDiv">
+		Status: <b>{{status}}</b>
+	</div>	
+	<div class="exampleDiv">
+		Config: <b>{{config}}</b>
+	</div>
+	<div class="exampleDiv">
+		Header Function: <b>{{headers}}</b>
+	</div>		
 </body>
 </html>
