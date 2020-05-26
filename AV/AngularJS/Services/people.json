@@ -1,0 +1,63 @@
+{
+"value": [
+{
+"personId": "88d1566b-59e4-41d3-8d51-08f7f8433e00",
+"firstName": "Isaac",
+"mIddleName": "Oakley",
+"lastName": "Billue",
+"gender": "Male",
+"age": 30,
+"country": "USA",
+"city": "Athens",
+"stateId": 11,
+"dateOfBirth": "1989-04-11T00:00:00",
+"createDate": "2020-03-04T19:42:49.867"
+},
+{
+"personId": "1d9a9a8f-17cc-406e-91a2-995493c02e7b",
+"firstName": "Isreal",
+"mIddleName": "Eli",
+"lastName": "Billue",
+"gender": "Male",
+"age": 47,
+"country": "USA",
+"city": "Forsyth",
+"stateId": 11,
+"dateOfBirth": "1972-11-07T00:00:00",
+"createDate": "2020-03-04T19:42:49.867"
+},
+{
+"personId": "2820e47e-ab09-4edc-91a6-b4c4d1027946",
+"firstName": "Alexandra",
+"mIddleName": "Althea",
+"lastName": "Billue",
+"gender": "Female",
+"age": 23,
+"country": "USA",
+"city": "Roswell",
+"stateId": 11,
+"dateOfBirth": "1996-04-11T00:00:00",
+"createDate": "2020-03-04T19:42:49.867"
+},
+{
+"personId": "476b129b-287a-42d3-9304-f99169489fa7",
+"firstName": "Duane",
+"mIddleName": "Allman",
+"lastName": "Billue",
+"gender": "Male",
+"age": 45,
+"country": "USA",
+"city": "Atlanta",
+"stateId": 11,
+"dateOfBirth": "1975-01-11T00:00:00",
+"createDate": "2020-03-04T19:42:49.867"
+}
+],
+"links": [
+{
+"href": "http://192.168.0.5:15001/api/persons?pageNumber=1&pageSize=10",
+"rel": "self",
+"method": "GET"
+}
+]
+}

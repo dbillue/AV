@@ -1,0 +1,110 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-26
+Description:	AngularJS Reference - [Simple Service Http w/ External JSON Data]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script>
+		var app = angular.module('servHttpApp', []);
+		
+		app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
+			$sceDelegateProvider.resourceUrlWhitelist([
+				'self'
+			]);
+		}]);
+		
+		/*
+		// Debug.
+		app.controller('servHttpCtrl', function($scope) {
+			$scope.data = "Duane,Allie,Isreal,Isaiah,Kiara";
+		});
+		
+		// Debug.
+		app.controller('servHttpCtrl', function($scope, $http) {
+		  $http({
+			method: 'GET',
+			url: 'names.txt'}).then(function (response) {
+			  $scope.data = response.data;
+		  });
+		});
+		*/
+		
+		app.controller('servHttpCtrl', function($scope, $http) {
+			$http.get("people.json").then(function (response) {
+				$scope.data = response.data.value,
+				$scope.status = response.status,				
+				$scope.config = response.config,
+				$scope.headers = response.headers,
+				$scope.sortTable = function(column) {
+					$scope.columnToOrderBy = column;
+				}
+			}, function (response) {
+				$scope.data = "Error: " + response.statusText;
+				$scope.status = response.status;
+				$scope.config = response.config;
+				$scope.headers = response.headers;				
+			});
+		});
+	</script>
+</head>
+<body ng-app="servHttpApp" ng-controller="servHttpCtrl">
+	<hr />
+	<h1>AngularJS Reference - Simple Service Http w/ External JSON Data</h1>
+	<hr />
+	<div class="exampleDiv">
+		<b>Data:</b> {{data}}
+		<br />
+		<b>Status:</b> {{status}}
+		<br />
+		<b>Config:</b> {{config}}
+		<br />
+		<b>Headers:</b> {{headers}}		
+	</div>
+	<div class="exampleDiv">
+		<table border="1" cellpadding="2" width="400px">
+			<tr>
+				<th ng-click="sortTable('firstName')">
+					First Name
+				</th>
+				<th ng-click="sortTable('lastName')">
+					Last Name
+				</th>
+				<th ng-click="sortTable('age')">
+					Age
+				</th>
+				<th ng-click="sortTable('gender')">
+					Gender
+				</th>
+			</tr>
+			<tr ng-repeat="person in data | orderBy:columnToOrderBy">
+				<td>
+					{{person.firstName}}
+				</td>
+				<td>
+					{{person.lastName}}
+				</td>
+				<td>
+					{{person.age}}
+				</td>
+				<td>
+					{{person.gender}}
+				</td>
+			<tr>
+		</table>
+	</div>
+</body>
+</html>
