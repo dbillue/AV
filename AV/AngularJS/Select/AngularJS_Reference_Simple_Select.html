@@ -1,0 +1,87 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-25
+Description:	AngularJS Reference - [Simple Select]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script>
+		var app = angular.module('selectApp', []);
+		
+		app.controller('selectController', function($scope) {
+			$scope.names = ['Jason', 'Jaime', 'Allison', 'Burt'],
+			$scope.locations = [{city:'Atlanta', state:'GA'},{city:'Richmond', state:'VA'},{city:'Miami', state:'FL'}],
+			$scope.trails = {trail01:'AT', trail02:'BMT', trail03:'PCT'}
+			$scope.rivers = {
+								river01: {name:'Etowah', start:'GA', end:'Gulf of Mexico'},
+								river02: {name:'South River', start:'GA', end:'Atlantic Ocean'},
+								river03: {name:'Sacramento', start:'CA', end:'Pacific Ocean'},
+							}
+		});
+	</script>
+</head>
+<body ng-app="selectApp" ng-controller="selectController">
+	<hr />
+	<h1>AngularJS Reference - Simple Select</h1>
+	<hr />
+	<div class="exampleDiv">
+		ng-options: <select ng-model="cbonames" ng-options="name for name in names"></select>
+	</div>
+	<div class="exampleDiv">
+		ng-repeat:
+		<select>
+			<option ng-repeat="name in names">{{name}}</option>
+		</select>
+	</div>
+	<div class="exampleDiv">
+		ng-options and ng-repeat:
+		<select ng-model="cbonames2">
+			<option ng-repeat="name in names" value="{{name}}">{{name}}</option>
+		</select>
+		<br />
+		<b>{{cbonames2}}</b>
+	</div>
+	<div class="exampleDiv">
+		ng-repeat as object:
+		<select ng-model="cbolocations">
+			<option ng-repeat="location in locations" ng-value="{{location}}">{{location.state}}</option>
+		</select>
+		<br />
+		<b>{{cbolocations.city + " " + cbolocations.state}}</b>
+	</div>
+	<div class="exampleDiv">
+		ng-options as object:
+		<select ng-model="cbolocations2" ng-options="location.state for location in locations"></select>
+		<br />
+		City: <b>{{cbolocations2.city}}</b><br />
+		State: <b>{{cbolocations2.state}}</b><br />
+	</div>
+	<div class="exampleDiv">
+		Object as data source:
+		<select ng-model="cbotrails" ng-options="trail for (trail, name) in trails"></select>
+		<br />
+		<b>{{cbotrails}}</b>
+	</div>
+	<div class="exampleDiv">
+		Data using key / value pairs:
+		<select ng-model="cborivers" ng-options="river.name for (x, river) in rivers"></select>
+		<br />
+		River: <b>{{cborivers.name}}</b><br />
+		Starts: <b>{{cborivers.start}}</b><br />
+		Ends: <b>{{cborivers.end}}</b><br />
+	</div>
+</body>
+</html>
