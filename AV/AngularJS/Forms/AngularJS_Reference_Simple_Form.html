@@ -1,0 +1,72 @@
+<!--
+Author:			Duane Billue
+Date:			2020-05-27
+Description:	AngularJS Reference - [Simple Form]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="Scripts\angular.min.js"></script>
+	<script src="Scripts\users.js"></script>
+	<link rel="stylesheet" href="CSS\w3.css">
+	<style>
+		.exampleApp
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+</head>
+<body ng-app="simpleFormApp" ng-controller="simpleFormController">
+	<hr />
+	<h1>AngularJS Reference - Simple Form</h1>
+	<hr />
+	<div class="exampleApp">
+		<div class="w3-container">
+			<h4>Game Show Hosts :-)</h4>
+			<table class="w3-table w3-bordered w3-striped">
+				<tr>
+					<th>Edit</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
+				<tr ng-repeat="host in hosts">
+					<td>
+						<button class="w3-btn w3-ripple" ng-click="editUser(host.id)">&#9998; Edit</button>
+					</td>
+					<td>{{host.fName}}</td>
+					<td>{{host.lName}}</td>
+				</tr>
+			</table>
+			<br />
+			
+			<button class="w3-btn w3-black w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
+			<br />
+			
+			<form ng-hide="hideform">
+				<h4 ng-show="edit">Create New Host</h4>
+				<h4 ng-hide="edit">Edit Host</h4>
+				<p ng-hide=false>{{debug}}</p>
+				<label>First Name:</label>
+				<input type="text" class="w3-input w3-border" ng-model="fName" ng-disabled="!edit" placeholder="First Name" />
+				<br />
+				<label>Last Name:</label>
+				<input type="text" class="w3-input w3-border" ng-model="lName" ng-disabled="!edit" placeholder="Last Name" />
+				<br />
+				<label>Password:</label>
+				<input type="text" class="w3-input w3-border" ng-model="pass1" placeholder="Password" />
+				<br />
+				<label>Re-Enter Password:</label>
+				<input type="text" class="w3-input w3-border" ng-model="pass2" placeholder="Re-Enter Password" />
+				<br />
+				<button class="w3-btn w3-black w3-ripple" ng-disabled="error || incomplete" ng-click="showMsg()">&#10004; Save Changes</button>&nbsp;
+				<button class="w3-btn w3-black w3-ripple" ng-click="hideHostForm()">&#10008; Hide Form</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
