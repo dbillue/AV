@@ -1,0 +1,48 @@
+<!--
+Author:			Duane Billue
+Date:			2020-05-28
+Description:	AngularJS Reference - [Simple Image Animation]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Reference</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+	<script>
+		var app = angular.module('imgAnimationApp', ['ngAnimate']);
+		
+		app.controller('imgAnimationCtrl', function($scope) {
+			$scope.instructionMsg = "Check to resize Waldo (now that he's been found):";
+		});
+	</script>
+	<style>
+		@keyframes imgAnimation {
+			from {
+				height: 368px;
+				width: 699px;
+			} to {
+				height: 50px;
+				width: 50px;
+			}
+		}
+		
+		img {
+			height: 368px;
+			width: 699px;
+		}
+		
+		img.ng-hide {
+			animation: 2s imgAnimation;
+		}
+	</style>	
+</head>
+<body ng-app="imgAnimationApp" ng-controller="imgAnimationCtrl">
+	<hr />
+	<h1>AngularJS Reference - Simple Image Animation</h1>
+	<hr />
+	{{instructionMsg}} <input type="checkbox" ng-model="hideElement"><br>
+	<img src="Waldo.jpg" ng-hide="hideElement" />
+</body>
+</html>
