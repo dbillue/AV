@@ -1,25 +1,40 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-28
+Description:	AngularJS Reference - [Simple Route SPA App]
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 	<script>
-	var app = angular.module("myApp", ["ngRoute"]);
-	app.config(function($routeProvider) {
-		$routeProvider
-		.when("/", {
-			templateUrl : "PowerHouse.htm"
-		})
-		.when("/Waldo", {
-			templateUrl : "Waldo.htm"
-		})
-		.when("/Walda", {
-			templateUrl : "Walda.htm"
-		})
-		.when("/Isreali", {
-			templateUrl : "Ally.htm"
+		var app = angular.module("myApp", ["ngRoute"]);
+		app.config(function($routeProvider) {
+			$routeProvider
+			.when("/", {
+				templateUrl : "PowerHouse.htm"
+			})
+			.when("/Waldo", {
+				templateUrl : "Waldo.htm"
+			})
+			.when("/Walda", {
+				templateUrl : "Walda.htm"
+			})
+			.when("/Isreali", {
+				templateUrl : "Ally.htm"
+			});
 		});
-	});
 	</script>
 </head>
 <body ng-app="myApp">
@@ -30,7 +45,7 @@
 	<a href="#!Waldo">View Waldo</a>
 	<a href="#!Walda">View Walda</a>
 	<a href="#!Isreali">View Isreal</a>
-	<div class="exampleDiv">
-		<div ng-view></div>
-	</div>
+
+	<!-- View -->
+	<div ng-view></div>
 </body>
