@@ -1,0 +1,60 @@
+<!--
+Author:			Duane Billue
+Date:			2020-05-28
+Description:	AngularJS Reference - [Simple Animation]
+-->
+
+<!DOCTYPE html>
+<html>
+<style>
+	div 
+	{
+		transition: all linear 0.5s;
+		background-color: lightblue;
+		height: 100px;
+		width: 100%;
+		position: relative;
+		top: 0;
+		left: 0;
+		padding: 2px 2px 2px 2px; 
+		border: 2px solid silver; 
+		margin-bottom:5px;	  
+	}
+
+	.ng-hide 
+	{
+		  height: 0;
+		  width: 0;
+		  background-color: transparent;
+		  top:-200px;
+		  left: 200px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+<script>
+	var app = angular.module('myApp', ['ngAnimate']);
+	
+	app.controller('formText', function($scope) {
+		$scope.textMsg = "Click to hide the div:";	
+		
+		$scope.updateResultText = function() {
+			if($scope.textMsg == "Click to hide the div:") 
+			{
+				$scope.textMsg = "Click to un-hide the div:";
+			} else {
+				$scope.textMsg = "Click to hide the div:";
+			}
+		};
+	});	
+</script>
+<body ng-app="myApp" ng-controller="formText">
+	<hr />
+	<h1>AngularJS Reference - Simple Animation</h1>
+	<hr />
+	<span>{{textMsg}}</span>
+		<input type="checkbox" ng-model="hideElement" ng-click="updateResultText()">
+		<div ng-hide="hideElement">Hide Me!</div>
+</div>
+</body>
+</html>
