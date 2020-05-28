@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<script>
+	var app = angular.module("myApp", ["ngRoute"]);
+	app.config(function($routeProvider) {
+		$routeProvider
+		.when("/", {
+			templateUrl : "PowerHouse.htm"
+		})
+		.when("/Waldo", {
+			templateUrl : "Waldo.htm"
+		})
+		.when("/Walda", {
+			templateUrl : "Walda.htm"
+		})
+		.when("/Isreali", {
+			templateUrl : "Ally.htm"
+		});
+	});
+	</script>
+</head>
+<body ng-app="myApp">
+	<hr />
+	<h1>AngularJS Reference - Simple Route SPA App</h1>
+	<hr />
+	<a href="#/!">Main</a>
+	<a href="#!Waldo">View Waldo</a>
+	<a href="#!Walda">View Walda</a>
+	<a href="#!Isreali">View Isreal</a>
+	<div class="exampleDiv">
+		<div ng-view></div>
+	</div>
+</body>
