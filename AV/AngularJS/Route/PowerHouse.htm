@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script>
+		var app = angular.module("phApp", []);
+		app.controller("phCtrl", function($scope) {
+			$scope.phMsg = "The US is the best!!!";
+		});
+	</script>
 </head>
-<body>
+<body ng-app="phApp" ng-controller="phCtrl">
 	<hr />
 	<b>{{phMsg}}</b><br />
 	<img src="images/USA_Banner.jpg">
