@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<script>
+		var app = angular.module("myApp", ["ngRoute"]);
+		app.config(function($routeProvider) {
+			$routeProvider
+			.when("/", {
+				templateUrl : "PowerHouse.htm",
+				controller : "phCtrl"
+			});
+		});
+	</script>
+</head>
+<body ng-app="myApp">
+	<hr />
+	<h1>AngularJS Reference - Simple Route SPA App w/ Controllers</h1>
+	<hr />
+	<a href="#/!">Main</a>
+	
+	<!-- View -->
+	<div ng-view></div>
+</body>
+</html>	

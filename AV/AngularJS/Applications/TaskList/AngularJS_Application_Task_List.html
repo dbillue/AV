@@ -1,0 +1,73 @@
+<!-- 
+Author: 		Duane Billue
+Date:			2020-05-28
+Description:	AngularJS Reference - [Simple SPA Application]
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.exampleDiv
+		{
+			background-color: lightblue; 
+			padding: 2px 2px 2px 2px; 
+			border: 2px solid silver; 
+			margin-bottom:5px;
+			max-width:600px;
+		}
+	</style>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script>
+		var app = angular.module("taskListApp", []);
+		
+		app.controller("taskListCtrl", function($scope) {
+			$scope.debug = "here";	
+			$scope.Tasks = ["Cut grass", "Take out trash", "Run errands", "Wash clothes", "Pay bills"];
+			$scope.addTask = function() {
+				if(!$scope.txtTask) {return;};
+				if($scope.Tasks.indexOf($scope.txtTask) == -1) {
+					$scope.Tasks.push($scope.txtTask);
+					$scope.errMsg = "";
+				} else {
+					$scope.errMsg = "This task already exists.";
+				}
+				$scope.txtTask = "";
+			};
+			$scope.removeItem = function(x) {
+				$scope.errMsg = "";
+				$scope.Tasks.splice(x, 1);
+			}
+		});
+	</script>
+</head>
+<body ng-app="taskListApp" ng-controller="taskListCtrl">
+	<hr />
+	<h1><center>AngularJS Reference - Simple SPA Application</center></h1>
+	<hr />
+	<center>
+		<div class="exampleDiv" ng-cloak class="w3-card-2 w3-margin">
+		  <header class="w3-container w3-light-grey w3-padding-16">
+			<h3>My Tasks List</h3>
+		  </header>	
+			<ul class="w3-ul">
+				<li ng-repeat="task in Tasks" class="w3-padding-16">
+					{{task}} <span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right"><b>&times;</b></span>
+				</li>
+			</ul>
+			<div class="w3-container w3-light-grey w3-padding-16">
+				<div class="w3-row w3-margin-top">
+					<div class="w3-col s10">			
+						<input type="text" ng-model="txtTask" class="w3-input w3-border w3-padding" placeholder="Add shopping items here" />
+					</div>
+					<div class="w3-col s2">
+						<button ng-click="addTask()" class="w3-btn w3-padding w3-black">Add Task</button>
+					</div>
+				</div>
+				<p class="w3-text-red"><b>{{errMsg}}</b></p>
+			</div>
+		</div>
+	</center>
+</body>
+</html>
