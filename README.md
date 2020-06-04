@@ -17,6 +17,7 @@ Misc projects and snippets of code to assist with daily coding efforts pulling o
 * Java Standard and JDBC - versions 8.x
 * Perl
 * Angular
+* TypeScript
 
 ## Contact
 Created by [Duane Billue](https://www.linkedin.com/in/duanebillue/) - feel free to contact me!
