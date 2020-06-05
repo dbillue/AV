@@ -1,7 +1,7 @@
 /******************
  Author:        Duane Billue
  Date:          2020-06-05
- Description:   Basic TypeScript functions.
+ Description:   Basic TypeScript functions and arrays
  ******************/
 
  // Function with optional parameter
@@ -95,3 +95,15 @@ function ShowAmount(amnt:any,qty?:any,available?:any):void {
 }
 
 ShowAmount(2);ShowAmount(2,5);ShowAmount(2,null,true);
+
+// Arrays (for good measure) <*><*>
+var container:any;
+var containers:string[] = ['Rail Car', 'Truck Trailer', 'Truck Trailer Two Way', 'Airplane', 'Ship'];
+for(container in containers) {
+    console.log('-' + containers[container]);
+}
+
+let icnt:number;
+for(icnt = 0; icnt <= containers.length-1; icnt++) {
+    console.log('<<>>' + containers[icnt]);
+}
