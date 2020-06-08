@@ -4,9 +4,10 @@
  Description:   TypeScript namespace OOP
  ******************/
 
+/// <reference path="IShape.ts" />
 namespace Drawing {
     export class Triangle implements IShape {
-        public draw() {
+        public drawing() {
             console.log("triangle drawn");
         }
     }

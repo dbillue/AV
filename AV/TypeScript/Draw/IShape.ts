@@ -5,10 +5,7 @@
  ******************/
 
 namespace Drawing {
-    namespace Drawing {
-        export interface IShape {
-            drawing();
-        }
+    export interface IShape {
+        drawing();
     }
 }
-

@@ -4,8 +4,11 @@
  Description:   TypeScript namespace OOP
  ******************/
 
+/// <reference path="IShape.ts" />
+/// <reference path="Circle.ts" />
+/// <reference path="Triangle.ts" />
 function drawAllShapes(shape:Drawing.IShape) {
-    shape.draw();
+    shape.drawing();
 }
 
 drawAllShapes(new Drawing.Circle());
