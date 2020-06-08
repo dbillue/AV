@@ -6,8 +6,8 @@
 
 // CP_Intro
 console.clear();
-var speedMPH:number = 25;
-var distanceMileInMiles:number = 3;
+let speedMPH:number = 25;
+let distanceMileInMiles:number = 3;
 console.log("Distance traveled: " + (speedMPH * distanceMileInMiles) + " miles.");
 
 // CP_Class
@@ -24,13 +24,13 @@ let distance = new Distance();
 distance.DetermineDistance();
 
 // CP_Type_Assertion
-var str = 5;
-var str2:number = <number> <any> str;
+let str = 5;
+let str2:number = <number> <any> str;
 console.log("Data type: " + typeof(str2));
 
 // CP_Conditional_Loops
-var cnt:number = 10;
-var totalCnt:number = 15;
+let cnt:number = 10;
+let totalCnt:number = 15;
 // While Loop
 while (cnt <= totalCnt) {
     console.log("Current number in while loop: " + cnt);
