@@ -16,11 +16,11 @@ namespace Artist{
         }
 
         showStageName():void {
-            console.log(`Instrument type: ${this._stageName}`);
+            console.log(`Artist stage name: ${this._stageName}`);
         }          
 
         showBandName():void {
-            console.log(`Instrument name: ${this._bandName}`);
+            console.log(`Artist band name: \'${this._bandName}\'`);
         }        
         
         showInstrument(instrumentName):void {
