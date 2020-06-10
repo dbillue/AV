@@ -106,3 +106,12 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/CSharp/WebApiClient/WebApiClient/obj
 /AV/PowerShell/Scripts/Networking/outout
 /AV/VS/WebApiClient/.vs/WebApiClient/v16/Server/sqlite3
+/AV/VS/TypeScript_Introduction/.vs/TypeScript_Introduction
+/AV/VS/TypeScript_Introduction/bin/Debug/netcoreapp3.0
+/AV/VS/TypeScript_Introduction/node_modules
+/AV/VS/TypeScript_Introduction/obj
+/AV/VS/WebApiClient/WebApiClient/obj
+/AV/VS/TypeScript_Introduction/TypeScript_Introduction.csproj.user
+/AV/CSharp/OraConn/OraConn/obj
+/AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Domain/obj/Release
+/.vs
