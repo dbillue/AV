@@ -62,6 +62,3 @@ for(cnt = 0; cnt <= totalCnt; cnt++)
         continue;
     }
 }
-
-
-// THIS IS FUN!!!!

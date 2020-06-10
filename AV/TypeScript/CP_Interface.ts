@@ -4,9 +4,9 @@
  Description:   Basic TypeScript Object Inheritance
  ******************/
 
- console.clear();
+console.clear();
 
- // Create interface
+// Create interface
 interface ICard {
     cardType:string;
     cardValue:string;
@@ -55,5 +55,3 @@ console.log(`Band Name: ${musician.bandName}`);
 console.log(`Artist Stage Name: ${musician.stageName}`);
 console.log(`Instrument: ${musician._instrumentName}`);
 console.log(`Instrument Class: ${musician._instumentClass}`);
-
-// I love this!!!
