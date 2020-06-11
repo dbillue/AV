@@ -1,12 +1,25 @@
 ﻿<html>
-    <head>
-        <title>Hey Hey Hey!!!</title>
-        <script src="/scripts/app.js"></script>
-    </head>
-    <body>
+<head>
+    <title>Hey Hey Hey!!!</title>
+    <script src="/scripts/app.js"></script>
+    <style>
+        .exampleDiv {
+            background-color: lightblue;
+            padding: 2px 2px 2px 2px;
+            border: 2px solid silver;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <hr />
+    <center><h1>TypeScript - Simple Example</h1></center>
+    <hr />
+    <div class="exampleDiv">
         <div id="msg"></div>
         <input id="compiler" onkeyup="document.getElementById('msg').innerText = displayMsg()" />
         <br />
         <input id="framework" onkeyup="document.getElementById('msg').innerText = displayMsg()" />
-    </body>
+    </div>
+</body>
 </html>
