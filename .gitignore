@@ -115,3 +115,5 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/CSharp/OraConn/OraConn/obj
 /AV/VS/FamilyAPIDemoEFCore/FamilyAPIDemoEFCore.Domain/obj/Release
 /.vs
+/AV/VS/TypeScript_Introduction/wwwroot/scripts/app.js
+/AV/VS/TypeScript_Introduction/wwwroot/scripts/app.js.map

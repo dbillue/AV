@@ -1,4 +1,5 @@
-﻿var gulp = require('gulp');
+/// <binding BeforeBuild='clean' AfterBuild='default' />
+var gulp = require('gulp');
 var del = require('del');
 
 // Define file paths.
