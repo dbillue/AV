@@ -18,6 +18,7 @@ Misc projects and snippets of code to assist with daily coding efforts pulling o
 * Perl
 * Angular
 * TypeScript
+* Blazor
 
 ## Contact
 Created by [Duane Billue](https://www.linkedin.com/in/duanebillue/) - feel free to contact me!
