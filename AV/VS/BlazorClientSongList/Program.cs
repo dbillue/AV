@@ -19,8 +19,6 @@ namespace BlazorClientSongList
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            Console.WriteLine("Local URL: " + builder.HostEnvironment.BaseAddress.ToString());
-
             await builder.Build().RunAsync();
         }
     }
