@@ -117,3 +117,6 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /.vs
 /AV/VS/TypeScript_Introduction/wwwroot/scripts/app.js
 /AV/VS/TypeScript_Introduction/wwwroot/scripts/app.js.map
+/AV/VS/BlazorClientSongList/.vs/BlazorClientSongList
+/AV/VS/BlazorClientSongList/bin/Debug/netstandard2.1
+/AV/VS/BlazorClientSongList/obj

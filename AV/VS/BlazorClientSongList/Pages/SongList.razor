@@ -1,0 +1,35 @@
+﻿@page "/song"
+
+<h3>Song List App</h3>
+
+<ul>
+    @foreach(var song in songs)
+    {
+        <li>
+            @song.SongName
+            <input type="checkbox" @bind="song.Favorite" /> Favorite?
+        </li>
+    }
+</ul>
+
+<hr />
+Add a new song:<input placeholder="Enter a song" @bind="txtNewSong" /><br />
+Is it a favorite? <input type="checkbox" @bind="chkFavorite" /><br />
+<button @onclick="AddSong">Add Song</button>
+<hr />
+
+@code {
+    private IList<Songs> songs = new List<Songs>();
+    private string txtNewSong = string.Empty;
+    private string favSong = string.Empty;
+    private bool chkFavorite;
+
+    private void AddSong()
+    {
+        if(!string.IsNullOrWhiteSpace(txtNewSong))
+        {
+            songs.Add(new Songs { SongName = txtNewSong, Favorite = chkFavorite });
+            txtNewSong = "";
+        }
+    }
+}
