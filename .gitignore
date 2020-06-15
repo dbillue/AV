@@ -120,3 +120,11 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/BlazorClientSongList/.vs/BlazorClientSongList
 /AV/VS/BlazorClientSongList/bin/Debug/netstandard2.1
 /AV/VS/BlazorClientSongList/obj
+/AV/VS/BlazorSignalRApp/Shared/bin/Debug/netstandard2.1
+/AV/VS/BlazorSignalRApp/Shared/obj
+/AV/VS/BlazorSignalRApp/Server/obj
+/AV/VS/BlazorSignalRApp/Server/bin/Debug/netcoreapp3.1
+/AV/VS/BlazorSignalRApp/Client/obj
+/AV/VS/BlazorSignalRApp/Client/bin/Debug/netstandard2.1
+/AV/VS/BlazorSignalRApp/.vs/BlazorSignalRApp/config
+/AV/VS/BlazorSignalRApp/Shared
