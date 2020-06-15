@@ -1,24 +1,45 @@
 ﻿@page "/song"
 
-<h3>Song List App</h3>
-
-<ul>
-    @foreach(var song in songs)
-    {
-        <li>
-            @song.SongName
-            <input type="checkbox" @bind="song.Favorite" /> Favorite?
-        </li>
-    }
-</ul>
+<div class="card">
+    <div class="card-header">
+        <h3>Song List</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    Add a new song:
+                </label>
+                <input type="text" class="form-control" placeholder="Enter a song" @bind="txtNewSong" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    Favorite:
+                </label>
+                <input type="checkbox" @bind="chkFavorite" />
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-secondary" @onclick="AddSong">Add Song</button>
+        </div>
+    </div>
+</div>
 
 <hr />
-Add a new song:<input placeholder="Enter a song" @bind="txtNewSong" /><br />
-Is it a favorite? <input type="checkbox" @bind="chkFavorite" /><br />
-<button @onclick="AddSong">Add Song</button>
-<hr />
 
-@code {
+@foreach (var song in songs)
+{
+    <div class="shadow p-3 mb-5 bg-white rounded" style="width:400px;padding:2px 2px 2px 2px">
+        @song.SongName
+        @if(song.Favorite)
+        {
+           <div> - Favorite!</div> 
+        }
+    </div>
+}
+
+@code 
+{
     private IList<Songs> songs = new List<Songs>();
     private string txtNewSong = string.Empty;
     private string favSong = string.Empty;
@@ -26,7 +47,7 @@ Is it a favorite? <input type="checkbox" @bind="chkFavorite" /><br />
 
     private void AddSong()
     {
-        if(!string.IsNullOrWhiteSpace(txtNewSong))
+        if (!string.IsNullOrWhiteSpace(txtNewSong))
         {
             songs.Add(new Songs { SongName = txtNewSong, Favorite = chkFavorite });
             txtNewSong = "";
