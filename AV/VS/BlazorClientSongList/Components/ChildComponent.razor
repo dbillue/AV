@@ -1,0 +1,21 @@
+﻿
+<hr />
+@Title
+
+<hr />
+@ChildContent
+
+<button class="btn btn-sm btn-primary" @onclick="OnClickCallBack">
+    Trigger Parent Callback Method
+</button>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallBack { get; set; }
+}
