@@ -1,88 +1,177 @@
 
 <br />
 
-<div class="card" style="align-content: center;">
-    <div class="card-header">
-        <div class="text-center">
-            <h3>Contact Form</h3>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label>
-                    First Name:
-                </label> 
-                <input name="txtFirstName" type="text" class="form-control" placeholder="First Name" />  
+<form [formGroup]="contactForm">
+    <div class="form-group">
+        <div class="card" style="align-content: center;">
+            <div class="card-header">
+                <div class="text-center">
+                    <h3>Contact Form</h3>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            First Name:
+                        </label> 
+                        <input formControlName="txtFirstName" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="First Name"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtFirstName').touched || contactForm.get('txtFirstName').dirty) && !contactForm.get('txtFirstName').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtFirstName').errors?.required">
+                                Enter a first name
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            Last Names:
+                        </label> 
+                        <input formControlName="txtLastName" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Last Name"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtLastName').touched || contactForm.get('txtLastName').dirty) && !contactForm.get('txtLastName').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtFirstName').errors?.required">
+                                Enter a last name
+                            </span>
+                        </span>  
+                    </div>            
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            Email:
+                        </label> 
+                        <input formControlName="txtEmail" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Email Address"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtEmail').touched || contactForm.get('txtEmail').dirty) && !contactForm.get('txtEmail').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtEmail').errors?.required">
+                                Enter an email address
+                            </span>
+                        </span>                                
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>
+                            Phone:
+                        </label>
+                        <select formControlName="cboPhoneType" class="form-control">
+                            <option *ngFor="let item of phoneEnum | enumPhone">{{item}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <input formControlName="txtPhone" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Number"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtPhone').touched || contactForm.get('txtPhone').dirty) && !contactForm.get('txtPhone').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtPhone').errors?.required">
+                                Enter a contact number
+                            </span>
+                        </span> 
+                    </div> 
+                </div>    
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            Address:
+                        </label>
+                        <input formControlName="txtAddress1" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Street Address"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtAddress1').touched || contactForm.get('txtAddress1').dirty) && !contactForm.get('txtAddress1').valid }" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="contactForm.get('txtAddress1').errors?.required">
+                                    Enter a street address
+                                </span>
+                            </span>
+                    </div>         
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            Address 2:
+                        </label> 
+                        <input name="txtAddress2" type="text" class="form-control" placeholder="Street Address" />  
+                    </div>  
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            City:
+                        </label> 
+                        <input formControlName="txtCity" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="City"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtCity').touched || contactForm.get('txtCity').dirty) && !contactForm.get('txtCity').valid }" />
+                            <span class="invalid-feedback">
+                                <span *ngIf="contactForm.get('txtCity').errors?.required">
+                                    Enter a city
+                                </span>
+                            </span>  
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            State:
+                        </label> 
+                        <input formControlName="txtState" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="State" 
+                                required 
+                                maxlength="2" 
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtState').touched || contactForm.get('txtState').dirty) && !contactForm.get('txtState').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtState').errors?.required">
+                                Enter a state
+                            </span>
+                        </span>    
+                    </div> 
+                    <div class="form-group col-md-2">
+                        <label>
+                            Zip Code:
+                        </label> 
+                        <input formControlName="txtZipCode" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Zip Code"
+                                required
+                                [ngClass] = "{'is-invalid': (contactForm.get('txtZipCode').touched || contactForm.get('txtZipCode').dirty) && !contactForm.get('txtZipCode').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="contactForm.get('txtZipCode').errors?.required">
+                                Enter a state
+                            </span>
+                        </span>  
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <button class="btn btn-secondary" [disabled]="!contactForm.valid">Submit</button>
+                    </div>
+                </div>        
             </div>
-            <div class="form-group col-md-3">
-                <label>
-                    Last Names:
-                </label> 
-                <input name="txtLastName" type="text" class="form-control" placeholder="Last Name" />  
-            </div>            
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label>
-                    Email:
-                </label> 
-                <input name="txtEmail" type="text" class="form-control" placeholder="Email Address" />  
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-2">
-                <label>
-                    Phone:
-                </label>
-                <select name="cboPhoneType" class="form-control">
-                    <option *ngFor="let item of phoneEnum | enumPhone">{{item}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-2">
-                <input name="txtPhone" type="text" class="form-control" placeholder="Number" />                
-            </div> 
-        </div>    
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>
-                    Address:
-                </label>
-                <input name="txtAddress1" type="text" class="form-control" placeholder="Street Address" />  
-            </div>         
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>
-                    Address 2:
-                </label> 
-                <input name="txtAddress2" type="text" class="form-control" placeholder="Street Address" />  
-            </div>  
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label>
-                    City:
-                </label> 
-                <input name="txtCity" type="text" class="form-control" placeholder="City" />  
-            </div>
-            <div class="form-group col-md-3">
-                <label>
-                    State:
-                </label> 
-                <input name="txtState" type="text" class="form-control" placeholder="State" />  
-            </div> 
-            <div class="form-group col-md-2">
-                <label>
-                    Zip Code:
-                </label> 
-                <input name="txtZipCode" type="text" class="form-control" placeholder="Zip Code" />  
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <button class="btn btn-secondary">Submit</button>
-            </div>
-        </div>        
     </div>
-</div>
+</form>
+    <br />Dirty: {{ contactForm.value | json }}
+    <br />Touched: {{ contactForm.touched }}
+    <br />Valid: {{ contactForm.valid }}
+    <br />Value: {{ contactForm.value | json }}

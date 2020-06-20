@@ -1,4 +1,5 @@
 import { Component, VERSION, Pipe, PipeTransform } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
