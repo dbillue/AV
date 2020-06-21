@@ -28,7 +28,7 @@ export class ContactComponent implements OnInit
       txtCity: new FormControl(),
       txtState: new FormControl(),
       txtZipCode: new FormControl()
-    });
+    });   
   }
 }
 
