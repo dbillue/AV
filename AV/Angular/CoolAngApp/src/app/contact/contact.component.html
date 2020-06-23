@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label>
-                            Last Names:
+                            Last Name:
                         </label> 
                         <input formControlName="txtLastName" 
                                 type="text" 
@@ -66,7 +66,7 @@
                             Phone:
                         </label>
                         <select formControlName="cboPhoneType" class="form-control">
-                            <option *ngFor="let item of phoneEnum | enumPhone">{{item}}</option>
+                            <option *ngFor="let item of phoneType | enumData">{{item}}</option>
                         </select>
                     </div>
                 </div>
@@ -171,7 +171,8 @@
         </div>
     </div>
 </form>
-    <br />Dirty: {{ contactForm.value | json }}
-    <br />Touched: {{ contactForm.touched }}
-    <br />Valid: {{ contactForm.valid }}
-    <br />Value: {{ contactForm.value | json }}
+
+<br />Dirty: {{ contactForm.value | json }}
+<br />Touched: {{ contactForm.touched }}
+<br />Valid: {{ contactForm.valid }}
+<br />Value: {{ contactForm.value | json }}

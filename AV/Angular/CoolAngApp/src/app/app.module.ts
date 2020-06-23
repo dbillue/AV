@@ -6,15 +6,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { ContactComponent, EnumToArrayPipe } from './contact/contact.component';
+import { ContactComponent, EnumToContactNumber } from './contact/contact.component';
+import { PeopleComponent, EnumToGenderType } from './people/people.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavigationComponent,
-    ContactComponent,
-    EnumToArrayPipe
+    ContactComponent, EnumToContactNumber,
+    PeopleComponent, EnumToGenderType
   ],
   imports: [
     BrowserModule,
@@ -22,6 +23,7 @@ import { ContactComponent, EnumToArrayPipe } from './contact/contact.component';
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'contact', component: ContactComponent },
+      { path: 'people', component: PeopleComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ])    

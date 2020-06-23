@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { PhoneType } from './PhoneType'
 
 @Component({
@@ -10,7 +10,7 @@ import { PhoneType } from './PhoneType'
 export class ContactComponent implements OnInit 
 {
   contactForm:FormGroup;
-  phoneEnum = PhoneType;
+  phoneType = PhoneType;
 
   // ctor.
   constructor() { }
@@ -27,16 +27,18 @@ export class ContactComponent implements OnInit
       txtAddress1: new FormControl(),
       txtCity: new FormControl(),
       txtState: new FormControl(),
-      txtZipCode: new FormControl()
+      txtZipCode: new FormControl(),
+      cboPhoneType: new FormControl()
     });   
   }
 }
 
 // Pipe.
 @Pipe({
-  name: 'enumPhone'
+  name: 'enumData'
 })
-export class EnumToArrayPipe implements PipeTransform 
+
+export class EnumToContactNumber implements PipeTransform 
 {
   transform(data: Object) 
   {
