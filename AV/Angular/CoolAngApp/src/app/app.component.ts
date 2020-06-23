@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './navigation/navigation.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-  title = 'CoolAngApp'
+  title:string = 'Angular App Rx'
 }
