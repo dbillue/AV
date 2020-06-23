@@ -1,0 +1,158 @@
+
+<br />
+
+<form [formGroup]="peopleForm">
+    <div class="form-group">
+        <div class="card" style="align-content: center;">
+            <div class="card-header">
+                <div class="text-center">
+                    <hr />
+                    <h3>Person Profile</h3>
+                    <hr />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            First Name:
+                        </label> 
+                        <input formControlName="txtFirstName" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="First Name"
+                                required
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtFirstName').touched || peopleForm.get('txtFirstName').dirty) && !peopleForm.get('txtFirstName').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtFirstName').errors?.required">
+                                Enter a first name
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            Middle Name:
+                        </label> 
+                        <input formControlName="txtMiddleName" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Middle Name"
+                                required
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtMiddleName').touched || peopleForm.get('txtMiddleName').dirty) && !peopleForm.get('txtMiddleName').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtMiddleName').errors?.required">
+                                Enter a middle name
+                            </span>
+                        </span>
+                    </div>                    
+                    <div class="form-group col-md-3">
+                        <label>
+                            Last Name:
+                        </label> 
+                        <input formControlName="txtLastName" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Last Name"
+                                required
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtLastName').touched || peopleForm.get('txtLastName').dirty) && !peopleForm.get('txtLastName').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtFirstName').errors?.required">
+                                Enter a last name
+                            </span>
+                        </span>  
+                    </div>            
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            Gender:
+                        </label>
+                        <select formControlName="cboGender" class="form-control">
+                                <option value="selected"></option>
+                                <option *ngFor="let item of genderType | enumData">{{item}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            Age:
+                        </label> 
+                        <!-- <select formControlName="cboAge" class="form-control">
+                            <option value="selected"></option>
+                            <option *ngFor="let age of ageArray">{{age + 1}}</option>
+                        </select> -->
+                        <input 
+                            formControlName="txtAge"
+                            type="number"
+                            class="form-control"
+                            value="1"
+                            required
+                            [ngClass] = "{'is-invalid': (peopleForm.get('txtAge').touched || peopleForm.get('txtAge').dirty) && !peopleForm.get('txtAge').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtAge').errors?.required">
+                                Enter an age
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            Date of Birth:
+                        </label> 
+                        <input formControlName="txtDOB" 
+                                type="date"
+                                class="form-control"
+                                placeholder="TODO - Add a calendar control"
+                                min="1900-01-01"
+                                max="2100-01-01"
+                                required /> 
+                    </div>                     
+                </div> 
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>
+                            City:
+                        </label> 
+                        <input formControlName="txtCity" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="City"
+                                required
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtCity').touched || peopleForm.get('txtCity').dirty) && !peopleForm.get('txtCity').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtCity').errors?.required">
+                                Enter a city
+                            </span>
+                        </span>  
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>
+                            State:
+                        </label> 
+                        <select formControlName="cboState" class="form-control">
+                            <!-- <option *ngFor="let item of phoneEnum | enumPhone">{{item}}</option> -->
+                            <option>TODO - Setup enum</option>
+                        </select>
+                    </div> 
+                    <div class="form-group col-md-2">
+                        <label>
+                            Zip Code:
+                        </label>
+                        <input formControlName="txtZipCode" 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Zip Code"
+                                required
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtZipCode').touched || peopleForm.get('txtZipCode').dirty) && !peopleForm.get('txtZipCode').valid }" />
+                        <span class="invalid-feedback">
+                            <span *ngIf="peopleForm.get('txtZipCode').errors?.required">
+                                Enter a Zip Code
+                            </span>
+                        </span>  
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</form>
+
+<br />Dirty: {{ peopleForm.value | json }}
+<br />Touched: {{ peopleForm.touched }}
+<br />Valid: {{ peopleForm.valid }}
+<br />Value: {{ peopleForm.value | json }}
