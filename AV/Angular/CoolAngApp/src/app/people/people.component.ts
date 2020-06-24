@@ -29,7 +29,7 @@ export class PeopleComponent implements OnInit
       txtDOB: new FormControl(),
       txtCity: new FormControl(),
       cboState: new FormControl(),
-      txtZipCode: new FormControl()
+      txtCountry: new FormControl()
     });
   }
 }

@@ -132,17 +132,17 @@
                     </div> 
                     <div class="form-group col-md-2">
                         <label>
-                            Zip Code:
+                            Country:
                         </label>
-                        <input formControlName="txtZipCode" 
+                        <input formControlName="txtCountry" 
                                 type="text" 
                                 class="form-control" 
-                                placeholder="Zip Code"
+                                placeholder="Country"
                                 required
-                                [ngClass] = "{'is-invalid': (peopleForm.get('txtZipCode').touched || peopleForm.get('txtZipCode').dirty) && !peopleForm.get('txtZipCode').valid }" />
+                                [ngClass] = "{'is-invalid': (peopleForm.get('txtCountry').touched || peopleForm.get('txtCountry').dirty) && !peopleForm.get('txtCountry').valid }" />
                         <span class="invalid-feedback">
-                            <span *ngIf="peopleForm.get('txtZipCode').errors?.required">
-                                Enter a Zip Code
+                            <span *ngIf="peopleForm.get('txtCountry').errors?.required">
+                                Enter a country
                             </span>
                         </span>  
                     </div>
