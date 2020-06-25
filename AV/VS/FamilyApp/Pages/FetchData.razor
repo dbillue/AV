@@ -1,0 +1,127 @@
+﻿@page "/fetchdata"
+
+@inject IWeatherForeCastService ForecastService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inherits OwningComponentBase<WeatherForecastService>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+-@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                    <td><button class="btn btn-primary" @onclick="(() => EditForecast(forecast))"></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <button class="btn btn-primary" @onclick="AddNewForeCast">Add New Forecast</button>
+    </p>
+
+    @if(ShowPopup)
+    {
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Forecast</h3>
+                        <button type="button" class="close" @onclick="ClosePopup">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="text" placeholder="Celsius observation" @bind-value="weatherForecast.TemperatureC" />
+                        @*<input class="form-control" type="text" placeholder="Fahrenheit observation" @bind-value="weatherForecast.TemperatureF" />*@
+                        <input class="form-control" type="text" placeholder="Summary" @bind-value="weatherForecast.Summary" />
+                        <br />
+                        <button class="btn btn-primary" @onclick="SaveObservation">Save</button>
+                        <button class="btn btn-primary" @onclick="DeleteObservation">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@code 
+{
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    List<WeatherForecast> forecasts;
+    WeatherForecast weatherForecast = new WeatherForecast();
+    bool ShowPopup;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await authenticationStateTask).User;
+        forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
+    }
+
+    void ClosePopup()
+    {
+        ShowPopup = false;
+    }
+
+    void AddNewForeCast()
+    {
+        weatherForecast = new WeatherForecast();
+        weatherForecast.Id = 0;
+        ShowPopup = true;
+    }
+
+    async Task SaveObservation()
+    {
+        ShowPopup = false;
+        var user = (await authenticationStateTask).User;
+        if(weatherForecast.Id == 0)
+        {
+            WeatherForecast newWeatherObservation = new WeatherForecast();
+            newWeatherObservation.Date =  System.DateTime.Now;
+            newWeatherObservation.Summary = weatherForecast.Summary;
+            newWeatherObservation.TemperatureC = Convert.ToInt32(weatherForecast.TemperatureC);
+            newWeatherObservation.UserName = user.Identity.Name;
+            var result = ForecastService.CreateWeatherObservationAsync(newWeatherObservation);
+        } else {
+            //TODO - Add update code
+        }
+
+        forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
+    }
+
+    void EditForecast(WeatherForecast weatherObservation)
+    {
+        weatherForecast = weatherObservation;
+        ShowPopup = true;
+    }
+
+    async Task DeleteObservation()
+    {
+        WeatherForecast observationToDelete = new WeatherForecast();
+        var user = (await authenticationStateTask).User;
+        var result = ForecastService.DeleteObservation(observationToDelete);
+        forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
+    }
+}
