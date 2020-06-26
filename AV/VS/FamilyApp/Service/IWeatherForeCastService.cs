@@ -12,6 +12,6 @@ namespace FamilyApp.Service
 
         Task<WeatherForecast> CreateWeatherObservationAsync(WeatherForecast weatherForeCast);
 
-        Task<WeatherForecast> DeleteObservation(WeatherForecast weatherForecast);
+        Task<bool> DeleteObservation(WeatherForecast weatherForecast);
     }
 }

@@ -16,8 +16,7 @@ namespace FamilyApp.Service
             _context = context;
         }
 
-        public async Task<List<WeatherForecast>>
-            GetWeatherEntriesAsync(string strCurrentUser)
+        public async Task<List<WeatherForecast>> GetWeatherEntriesAsync(string strCurrentUser)
         {
             return await _context.weatherForeCast.Where(
                 x => x.UserName == strCurrentUser).ToListAsync();
@@ -30,11 +29,13 @@ namespace FamilyApp.Service
             return Task.FromResult(weatherForecast);
         }
 
-        public Task<WeatherForecast> DeleteObservation(WeatherForecast weatherForecast)
+        public Task<bool> DeleteObservation(WeatherForecast weatherForecast)
         {
-            _context.weatherForeCast.Remove(weatherForecast);
+            var id = weatherForecast.Id;
+            var observationToDelete = _context.weatherForeCast.Where(obs => obs.Id == id).FirstOrDefault<WeatherForecast>();
+            _context.weatherForeCast.Remove(observationToDelete);
             _context.SaveChanges();
-            return Task.FromResult(weatherForecast);
+            return Task.FromResult(true);
         }
     }
 }
