@@ -129,3 +129,9 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/BlazorSignalRApp/.vs/BlazorSignalRApp/config
 /AV/VS/BlazorSignalRApp/Shared
 /AV/VS/BlazorSignalRApp/.vs/BlazorSignalRApp
+/AV/VS/FamilyApp/.vs/FamilyApp/config
+/AV/VS/FamilyApp/bin/Debug/netcoreapp3.1
+/AV/VS/FamilyApp/obj
+/AV/VS/FamilyApp/appsettings.Development.json
+/AV/VS/FamilyApp/appsettings.json
+/AV/VS/FamilyApp/Properties
