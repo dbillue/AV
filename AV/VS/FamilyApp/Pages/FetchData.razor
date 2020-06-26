@@ -58,7 +58,10 @@ else
                         <input class="form-control" type="text" placeholder="Summary" @bind-value="weatherForecast.Summary" />
                         <br />
                         <button class="btn btn-primary" @onclick="SaveObservation">Save</button>
-                        <button class="btn btn-primary" @onclick="DeleteObservation">Delete</button>
+                        @if(weatherForecast.Id != 0)
+                        {
+                            <button class="btn btn-primary" @onclick="DeleteObservation">Delete</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -119,9 +122,9 @@ else
 
     async Task DeleteObservation()
     {
-        WeatherForecast observationToDelete = new WeatherForecast();
+        //WeatherForecast observationToDelete = new WeatherForecast();
         var user = (await authenticationStateTask).User;
-        var result = ForecastService.DeleteObservation(observationToDelete);
+        var result = ForecastService.DeleteObservation(weatherForecast);
         forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
     }
 }
