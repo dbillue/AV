@@ -2,6 +2,7 @@
 
 @inject IWeatherForeCastService ForecastService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ILogger<FetchData> logger
 @inherits OwningComponentBase<WeatherForecastService>
 
 <h1>Weather forecast</h1>
@@ -41,7 +42,7 @@ else
         <button class="btn btn-primary" @onclick="AddNewForeCast">Add New Forecast</button>
     </p>
 
-    @if(ShowPopup)
+    @if (ShowPopup)
     {
         <div class="modal" tabindex="-1" style="display:block" role="dialog">
             <div class="modal-dialog">
@@ -58,7 +59,7 @@ else
                         <input class="form-control" type="text" placeholder="Summary" @bind-value="weatherForecast.Summary" />
                         <br />
                         <button class="btn btn-primary" @onclick="SaveObservation">Save</button>
-                        @if(weatherForecast.Id != 0)
+                        @if (weatherForecast.Id != 0)
                         {
                             <button class="btn btn-primary" @onclick="DeleteObservation">Delete</button>
                         }
@@ -69,12 +70,13 @@ else
     }
 }
 
-@code 
+@code
 {
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
     List<WeatherForecast> forecasts;
     WeatherForecast weatherForecast = new WeatherForecast();
+
     bool ShowPopup;
 
     protected override async Task OnInitializedAsync()
@@ -93,22 +95,26 @@ else
         weatherForecast = new WeatherForecast();
         weatherForecast.Id = 0;
         ShowPopup = true;
+        logger.LogInformation("Add new weather observation instantiated...");
     }
 
     async Task SaveObservation()
     {
         ShowPopup = false;
         var user = (await authenticationStateTask).User;
-        if(weatherForecast.Id == 0)
+        if (weatherForecast.Id == 0)
         {
             WeatherForecast newWeatherObservation = new WeatherForecast();
-            newWeatherObservation.Date =  System.DateTime.Now;
+            newWeatherObservation.Date = System.DateTime.Now;
             newWeatherObservation.Summary = weatherForecast.Summary;
             newWeatherObservation.TemperatureC = Convert.ToInt32(weatherForecast.TemperatureC);
             newWeatherObservation.UserName = user.Identity.Name;
             var result = ForecastService.CreateWeatherObservationAsync(newWeatherObservation);
-        } else {
-            //TODO - Add update code
+            logger.LogInformation("New weather observation saved...");
+        }
+        else
+        {
+            logger.LogInformation("Weather observation saved...");
         }
 
         forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
@@ -118,6 +124,7 @@ else
     {
         weatherForecast = weatherObservation;
         ShowPopup = true;
+        logger.LogInformation("Weather observation edited...");
     }
 
     async Task DeleteObservation()
@@ -125,6 +132,7 @@ else
         //WeatherForecast observationToDelete = new WeatherForecast();
         var user = (await authenticationStateTask).User;
         var result = ForecastService.DeleteObservation(weatherForecast);
+        logger.LogInformation("Weather observation deleted...");
         forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
     }
 }
