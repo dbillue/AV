@@ -9,7 +9,13 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
--@if (forecasts == null)
+@if (error)
+{
+    <p><em>An error has occured.  Please try reloading the page or contact tech support.</em></p>
+    return;
+}
+
+@if (forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
