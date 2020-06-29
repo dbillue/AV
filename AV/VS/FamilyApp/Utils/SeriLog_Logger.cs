@@ -20,5 +20,16 @@ namespace FamilyApp.Utils
                 Console.WriteLine(ex.Message);
             }
         }
+
+        public void WriteError(string msg)
+        {
+            try
+            {
+                Log.Fatal(msg);
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
