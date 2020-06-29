@@ -42,7 +42,7 @@ namespace FamilyDemoAPIv2.Controllers
         public ActionResult<AddPersonDTO> AddPerson(AddPersonDTO person)
         {
             // Log Api call.  Could be moved to database for future anayltics.
-            _log.WriteInformation("Controller:Persons,API:GetPersons,DateTime:" + DateTime.Now.ToString());
+            _log.WriteInformation("Controller:Persons,API:AddPerson,DateTime:" + DateTime.Now.ToString());
 
             try
             { 
