@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FamilyApp.Model;
+using FamilyApp.Utils;
+using Serilog;
 
 namespace FamilyApp.Pages
 {
@@ -15,6 +17,7 @@ namespace FamilyApp.Pages
         private Task<AuthenticationState> authenticationStateTask { get; set; }
         List<WeatherForecast> forecasts;
         WeatherForecast weatherForecast = new WeatherForecast();
+        SeriLog_Logger seriLogger = new SeriLog_Logger();
 
         bool ShowPopup;
         bool error;
@@ -25,9 +28,11 @@ namespace FamilyApp.Pages
             {
                 var user = (await authenticationStateTask).User;
                 forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
+                seriLogger.WriteInformation("Current authenticated user: " + user.Identity.Name);
+                seriLogger.WriteInformation("Weather observation count: " + forecasts.Count.ToString());
             } catch (Exception ex) {
                 error = true;
-                //TODO - Add error logging to file or data repo
+                seriLogger.WriteError(ex.Message);
             }
         }
 
@@ -46,7 +51,7 @@ namespace FamilyApp.Pages
                 logger.LogInformation("Add new weather observation instantiated...");
             } catch (Exception ex) {
                 error = true;
-                //TODO - Add error logging to file or data repo
+                seriLogger.WriteError(ex.Message);
             }
         }
 
@@ -65,16 +70,18 @@ namespace FamilyApp.Pages
                     newWeatherObservation.UserName = user.Identity.Name;
                     var result = ForecastService.CreateWeatherObservationAsync(newWeatherObservation);
                     logger.LogInformation("New weather observation saved...");
+                    seriLogger.WriteInformation("New weather observation saved.");
                 }
                 else
                 {
                     logger.LogInformation("Weather observation saved...");
+                    seriLogger.WriteInformation("Weather observation saved.");
                 }
 
                 forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
             } catch (Exception ex) {
                 error = true;
-                //TODO - Add error logging to file or data repo
+                seriLogger.WriteError(ex.Message);
             }
         }
 
@@ -84,10 +91,9 @@ namespace FamilyApp.Pages
             {
                 weatherForecast = weatherObservation;
                 ShowPopup = true;
-                logger.LogInformation("Weather observation edited...");
             } catch (Exception ex) {
                 error = true;
-                //TODO - Add error logging to file or data repo
+                seriLogger.WriteError(ex.Message);
             }
         }
 
@@ -97,11 +103,11 @@ namespace FamilyApp.Pages
             {
                 var user = (await authenticationStateTask).User;
                 var result = ForecastService.DeleteObservation(weatherForecast);
-                logger.LogInformation("Weather observation deleted...");
                 forecasts = await ForecastService.GetWeatherEntriesAsync(user.Identity.Name);
+                seriLogger.WriteInformation("Weather obeservation deleted.");
             } catch (Exception ex) {
                 error = true;
-                //TODO - Add error logging to file or data repo
+                seriLogger.WriteError(ex.Message);
             }
         }
     }
