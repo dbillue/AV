@@ -20,7 +20,6 @@ namespace FamilyDemoAPIv2
 
         public static void Main(string[] args)
         {
-
             // Configure Serilog.
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
