@@ -46,6 +46,7 @@ namespace FamilyApp
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<IWeatherForeCastService, WeatherForecastService>();
+            services.AddScoped<IFamilyService, FamilyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
