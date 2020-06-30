@@ -1,0 +1,223 @@
+﻿@page "/family"
+
+@inject IFamilyService FamilyService
+@inject ILogger<FetchData> logger
+
+@using System.ComponentModel.DataAnnotations;
+@using System.Linq;
+
+@if (personList != null)
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>DOB</th>
+                <th>City</th>
+                <th>State</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in personList)
+            {
+                <tr>
+                    <td>@person.FirstName.Trim() @person.LastName.Trim()</td>
+                    <td>@person.Age</td>
+                    <td>@person.DateOfBirth.ToString("MM-dd-yyyy")</td>
+                    <td>@person.City</td>
+                    <td>@GetBirthState(person.StateId)</td>
+                    <td><button class="btn btn-primary" @onclick="(() => EditPerson(person))">Edit</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<EditForm Model="@person" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="card">
+        <div class="card-header text-center">
+            <hr />
+            <h3>Family</h3>
+            <hr />
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>
+                    First Name:
+                </label>
+                <InputText id="FirstName"
+                           @bind-Value="person.FirstName"
+                           class="form-control"
+                           maxlength="50"
+                           placeholder="First Name" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    Middle Name:
+                </label>
+                <InputText id="MiddleName"
+                           @bind-Value="person.MIddleName"
+                           class="form-control"
+                           maxlength="50"
+                           placeholder="Middle Name" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    Last Name:
+                </label>
+                <InputText id="LastName"
+                           @bind-Value="person.LastName"
+                           class="form-control"
+                           maxlength="50"
+                           placeholder="Last Name" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>
+                    Gender:
+                </label>
+                <InputSelect id="cboGender"
+                             class="form-control"
+                             @bind-Value="person.Gender">
+                    <option></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </InputSelect>
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    Age:
+                </label>
+                <InputText id="intAge"
+                           min="1"
+                           class="form-control"
+                           @bind-Value="person.City" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    Date of Birth:
+                </label>
+                <InputText id="txtDOB"
+                           min="1900-01-01"
+                           max="2100-01-01"
+                           class="form-control"
+                           @bind-Value="person.City" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>
+                    City:
+                </label>
+                <InputText id="txtCity"
+                           class="form-control"
+                           maxlength="50"
+                           placeholder="City"
+                           @bind-Value="person.City" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    State:
+                </label>
+                <InputSelect id="cboState"
+                             class="form-control"
+                             @bind-Value="person.StateId">
+                    <option value="">To Be Completed</option>
+                </InputSelect>
+            </div>
+            <div class="form-group col-md-3">
+                <label>
+                    Country:
+                </label>
+                <InputText id="txtCountry"
+                           class="form-control"
+                           maxlength="50"
+                           placeholder="Country"
+                           @bind-Value="person.Country" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-group-sm btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+<EditForm Model="@birthState">
+    @if (birthStateList != null)
+    {
+        <InputSelect id="State" class="form-control" @bind-Value="StateId">
+            @foreach (var state in birthStateList)
+                {
+                <option value="@state.StateId">@state.State</option>
+                }
+            <option></option>
+        </InputSelect>
+    }
+</EditForm>
+
+
+@code
+{
+    List<BirthState> birthStateList;
+    List<Person> personList;
+    BirthState birthState = new BirthState();
+    Person person = new Person();
+    SeriLog_Logger seriLogger = new SeriLog_Logger();
+
+    public string StateId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            personList = await FamilyService.GetPeople();
+            birthStateList = await FamilyService.GetBirthStatesAsync();
+        }
+        catch (Exception ex)
+        {
+            seriLogger.WriteError(ex.Message);
+        }
+    }
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+
+    private void EditPerson(Person personProfile)
+    {
+        try
+        {
+            person = personProfile;
+        }
+        catch (Exception ex)
+        {
+            seriLogger.WriteError(ex.Message);
+        }
+    }
+
+    public string GetBirthState(int StateId)
+    {
+        string stateName = string.Empty;
+        birthStateList = FamilyService.GetBirthStates();
+
+        foreach (var state in birthStateList)
+        {
+            if (StateId == state.StateId)
+            {
+                stateName = state.State;
+                break;
+            }
+        }
+
+        return stateName;
+    }
+}
