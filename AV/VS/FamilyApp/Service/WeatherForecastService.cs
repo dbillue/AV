@@ -11,6 +11,7 @@ namespace FamilyApp.Service
     public class WeatherForecastService : IWeatherForeCastService
     {
         private readonly FamilyAppContext _context;
+
         public WeatherForecastService(FamilyAppContext context)
         {
             _context = context;
