@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using FamilyApp.Model;
 using FamilyApp.Utils;
-using Serilog;
 
 namespace FamilyApp.Pages
 {
