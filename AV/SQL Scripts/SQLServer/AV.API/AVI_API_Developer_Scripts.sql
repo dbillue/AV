@@ -53,6 +53,9 @@ SELECT pet.*, pettype.[Type]
 FROM pets pet INNER JOIN PetTypes pettype ON pet.PetTypeId = pettype.PetTypeId
 ORDER BY pettype.Type, pet.Name
 
+INSERT INTO Pets (Name, NickName, PetTypeId, PersonId)
+VALUES ('MountainBelly', 'BellyBaby', 2, 'A804062A-512A-4298-82EF-689C0525E03A')
+
 
 /************
 PetTypes
@@ -70,3 +73,24 @@ sp_help BirthState
 sp_helpindex BirthState
 
 SELECT * FROM BirthState ORDER BY State
+
+
+/************
+WeatherForecast
+************/
+sp_help WeatherForecast
+sp_helpindex WeatherForecast
+
+SELECT * FROM WeatherForecast
+
+INSERT INTO WeatherForecast ([Date], TemperatureC, TemperatureF, Summary, UserName)
+SELECT 
+	GetDate(), 37, 99, 'Hot!', 'me => DB'
+
+--UPDATE WeatherForecast SET
+--	UserName = 'duanebillue@yahoo.com'
+--WHERE
+--	Id = 1
+
+DELETE FROM WeatherForecast
+	

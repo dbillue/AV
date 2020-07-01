@@ -25,7 +25,9 @@ namespace FamilyApp.Service
 
         public List<BirthState> GetBirthStates()
         {
-            return _context.birthState.OrderBy(x => x.StateId).ToList();
+            //return _context.birthState.OrderBy(x => x.StateId).ToList();
+            //return (List<BirthState>)(_context.birthState as IQueryable<BirthState>);
+            return _context.birthState.ToList();
         }
 
         public async Task<List<Person>> GetPeople()

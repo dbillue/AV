@@ -27,7 +27,7 @@
                     <td>@person.Age</td>
                     <td>@person.DateOfBirth.ToString("MM-dd-yyyy")</td>
                     <td>@person.City</td>
-                    <td>@GetBirthState(person.StateId)</td>
+                    <td>@GetBirthState(person)</td>
                     <td><button class="btn btn-primary" @onclick="(() => EditPerson(person))">Edit</button></td>
                 </tr>
             }
@@ -204,14 +204,14 @@
         }
     }
 
-    public string GetBirthState(int StateId)
+    public string GetBirthState(Person person)
     {
         string stateName = string.Empty;
         birthStateList = FamilyService.GetBirthStates();
 
         foreach (var state in birthStateList)
         {
-            if (StateId == state.StateId)
+            if (person.StateId == state.StateId)
             {
                 stateName = state.State;
                 break;

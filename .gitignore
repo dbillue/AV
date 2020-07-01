@@ -135,3 +135,8 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/FamilyApp/appsettings.Development.json
 /AV/VS/FamilyApp/appsettings.json
 /AV/VS/FamilyApp/Properties
+/AV/VS/FamilyApp/.vs/FamilyApp/DesignTimeBuild
+/AV/VS/FamilyApp/bin/Release/netcoreapp3.1
+/AV/VS/FamilyApp/FamilyApp.csproj.user
+/AV/VS/FamilyApp/.config
+/AV/VS/FamilyApp/.vs/FamilyApp/v16/TestStore/0
