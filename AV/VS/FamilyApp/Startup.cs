@@ -35,7 +35,7 @@ namespace FamilyApp
             #region // Configure database connection / context.
             services.AddDbContext<FamilyAppContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("AVDbconnect"));
+                options.UseSqlServer(Configuration.GetConnectionString("connectionString"));
             });
             #endregion
 
