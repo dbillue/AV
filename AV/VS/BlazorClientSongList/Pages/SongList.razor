@@ -1,0 +1,56 @@
+﻿@page "/song"
+
+<div class="card">
+    <div class="card-header">
+        <h3>Song List</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    Add a new song:
+                </label>
+                <input type="text" class="form-control" placeholder="Enter a song" @bind="txtNewSong" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    Favorite:
+                </label>
+                <input type="checkbox" @bind="chkFavorite" />
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-secondary" @onclick="AddSong">Add Song</button>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+@foreach (var song in songs)
+{
+    <div class="shadow p-3 mb-5 bg-white rounded" style="width:400px;padding:2px 2px 2px 2px">
+        @song.SongName
+        @if(song.Favorite)
+        {
+           <div> - Favorite!</div> 
+        }
+    </div>
+}
+
+@code 
+{
+    private IList<Songs> songs = new List<Songs>();
+    private string txtNewSong = string.Empty;
+    private string favSong = string.Empty;
+    private bool chkFavorite;
+
+    private void AddSong()
+    {
+        if (!string.IsNullOrWhiteSpace(txtNewSong))
+        {
+            songs.Add(new Songs { SongName = txtNewSong, Favorite = chkFavorite });
+            txtNewSong = "";
+        }
+    }
+}

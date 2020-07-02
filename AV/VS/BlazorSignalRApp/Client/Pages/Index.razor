@@ -1,0 +1,76 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<div class="card">
+    <div class="card-header">
+        <h3>Chat Application Tutorial</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    User:
+                </label>
+                <input type="text" class="form-control" placeholder="Enter name" @bind="txtUserInput" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>
+                    Message:
+                </label>
+                <input type="text" class="form-control" placeholder="Enter message" @bind="txtmessageInput" />
+            </div>
+        </div>
+        <div class="form-row">
+            <button @onclick="Send" class="btn btn-secondary btn-sm">Send Message</button>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+@if (messages.Count > 0)
+{
+    @foreach (var message in messages)
+    {
+        <div class="shadow p-3 mb-5 bg-white rounded" style="width:400px;padding:2px 2px 2px 2px">
+            @message
+        </div>
+    }
+}
+
+@code {
+
+    private HubConnection hubConnection;
+    private List<string> messages = new List<string>();
+    private string txtUserInput;
+    private string txtmessageInput;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"))
+            .Build();
+
+        hubConnection.On<string, string>("ReceiveMessage", (txtUserInput, txtmessageInput) =>
+        {
+            var encodedMsg = $"{txtUserInput}: {txtmessageInput}";
+            messages.Add(encodedMsg);
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    Task Send() =>
+        hubConnection.SendAsync("SendMessage", txtUserInput, txtmessageInput);
+
+    public bool IsConnected =>
+        hubConnection.State == HubConnectionState.Connected;
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+}

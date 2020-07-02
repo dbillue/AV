@@ -1,0 +1,22 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager 
+
+<div class="card">
+    <div class="card-header">
+        <h3>How do you feel?</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" placeholder="Be honest..." @bind="txtFeeling" @onblur="Navigate"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string txtFeeling = string.Empty;
+
+    private void Navigate()
+    {
+        NavigationManager.NavigateTo("feeling/" + txtFeeling);
+    }
+}
