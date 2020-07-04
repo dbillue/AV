@@ -53,6 +53,13 @@ namespace FamilyApp.Model
         public ICollection<Pet> Pets => new HashSet<Pet>();
 
         //public ICollection<BirthState> birthState => new HashSet<BirthState>();
+
+        public ICollection<BirthState> birthState;
+
+        public Person()
+        {
+            birthState = new List<BirthState>();
+        }
     }
 
 

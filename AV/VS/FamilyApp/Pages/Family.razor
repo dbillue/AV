@@ -180,6 +180,10 @@
         {
             personList = await FamilyService.GetPeople();
             birthStateList = await FamilyService.GetBirthStatesAsync();
+            foreach(var person in personList)
+            {
+                person.birthState = birthStateList;
+            }
         }
         catch (Exception ex)
         {
@@ -207,9 +211,8 @@
     public string GetBirthState(Person person)
     {
         string stateName = string.Empty;
-        birthStateList = FamilyService.GetBirthStates();
 
-        foreach (var state in birthStateList)
+        foreach (var state in person.birthState)
         {
             if (person.StateId == state.StateId)
             {
