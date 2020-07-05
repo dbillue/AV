@@ -10,10 +10,10 @@ namespace FamilyApp.Service
     {
         Task<List<BirthState>> GetBirthStatesAsync();
 
-        List<BirthState> GetBirthStates();
-
         Task<List<Person>> GetPeople();
 
         Task<List<Pet>> GetPets();
+
+        Task<bool> AddPerson(Person person);
     }
 }

@@ -23,13 +23,6 @@ namespace FamilyApp.Service
             return await _context.birthState.OrderBy(x => x.StateId).ToListAsync();
         }
 
-        public List<BirthState> GetBirthStates()
-        {
-            //return _context.birthState.OrderBy(x => x.StateId).ToList();
-            //return (List<BirthState>)(_context.birthState as IQueryable<BirthState>);
-            return _context.birthState.ToList();
-        }
-
         public async Task<List<Person>> GetPeople()
         {
             return await _context.person.OrderBy(x => x.LastName).ToListAsync();
@@ -38,6 +31,12 @@ namespace FamilyApp.Service
         public async Task<List<Pet>> GetPets()
         {
             return await _context.pet.ToListAsync();
+        }
+
+        public async Task<bool> AddPerson(Person person)
+        {
+            await _context.person.AddAsync(person);
+            return true;
         }
     }
 }
