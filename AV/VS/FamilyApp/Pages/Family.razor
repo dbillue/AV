@@ -157,7 +157,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick="AddUpdatePerson">Submit</button>
+                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick="UpdatePerson">Submit</button>
                             <button type="submit" class="btn btn-group-sm btn-primary" @onclick="CloseUpdatePerson">Cancel</button>
                         </div>
                     </div>
@@ -208,8 +208,8 @@
     Person person = new Person();
     SeriLog_Logger seriLogger = new SeriLog_Logger();
 
-    public string StateId { get; set; }
-    public string fullName { get; set; }
+    public string StateId = string.Empty;
+    public string fullName = string.Empty;
     public bool showAddPerson = false;
     public bool showUpdatePerson = false;
 
@@ -281,7 +281,7 @@
         return stateName;
     }
 
-    public async Task AddUpdatePerson()
+    public async Task UpdatePerson()
     {
         foreach(var state in birthStateList)
         {
@@ -290,7 +290,7 @@
                 person.StateId = state.StateId;
             }
         }
-        var result = await FamilyService.AddPerson(person);
+        await FamilyService.UpdatePerson(person);
         showUpdatePerson = false;
     }
 }

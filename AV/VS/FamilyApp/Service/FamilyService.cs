@@ -1,10 +1,9 @@
-﻿using System;
+﻿using FamilyApp.DBContext;
+using FamilyApp.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using FamilyApp.DBContext;
-using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
@@ -33,10 +32,16 @@ namespace FamilyApp.Service
             return await _context.pet.ToListAsync();
         }
 
-        public async Task<bool> AddPerson(Person person)
+        public async Task AddPerson(Person person)
         {
             await _context.person.AddAsync(person);
-            return true;
+        }
+
+        public async Task UpdatePerson(Person person)
+        {
+            _context.person.Where(p => p.PersonId == person.PersonId).FirstOrDefault();
+            await _context.SaveChangesAsync();
+            //return person;
         }
     }
 }
