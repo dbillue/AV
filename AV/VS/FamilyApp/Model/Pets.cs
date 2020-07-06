@@ -30,5 +30,14 @@ namespace FamilyApp.Model
 
         [Required]
         public DateTime CreateDate { get; set; }
+
+        public List<PetTypes> petTypes;
+        public string petType;
+
+        public Pet()
+        {
+            petTypes = new List<PetTypes>();
+            petType = string.Empty;
+        }
     }
 }

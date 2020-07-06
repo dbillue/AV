@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static FamilyApp.Model.Person;
 
 namespace FamilyApp.Model
 {
@@ -48,11 +47,10 @@ namespace FamilyApp.Model
         [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
         public DateTime CreateDate { get; set; }
 
-        public ICollection<Pet> Pets;
-        public ICollection<BirthState> birthState;
+        public List<Pet> Pets;
+        public List<BirthState> birthState;
         public string state;
 
         public Person()
