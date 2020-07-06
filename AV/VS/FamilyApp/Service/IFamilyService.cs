@@ -8,14 +8,18 @@ namespace FamilyApp.Service
 {
     interface IFamilyService
     {
-        Task<List<BirthState>> GetBirthStatesAsync();
+        Task<List<BirthState>> GetBirthStates();
 
         Task<List<Person>> GetPeople();
 
         Task<List<Pet>> GetPets();
 
-        Task AddPerson(Person person);
+        Task<List<PetTypes>> GetPetTypes();
+
+        Task<Person> AddPerson(Person person);
 
         Task UpdatePerson(Person person);
+
+        Task AddPet(Pet pet);
     }
 }

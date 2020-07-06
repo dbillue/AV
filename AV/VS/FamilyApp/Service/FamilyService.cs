@@ -1,6 +1,7 @@
 ﻿using FamilyApp.DBContext;
 using FamilyApp.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace FamilyApp.Service
             _context = context;
         }
 
-        public async Task<List<BirthState>> GetBirthStatesAsync()
+        public async Task<List<BirthState>> GetBirthStates()
         {
             return await _context.birthState.OrderBy(x => x.StateId).ToListAsync();
         }
@@ -32,16 +33,31 @@ namespace FamilyApp.Service
             return await _context.pet.ToListAsync();
         }
 
-        public async Task AddPerson(Person person)
+        public async Task<List<PetTypes>> GetPetTypes()
         {
-            await _context.person.AddAsync(person);
+            return await _context.petType.ToListAsync();
+        }
+
+        public async Task AddPet(Pet pet)
+        {
+            pet.PetId = new Guid();
+            _context.pet.Add(pet);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Person> AddPerson(Person person)
+        {
+            person.PersonId = new Guid();
+            _context.person.Add(person);
+            await _context.SaveChangesAsync();
+
+            return _context.person.Where(p => person.PersonId == p.PersonId).FirstOrDefault();
         }
 
         public async Task UpdatePerson(Person person)
         {
             _context.person.Where(p => p.PersonId == person.PersonId).FirstOrDefault();
             await _context.SaveChangesAsync();
-            //return person;
         }
     }
 }
