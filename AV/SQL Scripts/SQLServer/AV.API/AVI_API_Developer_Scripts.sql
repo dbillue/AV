@@ -31,14 +31,16 @@ FROM persons person LEFT OUTER JOIN pets pet ON person.PersonId = pet.PersonId
 ORDER BY person.FirstName, pet.Name
 
 INSERT INTO Persons (FirstName, MIddleName, LastName, Gender, Age, Country, City, StateId, DateOfBirth)
-VALUES ('Allison', 'Karly', 'Hope', 'Female', 34, 'USA', 'Unknown', 5, '1986-07-05')
+VALUES ('Allison', 'Karly', 'Hope', 'Female', 34, 'USA', 'Unknown', 5, '1986-07-05 00:00:00')
 
 DELETE FROM Persons
 WHERE 1 = 1
 	AND PersonId IN ('FCE84A41-5FD2-4253-82C9-8E152429ECA4', '998FB1EF-AF15-4032-AF53-B15B587B9142')
 	--AND FirstName IN ('A', 'J')
 
-DROP TABLE Family_Seed
+-- DELETE FROM Persons WHERE PersonId IN ('2D603475-2D0A-449B-1152-08D821BE6067')
+
+-- DROP TABLE Family_Seed
 
 
 /************
@@ -54,7 +56,9 @@ FROM pets pet INNER JOIN PetTypes pettype ON pet.PetTypeId = pettype.PetTypeId
 ORDER BY pettype.Type, pet.Name
 
 INSERT INTO Pets (Name, NickName, PetTypeId, PersonId)
-VALUES ('MountainBelly', 'BellyBaby', 2, 'A804062A-512A-4298-82EF-689C0525E03A')
+VALUES ('MountainBelly', 'BellyBaby', 2, 'A3442212-DA30-4ECF-A730-005014A63C9F')
+
+-- DELETE FROM Pets WHERE PetId IN ('41E11BBA-77DA-43CD-ADD8-F91FAF9C2184')
 
 
 /************
@@ -73,6 +77,8 @@ sp_help BirthState
 sp_helpindex BirthState
 
 SELECT * FROM BirthState ORDER BY State
+
+TRUNCATE TABLE BirthState
 
 
 /************

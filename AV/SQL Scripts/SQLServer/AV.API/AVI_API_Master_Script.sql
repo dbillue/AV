@@ -26,7 +26,7 @@ CREATE TABLE dbo.Persons
 	[Country] VARCHAR(50) NOT NULL,
 	[City] VARCHAR(50) NOT NULL,
 	[StateId] INT NOT NULL,
-	[DateOfBirth] DATETIME NOT NULL,
+	[DateOfBirth] DATE NOT NULL,
 	[CreateDate] DATETIME DEFAULT GETDATE()
 )
 
