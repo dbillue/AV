@@ -17,5 +17,6 @@ namespace FamilyApp.DBContext
         public DbSet<BirthState> birthState { get; set; }
         public DbSet<Person> person { get; set; }
         public DbSet<Pet> pet { get; set; }
+        public DbSet<PetTypes> petType { get; set; }
     }
 }
