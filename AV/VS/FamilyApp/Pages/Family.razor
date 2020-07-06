@@ -36,7 +36,7 @@
     <button class="btn btn-primary" @onclick="showAddPersonForm">Add Person</button>
 }
 
-@if (showUpdatePerson)
+@if (showEditPerson)
 {
     <EditForm Model="@person" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -45,10 +45,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Edit Person</h3>
+                        <h4 class="modal-title">Edit Person</h4>
                         <!-- Button to close the popup -->
                         <button type="button" class="close"
-                                @onclick="CloseUpdatePerson">
+                                @onclick='(() => ClosePopup("Edit"))'>
                             <span aria-hidden="true">X</span>
                         </button>
                     </div>
@@ -155,10 +155,59 @@
                                        @bind-Value="person.Country" />
                         </div>
                     </div>
+                    @if(person.Pets.Count > 0)
+                    {
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Show pets
+                                </label>
+                                <input type="Checkbox" id="showPets" @onchange="ShowPets" />
+                            </div>
+                        </div>
+                        @if(showPets)
+                        {
+                            @foreach(var pet in person.Pets)
+                            {
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>
+                                            Pet Name:
+                                        </label>
+                                        <InputText id="txtName"
+                                                   class="form-control"
+                                                   maxlength="50"
+                                                   placeholder="Pet Name"
+                                                   @bind-Value="pet.Name" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>
+                                            Pet Nick Name:
+                                        </label>
+                                        <InputText id="txtNickName"
+                                                   class="form-control"
+                                                   maxlength="50"
+                                                   placeholder="Pet Nick Name"
+                                                   @bind-Value="pet.NickName" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>
+                                            Pet Type:
+                                        </label>
+                                        <InputText id="txtPetType"
+                                                   class="form-control"
+                                                   maxlength="50"
+                                                   placeholder="Pet Type"
+                                                   @bind-Value="pet.petType" />
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick="UpdatePerson">Submit</button>
-                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick="CloseUpdatePerson">Cancel</button>
+                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick="AddUpdatePerson">Submit</button>
+                            <button type="submit" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Edit"))'>Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -167,18 +216,154 @@
     </EditForm>
 }
 
-@if(showAddPerson)
+@if (showAddPerson)
 {
     <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Add Person</h3>
+                    <h4 class="modal-title">Add Person</h4>
                     <!-- Button to close the popup -->
                     <button type="button" class="close"
-                            @onclick="CloseAddPerson">
+                            @onclick='(() => ClosePopup("Add"))'>
                         <span aria-hidden="true">X</span>
                     </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            First Name:
+                        </label>
+                        <input type="text" id="FirstName"
+                               @bind="objAddPerson.FirstName"
+                               class="form-control"
+                               maxlength="50"
+                               placeholder="First Name" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Middle Name:
+                        </label>
+                        <input type="text" id="MiddleName"
+                               @bind="objAddPerson.MIddleName"
+                               class="form-control"
+                               maxlength="50"
+                               placeholder="Middle Name" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Last Name:
+                        </label>
+                        <input type="text" id="LastName"
+                               @bind="objAddPerson.LastName"
+                               class="form-control"
+                               maxlength="50"
+                               placeholder="Last Name" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            Gender:
+                        </label>
+                        <select id="cboGender"
+                                class="form-control"
+                                @bind="objAddPerson.Gender">
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Age:
+                        </label>
+                        <input type="number" id="intAge2"
+                               class="form-control"
+                               @bind="objAddPerson.Age" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Date of Birth:
+                        </label>
+                        <input type="date" id="DateOfBirth"
+                               class="form-control"
+                               @bind="objAddPerson.DateOfBirth" />
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            City:
+                        </label>
+                        <input type="text" id="txtCity"
+                               class="form-control"
+                               maxlength="50"
+                               placeholder="City"
+                               @bind="objAddPerson.City" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            State:
+                        </label>
+                        <select id="cboState"
+                                class="form-control"
+                                @bind="objAddPerson.state">
+                            @foreach (var state in birthStateList)
+                            {
+                                <option value="">@state.State</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Country:
+                        </label>
+                        <input type="text" id="txtCountry"
+                               class="form-control"
+                               maxlength="50"
+                               placeholder="Country"
+                               @bind="objAddPerson.Country" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>
+                            Pet Name:
+                        </label>
+                        <input type="Text" id="txtName"
+                                    class="form-control"
+                                    maxlength="50"
+                                    placeholder="Pet Name"
+                                    @bind="pet.Name" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Pet Nick Name:
+                        </label>
+                        <input type="text" id="txtNickName"
+                                    class="form-control"
+                                    maxlength="50"
+                                    placeholder="Pet Nick Name"
+                                    @bind="pet.NickName" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>
+                            Pet Type:
+                        </label>
+                        <input type="text" id="txtPetType"
+                                    class="form-control"
+                                    maxlength="50"
+                                    placeholder="Pet Type"
+                                    @bind="petType.Type" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <button type="submit" class="btn btn-group-sm btn-primary" @onclick="AddPerson">Submit</button>
+                        <button type="submit" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Add"))'>Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,41 +371,71 @@
 }
 
 @*
-<EditForm Model="@birthState">
-    @if (birthStateList != null)
-    {
-        <InputSelect id="State" class="form-control" @bind-Value="StateId">
-            @foreach (var state in birthStateList)
-                {
-                <option value="@state.StateId">@state.State</option>
-                }
-            <option></option>
-        </InputSelect>
-    }
-</EditForm>
+    <EditForm Model="@birthState">
+        @if (birthStateList != null)
+        {
+            <InputSelect id="State" class="form-control" @bind-Value="StateId">
+                @foreach (var state in birthStateList)
+                    {
+                    <option value="@state.StateId">@state.State</option>
+                    }
+                <option></option>
+            </InputSelect>
+        }
+    </EditForm>
 *@
 
 @code
 {
     List<BirthState> birthStateList;
     List<Person> personList;
+    List<Pet> petList;
+    List<PetTypes> petTypeList;
     BirthState birthState = new BirthState();
+    Pet pet = new Pet();
+    PetTypes petType = new PetTypes();
     Person person = new Person();
+    Person objAddPerson = new Person();
     SeriLog_Logger seriLogger = new SeriLog_Logger();
 
     public string StateId = string.Empty;
     public string fullName = string.Empty;
+    public bool showEditPerson = false;
     public bool showAddPerson = false;
-    public bool showUpdatePerson = false;
+    public bool addPerson = false;
+    public bool showPets = false;
+    public bool showAddPets = false;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            personList = await GetPersons();
+        }
+        catch (Exception ex)
+        {
+            seriLogger.WriteError(ex.Message);
+        }
+    }
+
+    public async Task<List<Person>> GetPersons()
+    {
+        try
+        {
             personList = await FamilyService.GetPeople();
-            birthStateList = await FamilyService.GetBirthStatesAsync();
+            petList = await FamilyService.GetPets();
+            petTypeList = await FamilyService.GetPetTypes();
+            birthStateList = await FamilyService.GetBirthStates();
+
+            foreach (var pet in petList)
+            {
+                pet.petTypes = petTypeList;
+                pet.petType = GetPetType(pet);
+            }
+
             foreach (var person in personList)
             {
+                person.Pets = GetPets(person);
                 person.birthState = birthStateList;
                 person.state = GetBirthState(person);
             }
@@ -229,6 +444,21 @@
         {
             seriLogger.WriteError(ex.Message);
         }
+
+        return personList;
+    }
+
+    public List<Pet> GetPets(Person person)
+    {
+        foreach (var pet in petList)
+        {
+            if (person.PersonId == pet.PersonId)
+            {
+                person.Pets.Add(pet);
+            }
+        }
+
+        return person.Pets;
     }
 
     private void HandleValidSubmit()
@@ -236,11 +466,12 @@
         Console.WriteLine("OnValidSubmit");
     }
 
+    #region // Edit person
     private void EditPerson(Person personProfile)
     {
         try
         {
-            showUpdatePerson = true;
+            showEditPerson = true;
             person = personProfile;
             fullName = personProfile.FirstName + " " + personProfile.LastName;
         }
@@ -250,19 +481,84 @@
         }
     }
 
-    private void CloseUpdatePerson()
+    public async Task AddUpdatePerson()
     {
-        showUpdatePerson = false;
-    }
+        person.StateId = GetBirthStateId(person);
+        await FamilyService.UpdatePerson(person);
 
+        showEditPerson = false;
+    }
+    #endregion
+
+    #region // Add person and pet
     private void showAddPersonForm()
     {
+        addPerson = true;
+        fullName = "";
         showAddPerson = true;
     }
 
-    private void CloseAddPerson()
+    private async Task AddPerson()
     {
+        objAddPerson.StateId = GetBirthStateId(objAddPerson);
+        objAddPerson.CreateDate = DateTime.Now;
+        Person newPerson = await FamilyService.AddPerson(objAddPerson);
+
+        if (!string.IsNullOrEmpty(pet.Name))
+        {
+            await InsertPet(objAddPerson, pet, petType);
+        }
+
         showAddPerson = false;
+
+        personList = await GetPersons();
+    }
+
+    private async Task InsertPet(Person newPerson, Pet pet, PetTypes petType)
+    {
+        pet.PersonId = newPerson.PersonId;
+        pet.CreateDate = DateTime.Now;
+        switch (petType.Type)
+        {
+            case "Cat":
+                pet.PetTypeId = 1;
+                break;
+            case "Dog":
+                pet.PetTypeId = 2;
+                break;
+            case "Reptile":
+                pet.PetTypeId = 3;
+                break;
+            default:
+                break;
+        }
+        await FamilyService.AddPet(pet);
+    }
+    #endregion
+
+    private void ClosePopup(string formType)
+    {
+        switch (formType)
+        {
+            case "Add":
+                showAddPerson = false;
+                break;
+            case "Edit":
+                showEditPerson = false;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ShowPets()
+    {
+        if(showPets)
+        {
+            showPets = false;
+        } else {
+            showPets = true;
+        }
     }
 
     public string GetBirthState(Person person)
@@ -281,16 +577,36 @@
         return stateName;
     }
 
-    public async Task UpdatePerson()
+    public int GetBirthStateId(Person person)
     {
-        foreach(var state in birthStateList)
+        int stateId = 1;
+        foreach (var state in birthStateList)
         {
-            if(person.state == state.State)
+            if (person.state == state.State)
             {
-                person.StateId = state.StateId;
+                stateId = state.StateId;
+                break;
             }
         }
-        await FamilyService.UpdatePerson(person);
-        showUpdatePerson = false;
+
+        return stateId;
+    }
+
+    public string GetPetType(Pet pet)
+    {
+        string petType = string.Empty;
+        foreach(var p in petList)
+        {
+            foreach(var petTypes in p.petTypes)
+            {
+                if (pet.PetTypeId == petTypes.PetTypeId)
+                {
+                    petType = petTypes.Type;
+                    break;
+                }
+            }
+        }
+
+        return petType;
     }
 }
