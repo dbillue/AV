@@ -35,7 +35,7 @@ namespace FamilyApp
             #region // Configure database connection / context.
             services.AddDbContext<FamilyAppContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("connectionString"));
+                options.UseSqlServer(Configuration.GetConnectionString("connectionString_Azure"));
             });
             #endregion
 
@@ -47,6 +47,7 @@ namespace FamilyApp
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<IWeatherForeCastService, WeatherForecastService>();
             services.AddScoped<IFamilyService, FamilyService>();
+            services.AddScoped<IFamilyAPIService, FamilyAPIService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +64,8 @@ namespace FamilyApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
