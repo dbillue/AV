@@ -48,6 +48,7 @@ namespace FamilyApp
             services.AddScoped<IWeatherForeCastService, WeatherForecastService>();
             services.AddScoped<IFamilyService, FamilyService>();
             services.AddScoped<IFamilyAPIService, FamilyAPIService>();
+            services.AddScoped<IPetService, PetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
