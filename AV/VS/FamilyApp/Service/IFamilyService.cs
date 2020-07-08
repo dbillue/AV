@@ -21,5 +21,9 @@ namespace FamilyApp.Service
         Task UpdatePerson(Person person);
 
         Task AddPet(Pet pet);
+
+        Task DeletePerson(Person person);
+
+        Task DeletePet(Pet pet);
     }
 }

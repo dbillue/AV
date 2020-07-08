@@ -45,6 +45,12 @@ namespace FamilyApp.Service
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeletePet(Pet pet)
+        {
+            _context.Remove(pet);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Person> AddPerson(Person person)
         {
             person.PersonId = new Guid();
@@ -57,6 +63,12 @@ namespace FamilyApp.Service
         public async Task UpdatePerson(Person person)
         {
             _context.person.Where(p => p.PersonId == person.PersonId).FirstOrDefault();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeletePerson(Person person)
+        {
+            _context.Remove(person);
             await _context.SaveChangesAsync();
         }
     }
