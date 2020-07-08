@@ -62,7 +62,18 @@ namespace FamilyApp.Service
 
         public async Task UpdatePerson(Person person)
         {
-            _context.person.Where(p => p.PersonId == person.PersonId).FirstOrDefault();
+            var personToUpdate = _context.person.Where(p => p.PersonId == person.PersonId).FirstOrDefault();
+            
+            personToUpdate.FirstName = person.FirstName;
+            personToUpdate.MIddleName = person.MIddleName;
+            personToUpdate.LastName = person.LastName;
+            personToUpdate.Gender = person.Gender;
+            personToUpdate.Age = person.Age;
+            personToUpdate.Country = person.Country;
+            personToUpdate.City = person.City;
+            personToUpdate.StateId = person.StateId;
+            personToUpdate.DateOfBirth = person.DateOfBirth;
+
             await _context.SaveChangesAsync();
         }
 
