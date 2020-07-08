@@ -2,6 +2,7 @@
 
 @inject IFamilyService FamilyService
 @inject IFamilyAPIService FamilyAPIService
+@inject IPetService PetService
 @inject ILogger<FetchData> logger
 
 @if (personList != null)
@@ -209,54 +210,53 @@ else
                                 </div>
                             }
                         }
-                    } else {
+                    }
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>
+                                Add pets
+                            </label>
+                            <input type="Checkbox" id="addPets" @onchange="ShowAddPetsForm" />
+                        </div>
+                    </div>
+                    @if (showAddPets)
+                    {
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label>
-                                    Add pets
+                                    Pet Name:
                                 </label>
-                                <input type="Checkbox" id="addPets" @onchange="ShowAddPetsForm" />
+                                <input type="Text" id="txtName"
+                                       class="form-control"
+                                       maxlength="50"
+                                       placeholder="Pet Name"
+                                       @bind="pet.Name" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Pet Nick Name:
+                                </label>
+                                <input type="text" id="txtNickName"
+                                       class="form-control"
+                                       maxlength="50"
+                                       placeholder="Pet Nick Name"
+                                       @bind="pet.NickName" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Pet Type:
+                                </label>
+                                <select id="cboPetType"
+                                        class="form-control"
+                                        @bind="petType.Type">
+                                    <option></option>
+                                    @foreach (var type in petTypeList)
+                                    {
+                                        <option value="">@type.Type</option>
+                                    }
+                                </select>
                             </div>
                         </div>
-                        @if(showAddPets)
-                        { 
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label>
-                                        Pet Name:
-                                    </label>
-                                    <input type="Text" id="txtName"
-                                           class="form-control"
-                                           maxlength="50"
-                                           placeholder="Pet Name"
-                                           @bind="pet.Name" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>
-                                        Pet Nick Name:
-                                    </label>
-                                    <input type="text" id="txtNickName"
-                                           class="form-control"
-                                           maxlength="50"
-                                           placeholder="Pet Nick Name"
-                                           @bind="pet.NickName" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>
-                                        Pet Type:
-                                    </label>
-                                    <select id="cboPetType"
-                                            class="form-control"
-                                            @bind="petType.Type">
-                                            <option></option>
-                                            @foreach (var type in petTypeList)
-                                            {
-                                                <option value="">@type.Type</option>
-                                            }
-                                    </select>
-                                </div>
-                            </div>
-                        }
                     }
                     <div class="form-row">
                         <div class="form-group col-md-4">

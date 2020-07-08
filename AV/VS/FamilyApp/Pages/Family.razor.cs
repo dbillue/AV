@@ -1,4 +1,5 @@
 ﻿using FamilyApp.Model;
+using FamilyApp.Service;
 using FamilyApp.Utils;
 using System;
 using System.Collections.Generic;
@@ -111,7 +112,7 @@ namespace FamilyApp.Pages
             //TODO: Add additional field validation
             if (!string.IsNullOrEmpty(pet.Name))
             {
-                await InsertPet(objAddPerson, pet, petType);
+                await PetService.AddNewPet(newPerson, pet, petList, petType, "New");
             }
 
             objAddPerson.FirstName = string.Empty;
@@ -131,27 +132,6 @@ namespace FamilyApp.Pages
 
             people = string.Empty;
             personList = await GetPersons();
-        }
-
-        private async Task InsertPet(Person person, Pet pet, PetTypes petType)
-        {
-            pet.PersonId = person.PersonId;
-            pet.CreateDate = DateTime.Now;
-            switch (petType.Type)
-            {
-                case "Cat":
-                    pet.PetTypeId = 1;
-                    break;
-                case "Dog":
-                    pet.PetTypeId = 2;
-                    break;
-                case "Reptile":
-                    pet.PetTypeId = 3;
-                    break;
-                default:
-                    break;
-            }
-            await FamilyService.AddPet(pet);
         }
         #endregion
 
@@ -192,11 +172,12 @@ namespace FamilyApp.Pages
             //TODO: Add additional field validation
             if (!string.IsNullOrEmpty(pet.Name))
             {
-                await InsertPet(person, pet, petType);
+                await PetService.AddNewPet(person, pet, petList, petType, "Existing");
             }
 
             showEditPerson = false;
             showAddPets = false;
+            showPets = false;
 
             personList = await GetPersons();
         }
@@ -211,6 +192,7 @@ namespace FamilyApp.Pages
 
         private async Task DeletePerson()
         { 
+            //TODO: Fix DB concurrency issue 
             if(person.Pets.Count > 0)
             {
                 await DeletePet(person);
