@@ -16,7 +16,7 @@ namespace FamilyApp.Service
 
         Task<List<PetTypes>> GetPetTypes();
 
-        Task<Person> AddPerson(Person person);
+        Task AddPerson(Person person);
 
         Task UpdatePerson(Person person);
 

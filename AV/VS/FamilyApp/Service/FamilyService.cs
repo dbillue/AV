@@ -40,7 +40,6 @@ namespace FamilyApp.Service
 
         public async Task AddPet(Pet pet)
         {
-            pet.PetId = new Guid();
             _context.pet.Add(pet);
             await _context.SaveChangesAsync();
         }
@@ -51,13 +50,11 @@ namespace FamilyApp.Service
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Person> AddPerson(Person person)
+        public async Task AddPerson(Person person)
         {
             person.PersonId = new Guid();
             _context.person.Add(person);
             await _context.SaveChangesAsync();
-
-            return _context.person.Where(p => person.PersonId == p.PersonId).FirstOrDefault();
         }
 
         public async Task UpdatePerson(Person person)

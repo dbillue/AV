@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace FamilyApp.Service
 {
@@ -13,42 +16,30 @@ namespace FamilyApp.Service
     {
         private readonly FamilyService _familyService;
 
-        public PetService(IServiceProvider serviceProvider) 
+        public PetService(IServiceProvider serviceProvider)
         {
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
         }
 
-        public async Task AddNewPet(Person person, Pet pet, List<Pet> petList, PetTypes petType, string personType)
+        public async Task AddNewPet(Person person, Pet pet, PetTypes petType)
         {
             // Assign default properties.
             pet.PersonId = person.PersonId;
             pet.CreateDate = DateTime.Now;
             pet.PetTypeId = GetPetType(pet, petType);
+            await _familyService.AddPet(pet);
+        }
 
-            switch (personType)
-            {
-                case "New":
-                    await _familyService.AddPet(pet);
-                    break;
-                case "Existing":
-                    foreach (var p in petList)
-                    {
-                        if (string.IsNullOrEmpty(p.PersonId.ToString()))
-                        {
-                            await _familyService.AddPet(pet);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        public async Task DeletePet(Pet pet)
+        {
+            await _familyService.DeletePet(pet);
         }
 
         public int GetPetType(Pet pet, PetTypes petType)
         {
             int petTypeId = 0;
 
-            switch (petType.Type)
+            switch (pet.petType)
             {
                 case "Cat":
                     petTypeId = 1;

@@ -8,7 +8,9 @@ namespace FamilyApp.Service
 {
     interface IPetService
     {
-        Task AddNewPet(Person person, Pet pet, List<Pet> petList, PetTypes petType, string personType);
+        Task AddNewPet(Person person, Pet pet, PetTypes petType);
+
+        Task DeletePet(Pet pet);
 
         int GetPetType(Pet pet, PetTypes petType);
     }
