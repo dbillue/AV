@@ -18,6 +18,8 @@ namespace FamilyApp.Pages
         List<PetTypes> petTypeList;
         Pet pet = new Pet();
         PetTypes petType = new PetTypes();
+        Pet addPetPerson = new Pet();
+        Pet addPetPersonUpdate = new Pet();
         Person person = new Person();
         Person objAddPerson = new Person();
         SeriLog_Logger seriLogger = new SeriLog_Logger();
@@ -62,9 +64,11 @@ namespace FamilyApp.Pages
                 petTypeList = await FamilyService.GetPetTypes();
                 birthStateList = await FamilyService.GetBirthStates();
 
+                addPetPersonUpdate.petTypes = petTypeList;
+                addPetPerson.petTypes = petTypeList;
+
                 foreach (var pet in petList)
-                {
-                    pet.petTypes = petTypeList;
+                { 
                     pet.petType = GetPetType(pet);
                 }
 
@@ -107,12 +111,12 @@ namespace FamilyApp.Pages
         {
             objAddPerson.StateId = GetBirthStateId(objAddPerson);
             objAddPerson.CreateDate = DateTime.Now;
-            Person newPerson = await FamilyService.AddPerson(objAddPerson);
+            await FamilyService.AddPerson(objAddPerson);
 
             //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(pet.Name))
+            if (!string.IsNullOrEmpty(addPetPerson.Name))
             {
-                await PetService.AddNewPet(newPerson, pet, petList, petType, "New");
+                await PetService.AddNewPet(objAddPerson, addPetPerson, petType);
             }
 
             objAddPerson.FirstName = string.Empty;
@@ -124,14 +128,17 @@ namespace FamilyApp.Pages
             objAddPerson.City = string.Empty;
             objAddPerson.state = string.Empty;
             objAddPerson.Country = string.Empty;
-            pet.Name = string.Empty;
-            pet.NickName = string.Empty;
-            petType.Type = string.Empty;
 
             showAddPerson = false;
 
             people = string.Empty;
             personList = await GetPersons();
+
+            //addPetPerson.PetId = Guid.Empty;
+            //addPetPerson.Name = string.Empty;
+            //addPetPerson.NickName = string.Empty;
+            //addPetPerson.PersonId = Guid.Empty;
+            //addPetPerson.PetTypeId = 0;
         }
         #endregion
 
@@ -157,27 +164,37 @@ namespace FamilyApp.Pages
                 showAddPets = false;
             } else {
                 showAddPets = true;
-
-                pet.Name = string.Empty;
-                pet.NickName = string.Empty;
-                petType.Type = string.Empty;
             }
         }
 
         private async Task UpdatePerson()
         {
+            //TODO: Add additional field validation
+            if (!string.IsNullOrEmpty(addPetPersonUpdate.Name))
+            {
+                await PetService.AddNewPet(person, addPetPersonUpdate, petType);
+            }
+
             person.StateId = GetBirthStateId(person);
             await FamilyService.UpdatePerson(person);
-
-            //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(pet.Name))
-            {
-                await PetService.AddNewPet(person, pet, petList, petType, "Existing");
-            }
 
             showEditPerson = false;
             showAddPets = false;
             showPets = false;
+
+            personList = await GetPersons();
+
+            //addPetPersonUpdate.Name = string.Empty;
+            //addPetPersonUpdate.NickName = string.Empty;
+            //addPetPersonUpdate.PersonId = Guid.Empty;
+            //addPetPersonUpdate.PetTypeId = 0;
+        }
+
+        private async Task DeletePet(Pet pet)
+        {
+            await PetService.DeletePet(pet);
+
+            ClosePopup("Edit");
 
             personList = await GetPersons();
         }
@@ -200,6 +217,8 @@ namespace FamilyApp.Pages
 
             await FamilyService.DeletePerson(person);
             showDeletePerson = false;
+
+            personList = await GetPersons();
         }
 
         private async Task DeletePet(Person person)
@@ -225,6 +244,9 @@ namespace FamilyApp.Pages
                     showEditPerson = false;
                     showPets = false;
                     showAddPets = false;
+                    pet.Name = string.Empty;
+                    pet.NickName = string.Empty;
+                    petType.Type = string.Empty;
                     break;
                 case "Delete":
                     showDeletePerson = false;
@@ -282,7 +304,7 @@ namespace FamilyApp.Pages
             string petType = string.Empty;
             foreach (var p in petList)
             {
-                foreach (var petTypes in p.petTypes)
+                foreach (var petTypes in petTypeList)
                 {
                     if (pet.PetTypeId == petTypes.PetTypeId)
                     {

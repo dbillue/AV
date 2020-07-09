@@ -181,7 +181,7 @@ else
                                         <label>
                                             Pet Name:
                                         </label>
-                                        <InputText id="txtName"
+                                        <InputText id="txtPetName"
                                                    class="form-control"
                                                    maxlength="50"
                                                    placeholder="Pet Name"
@@ -191,7 +191,7 @@ else
                                         <label>
                                             Pet Nick Name:
                                         </label>
-                                        <InputText id="txtNickName"
+                                        <InputText id="txtPetNickName"
                                                    class="form-control"
                                                    maxlength="50"
                                                    placeholder="Pet Nick Name"
@@ -206,6 +206,9 @@ else
                                                    maxlength="50"
                                                    placeholder="Pet Type"
                                                    @bind-Value="pet.petType" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <button type="button" class="btn-primary" @onclick="(() => DeletePet(pet))">Delete</button>
                                     </div>
                                 </div>
                             }
@@ -226,21 +229,21 @@ else
                                 <label>
                                     Pet Name:
                                 </label>
-                                <input type="Text" id="txtName"
+                                <input type="Text" id="txtAddName"
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="Pet Name"
-                                       @bind="pet.Name" />
+                                       @bind="addPetPersonUpdate.Name" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label>
                                     Pet Nick Name:
                                 </label>
-                                <input type="text" id="txtNickName"
+                                <input type="text" id="txtAddNickName"
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="Pet Nick Name"
-                                       @bind="pet.NickName" />
+                                       @bind="addPetPersonUpdate.NickName" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label>
@@ -248,11 +251,11 @@ else
                                 </label>
                                 <select id="cboPetType"
                                         class="form-control"
-                                        @bind="petType.Type">
+                                        @bind="addPetPersonUpdate.petType">
                                     <option></option>
-                                    @foreach (var type in petTypeList)
+                                    @foreach (var addPetType in addPetPersonUpdate.petTypes)
                                     {
-                                        <option value="">@type.Type</option>
+                                        <option value="">@addPetType.Type</option>
                                     }
                                 </select>
                             </div>
@@ -394,7 +397,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Pet Name"
-                                   @bind="pet.Name" />
+                                   @bind='addPetPerson.Name' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -404,7 +407,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Pet Nick Name"
-                                   @bind="pet.NickName" />
+                                   @bind='addPetPerson.NickName' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -412,12 +415,12 @@ else
                             </label>
                             <select id="cboPetType"
                                     class="form-control"
-                                    @bind="petType.Type">
-                                <option></option>
-                                @foreach (var type in petTypeList)
-                                {
-                                    <option value="">@type.Type</option>
-                                }
+                                    @bind='addPetPerson.petType'>
+                                    <option></option>
+                                    @foreach (var addPetType in addPetPerson.petTypes)
+                                    {
+                                        <option value="">@addPetType.Type</option>
+                                    }
                             </select>
                         </div>
                     </div>
