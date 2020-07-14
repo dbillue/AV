@@ -1,14 +1,7 @@
-﻿using FamilyApp.DBContext;
-using FamilyApp.Model;
-using FamilyApp.Pages;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using FamilyApp.Model;
 using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
+using System;
+using System.Threading.Tasks;
 
 namespace FamilyApp.Service
 {
