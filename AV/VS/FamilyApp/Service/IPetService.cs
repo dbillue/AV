@@ -6,7 +6,7 @@ using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
-    interface IPetService
+    public interface IPetService
     {
         Task AddNewPet(Person person, Pet pet, PetTypes petType);
 
