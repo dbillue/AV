@@ -144,3 +144,5 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/BlazorClientSongList/BlazorClientSongList.csproj.user
 /AV/VS/BlazorSignalRApp/Server/appsettings.Development.json
 /AV/VS/BlazorSignalRApp/Server/appsettings.json
+/AV/VS/XUnitTestFamilyApp/bin/Debug/netcoreapp3.1
+/AV/VS/XUnitTestFamilyApp/obj
