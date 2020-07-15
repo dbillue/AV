@@ -10,7 +10,7 @@ namespace FamilyApp.Service
     {
         Task<bool> AddNewPet(Person person, Pet pet, PetTypes petType);
 
-        Task DeletePet(Pet pet);
+        Task<bool> DeletePet(Pet pet);
 
         int GetPetType(Pet pet, PetTypes petType);
     }

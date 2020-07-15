@@ -24,9 +24,10 @@ namespace FamilyApp.Service
             return true;
         }
 
-        public async Task DeletePet(Pet pet)
+        public async Task<bool> DeletePet(Pet pet)
         {
             await _familyService.DeletePet(pet);
+            return true;
         }
 
         public int GetPetType(Pet pet, PetTypes petType)
