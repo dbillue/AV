@@ -416,11 +416,11 @@ else
                             <select id="cboPetType"
                                     class="form-control"
                                     @bind='addPetPerson.petType'>
-                                    <option></option>
-                                    @foreach (var addPetType in addPetPerson.petTypes)
-                                    {
-                                        <option value="">@addPetType.Type</option>
-                                    }
+                                <option></option>
+                                @foreach (var addPetType in addPetPerson.petTypes)
+                                {
+                                    <option value="">@addPetType.Type</option>
+                                }
                             </select>
                         </div>
                     </div>
