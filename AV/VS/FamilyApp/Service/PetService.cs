@@ -14,13 +14,14 @@ namespace FamilyApp.Service
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
         }
 
-        public async Task AddNewPet(Person person, Pet pet, PetTypes petType)
+        public async Task<bool> AddNewPet(Person person, Pet pet, PetTypes petType)
         {
             // Assign default properties.
             pet.PersonId = person.PersonId;
             pet.CreateDate = DateTime.Now;
             pet.PetTypeId = GetPetType(pet, petType);
             await _familyService.AddPet(pet);
+            return true;
         }
 
         public async Task DeletePet(Pet pet)
