@@ -133,12 +133,6 @@ namespace FamilyApp.Pages
 
             people = string.Empty;
             personList = await GetPersons();
-
-            //addPetPerson.PetId = Guid.Empty;
-            //addPetPerson.Name = string.Empty;
-            //addPetPerson.NickName = string.Empty;
-            //addPetPerson.PersonId = Guid.Empty;
-            //addPetPerson.PetTypeId = 0;
         }
         #endregion
 
@@ -192,7 +186,7 @@ namespace FamilyApp.Pages
 
         private async Task DeletePet(Pet pet)
         {
-            await PetService.DeletePet(pet);
+            var petDeleted = await PetService.DeletePet(pet);
 
             ClosePopup("Edit");
 
@@ -272,13 +266,18 @@ namespace FamilyApp.Pages
         {
             string stateName = string.Empty;
 
-            foreach (var state in person.birthState)
+            try
             {
-                if (person.StateId == state.StateId)
+                foreach (var state in person.birthState)
                 {
-                    stateName = state.State;
-                    break;
+                    if (person.StateId == state.StateId)
+                    {
+                        stateName = state.State;
+                        break;
+                    }
                 }
+            } catch (Exception ex) {
+                seriLogger.WriteError(ex.Message);
             }
 
             return stateName;
@@ -287,13 +286,19 @@ namespace FamilyApp.Pages
         private int GetBirthStateId(Person person)
         {
             int stateId = 1;
-            foreach (var state in birthStateList)
+
+            try
             {
-                if (person.state == state.State)
+                foreach (var state in birthStateList)
                 {
-                    stateId = state.StateId;
-                    break;
+                    if (person.state == state.State)
+                    {
+                        stateId = state.StateId;
+                        break;
+                    }
                 }
+            } catch (Exception ex) {
+                seriLogger.WriteError(ex.Message);
             }
 
             return stateId;
@@ -302,16 +307,22 @@ namespace FamilyApp.Pages
         private string GetPetType(Pet pet)
         {
             string petType = string.Empty;
-            foreach (var p in petList)
+
+            try
             {
-                foreach (var petTypes in petTypeList)
+                foreach (var p in petList)
                 {
-                    if (pet.PetTypeId == petTypes.PetTypeId)
+                    foreach (var petTypes in petTypeList)
                     {
-                        petType = petTypes.Type;
-                        break;
+                        if (pet.PetTypeId == petTypes.PetTypeId)
+                        {
+                            petType = petTypes.Type;
+                            break;
+                        }
                     }
                 }
+            } catch (Exception ex) { 
+                seriLogger.WriteError(ex.Message);
             }
 
             return petType;
