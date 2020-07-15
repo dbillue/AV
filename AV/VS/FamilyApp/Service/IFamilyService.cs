@@ -6,7 +6,7 @@ using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
-    interface IFamilyService
+    public interface IFamilyService
     {
         Task<List<BirthState>> GetBirthStates();
 
