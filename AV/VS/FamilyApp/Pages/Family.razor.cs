@@ -116,7 +116,7 @@ namespace FamilyApp.Pages
             //TODO: Add additional field validation
             if (!string.IsNullOrEmpty(addPetPerson.Name))
             {
-                await PetService.AddNewPet(objAddPerson, addPetPerson, petType);
+                var petAdded = await PetService.AddNewPet(objAddPerson, addPetPerson, petType);
             }
 
             objAddPerson.FirstName = string.Empty;
@@ -172,7 +172,7 @@ namespace FamilyApp.Pages
             //TODO: Add additional field validation
             if (!string.IsNullOrEmpty(addPetPersonUpdate.Name))
             {
-                await PetService.AddNewPet(person, addPetPersonUpdate, petType);
+                var petAdded = await PetService.AddNewPet(person, addPetPersonUpdate, petType);
             }
 
             person.StateId = GetBirthStateId(person);
