@@ -1,12 +1,7 @@
-﻿using System;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using FamilyApp.Model;
-using Microsoft.Extensions.Configuration;
 
 namespace FamilyApp.Service
 {
@@ -15,7 +10,7 @@ namespace FamilyApp.Service
         IConfiguration configuration;
         string URIEndPoint, URI_Path = string.Empty;
 
-        public FamilyAPIService(IConfiguration _configuration) 
+        public FamilyAPIService(IConfiguration _configuration)
         {
             configuration = _configuration;
             URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI").Value;
