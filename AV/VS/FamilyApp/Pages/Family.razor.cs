@@ -204,8 +204,9 @@ namespace FamilyApp.Pages
         #endregion
 
         #region // Delete person
-        private void ShowDeletePersonForm(Person person)
+        private void ShowDeletePersonForm(Person personProfile)
         {
+            person = personProfile;
             fullName = person.FirstName + " " + person.LastName;
             showDeletePerson = true;
         }
