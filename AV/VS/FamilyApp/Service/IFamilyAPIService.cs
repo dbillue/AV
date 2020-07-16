@@ -6,7 +6,7 @@ using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
-    interface IFamilyAPIService
+    public interface IFamilyAPIService
     {
         Task<string> GetPeopleRaw();
     }
