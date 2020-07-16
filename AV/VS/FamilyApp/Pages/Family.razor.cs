@@ -114,9 +114,12 @@ namespace FamilyApp.Pages
             await FamilyService.AddPerson(objAddPerson);
 
             //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(addPetPerson.Name))
+            if (!string.IsNullOrEmpty(addPetPerson.addPetName))
             {
-                var petAdded = await PetService.AddNewPet(objAddPerson, addPetPerson, petType);
+                addPetPerson.Name = addPetPerson.addPetName;
+                addPetPerson.NickName = addPetPerson.addPetNickName;
+                addPetPerson.petType = addPetPerson.addPetType;
+                var petAdded = await PetService.AddNewPet(objAddPerson, addPetPerson, addPetPerson.petType);
             }
 
             objAddPerson.FirstName = string.Empty;
@@ -128,6 +131,10 @@ namespace FamilyApp.Pages
             objAddPerson.City = string.Empty;
             objAddPerson.state = string.Empty;
             objAddPerson.Country = string.Empty;
+
+            addPetPerson.addPetName = string.Empty;
+            addPetPerson.addPetNickName = string.Empty;
+            addPetPerson.addPetType = string.Empty;
 
             showAddPerson = false;
 
@@ -164,9 +171,12 @@ namespace FamilyApp.Pages
         private async Task UpdatePerson()
         {
             //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(addPetPersonUpdate.Name))
+            if (!string.IsNullOrEmpty(addPetPersonUpdate.addPetName))
             {
-                var petAdded = await PetService.AddNewPet(person, addPetPersonUpdate, petType);
+                addPetPersonUpdate.Name = addPetPersonUpdate.addPetName;
+                addPetPersonUpdate.NickName = addPetPersonUpdate.addPetNickName;
+                addPetPersonUpdate.petType = addPetPersonUpdate.addPetType;
+                var petAdded = await PetService.AddNewPet(person, addPetPersonUpdate, addPetPersonUpdate.petType);
             }
 
             person.StateId = GetBirthStateId(person);
@@ -176,12 +186,11 @@ namespace FamilyApp.Pages
             showAddPets = false;
             showPets = false;
 
-            personList = await GetPersons();
+            addPetPersonUpdate.addPetName = string.Empty;
+            addPetPersonUpdate.addPetNickName = string.Empty;
+            addPetPersonUpdate.addPetType = string.Empty;
 
-            //addPetPersonUpdate.Name = string.Empty;
-            //addPetPersonUpdate.NickName = string.Empty;
-            //addPetPersonUpdate.PersonId = Guid.Empty;
-            //addPetPersonUpdate.PetTypeId = 0;
+            personList = await GetPersons();
         }
 
         private async Task DeletePet(Pet pet)
@@ -203,7 +212,6 @@ namespace FamilyApp.Pages
 
         private async Task DeletePerson()
         { 
-            //TODO: Fix DB concurrency issue 
             if(person.Pets.Count > 0)
             {
                 await DeletePet(person);

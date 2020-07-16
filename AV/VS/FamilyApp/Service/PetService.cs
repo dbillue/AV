@@ -14,7 +14,7 @@ namespace FamilyApp.Service
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
         }
 
-        public async Task<bool> AddNewPet(Person person, Pet pet, PetTypes petType)
+        public async Task<bool> AddNewPet(Person person, Pet pet, string petType)
         {
             // Assign default properties.
             pet.PersonId = person.PersonId;
@@ -30,11 +30,11 @@ namespace FamilyApp.Service
             return true;
         }
 
-        public int GetPetType(Pet pet, PetTypes petType)
+        public int GetPetType(Pet pet, string petType)
         {
             int petTypeId = 0;
 
-            switch (pet.petType)
+            switch (petType)
             {
                 case "Cat":
                     petTypeId = 1;

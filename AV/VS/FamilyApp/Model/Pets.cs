@@ -31,13 +31,19 @@ namespace FamilyApp.Model
         [Required]
         public DateTime CreateDate { get; set; }
 
-        public string petType;
+        public string petType = string.Empty;
+        public string addPetType;
         public List<PetTypes> petTypes;
+        public string addPetName = string.Empty;
+        public string addPetNickName = string.Empty;
 
         public Pet()
         {
             petType = string.Empty;
+            addPetType = string.Empty;
             petTypes = new List<PetTypes>();
+            addPetName = string.Empty;
+            addPetNickName = string.Empty;
         }
     }
 }
