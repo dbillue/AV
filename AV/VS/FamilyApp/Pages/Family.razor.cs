@@ -1,11 +1,9 @@
-﻿using FamilyApp.Model;
-using FamilyApp.Service;
+﻿using FamilyApp.DTO;
+using FamilyApp.Model;
 using FamilyApp.Utils;
-using FamilyApp.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
 
 namespace FamilyApp.Pages
 {
@@ -65,7 +63,7 @@ namespace FamilyApp.Pages
 
                 foreach (var petDTO in petList)
                 {
-                    petDTO.petType = GetPetType(pet);
+                    petDTO.petType = PetService.GetPetType(pet, petList, petTypeList);
                 }
 
                 foreach (var person in personList)
@@ -161,10 +159,12 @@ namespace FamilyApp.Pages
 
         private void ShowAddPetsForm()
         {
-            if(showAddPets)
+            if (showAddPets)
             {
                 showAddPets = false;
-            } else {
+            }
+            else
+            {
                 showAddPets = true;
             }
         }
@@ -226,7 +226,7 @@ namespace FamilyApp.Pages
         {
             foreach (var pet in petList)
             {
-                if(person.PersonId == pet.PersonId)
+                if (person.PersonId == pet.PersonId)
                 {
                     var petDeleted = await PetService.DeletePet(pet);
                 }
@@ -282,7 +282,9 @@ namespace FamilyApp.Pages
                         break;
                     }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 seriLogger.WriteError(ex.Message);
             }
 
@@ -303,35 +305,13 @@ namespace FamilyApp.Pages
                         break;
                     }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 seriLogger.WriteError(ex.Message);
             }
 
             return stateId;
-        }
-
-        private string GetPetType(Pet pet)
-        {
-            string petType = string.Empty;
-
-            try
-            {
-                foreach (var p in petList)
-                {
-                    foreach (var petTypes in petTypeList)
-                    {
-                        if (pet.PetTypeId == petTypes.PetTypeId)
-                        {
-                            petType = petTypes.Type;
-                            break;
-                        }
-                    }
-                }
-            } catch (Exception ex) { 
-                seriLogger.WriteError(ex.Message);
-            }
-
-            return petType;
         }
     }
 }
