@@ -18,11 +18,11 @@ namespace XUnitTestFamilyApp
 
             // Arrange.
             var petService = new Mock<IPetService>();
-            petService.Setup(ps => ps.AddNewPet(person, pet, petType)).ReturnsAsync(true);
+            petService.Setup(ps => ps.AddNewPet(person, pet, petType.ToString())).ReturnsAsync(true);
             var addPet = petService.Object;
 
             // Act.
-            var actual = await addPet.AddNewPet(person, pet, petType);
+            var actual = await addPet.AddNewPet(person, pet, petType.ToString());
 
             // Assert.
             Assert.True
@@ -58,11 +58,11 @@ namespace XUnitTestFamilyApp
 
             // Arrange.
             var petService = new Mock<IPetService>();
-            petService.Setup(ps => ps.GetPetType(pet, petType)).Returns(1);
+            petService.Setup(ps => ps.GetPetType(pet, petType.ToString())).Returns(1);
             var ps = petService.Object;
 
             // Act.
-            var actual = ps.GetPetType(pet, petType);
+            var actual = ps.GetPetType(pet, petType.ToString());
 
             // Assert.
             Assert.Equal
