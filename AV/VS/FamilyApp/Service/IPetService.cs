@@ -13,5 +13,7 @@ namespace FamilyApp.Service
         Task<bool> DeletePet(Pet pet);
 
         int GetPetType(Pet pet, string petType);
+
+        string GetPetType(Pet pet, List<Pet> petList, List<PetTypes> petTypeList);
     }
 }
