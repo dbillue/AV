@@ -233,7 +233,7 @@ else
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="Pet Name"
-                                       @bind="addPetPersonUpdate.addPetName" />
+                                       @bind="petDTO.Name" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label>
@@ -243,7 +243,7 @@ else
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="Pet Nick Name"
-                                       @bind="addPetPersonUpdate.addPetNickName" />
+                                       @bind="petDTO.NickName" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label>
@@ -251,9 +251,9 @@ else
                                 </label>
                                 <select id="cboPetType"
                                         class="form-control"
-                                        @bind="addPetPersonUpdate.addPetType">
+                                        @bind="petDTO.petType">
                                     <option></option>
-                                    @foreach (var addPetType in addPetPersonUpdate.petTypes)
+                                    @foreach (var addPetType in petDTO.petTypes)
                                     {
                                         <option value="">@addPetType.Type</option>
                                     }
@@ -275,7 +275,7 @@ else
 
 @if (showAddPerson)
 {
-    <EditForm Model="@objAddPerson" OnValidSubmit="AddPerson">
+    <EditForm Model="@person" OnValidSubmit="AddPerson">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
@@ -294,8 +294,8 @@ else
                             <label>
                                 First Name:
                             </label>
-                            <InputText id="FirstName"
-                                       @bind-Value="objAddPerson.FirstName"
+                            <input type="text" id="FirstName"
+                                       @bind="person.FirstName"
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="First Name" />
@@ -305,7 +305,7 @@ else
                                 Middle Name:
                             </label>
                             <input type="text" id="MiddleName"
-                                   @bind="objAddPerson.MIddleName"
+                                   @bind="person.MIddleName"
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Middle Name" />
@@ -315,7 +315,7 @@ else
                                 Last Name:
                             </label>
                             <input type="text" id="LastName"
-                                   @bind="objAddPerson.LastName"
+                                   @bind="person.LastName"
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Last Name" />
@@ -328,7 +328,7 @@ else
                             </label>
                             <select id="cboGender"
                                     class="form-control"
-                                    @bind="objAddPerson.Gender">
+                                    @bind="person.Gender">
                                 <option></option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -340,7 +340,7 @@ else
                             </label>
                             <input type="number" id="intAge2"
                                    class="form-control"
-                                   @bind="objAddPerson.Age" />
+                                   @bind="person.Age" />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -348,7 +348,7 @@ else
                             </label>
                             <input type="date" id="DateOfBirth"
                                    class="form-control"
-                                   @bind="objAddPerson.DateOfBirth" />
+                                   @bind="person.DateOfBirth" />
 
                         </div>
                     </div>
@@ -361,7 +361,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="City"
-                                   @bind="objAddPerson.City" />
+                                   @bind="person.City" />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -369,7 +369,7 @@ else
                             </label>
                             <select id="cboState"
                                     class="form-control"
-                                    @bind="objAddPerson.state">
+                                    @bind="person.state">
                                 <option></option>
                                 @foreach (var state in birthStateList)
                                 {
@@ -385,7 +385,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Country"
-                                   @bind="objAddPerson.Country" />
+                                   @bind="person.Country" />
                         </div>
                     </div>
                     <div class="form-row">
@@ -397,7 +397,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Pet Name"
-                                   @bind='addPetPerson.addPetName' />
+                                   @bind='petDTO.Name' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -407,7 +407,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Pet Nick Name"
-                                   @bind='addPetPerson.addPetNickName' />
+                                   @bind='petDTO.NickName' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -415,9 +415,9 @@ else
                             </label>
                             <select id="cboPetType"
                                     class="form-control"
-                                    @bind='addPetPerson.addPetType'>
+                                    @bind='petDTO.petType'>
                                 <option></option>
-                                @foreach (var addPetType in addPetPerson.petTypes)
+                                @foreach (var addPetType in petDTO.petTypes)
                                 {
                                     <option value="">@addPetType.Type</option>
                                 }

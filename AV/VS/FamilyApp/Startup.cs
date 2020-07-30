@@ -29,6 +29,7 @@ namespace FamilyApp
             services.AddDbContext<FamilyAppContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("connectionString_Azure"));
+                options.EnableSensitiveDataLogging(true);
             });
             #endregion
 

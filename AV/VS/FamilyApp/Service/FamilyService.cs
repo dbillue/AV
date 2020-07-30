@@ -40,6 +40,7 @@ namespace FamilyApp.Service
 
         public async Task AddPet(Pet pet)
         {
+            pet.PetId = new Guid();
             _context.pet.Add(pet);
             await _context.SaveChangesAsync();
         }
@@ -76,7 +77,17 @@ namespace FamilyApp.Service
 
         public async Task DeletePerson(Person person)
         {
-            _context.Remove(person);
+            var personRecord = _context.Set<Person>()
+                .FirstOrDefault(entry => entry.PersonId == person.PersonId);
+
+            // check if local is not null 
+            if (personRecord != null)
+            {
+                // detach
+                _context.Entry(personRecord).State = EntityState.Detached;
+            }
+
+            _context.Remove(personRecord);
             await _context.SaveChangesAsync();
         }
     }
