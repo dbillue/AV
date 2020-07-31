@@ -35,6 +35,7 @@ namespace FamilyApp.Service
 
         public int GetPetType(Pet pet, string petType)
         {
+            // TODO: Refactor to use petTypeList and remove switch statement
             int petTypeId = 0;
 
             switch (petType)
@@ -55,21 +56,18 @@ namespace FamilyApp.Service
             return petTypeId;
         }
 
-        public string GetPetType(Pet pet, List<Pet> petList, List<PetTypes> petTypeList)
+        public string GetPetType(int petTypeId, List<PetTypes> petTypeList)
         {
-            string petType = string.Empty;
+            string petTypeName = string.Empty;
 
             try
             {
-                foreach (var p in petList)
+                foreach (var petType in petTypeList)
                 {
-                    foreach (var petTypes in petTypeList)
+                    if (petTypeId == petType.PetTypeId)
                     {
-                        if (pet.PetTypeId == petTypes.PetTypeId)
-                        {
-                            petType = petTypes.Type;
-                            break;
-                        }
+                        petTypeName = petType.Type;
+                        break;
                     }
                 }
             }
@@ -78,7 +76,20 @@ namespace FamilyApp.Service
                 seriLogger.WriteError(ex.Message);
             }
 
-            return petType;
+            return petTypeName;
+        }
+
+        public List<Pet> GetPets(Person person, List<Pet> petList)
+        {
+            foreach (var pet in petList)
+            {
+                if (person.PersonId == pet.PersonId)
+                {
+                    person.Pets.Add(pet);
+                }
+            }
+
+            return person.Pets;
         }
     }
 }

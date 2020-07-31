@@ -14,6 +14,8 @@ namespace FamilyApp.Service
 
         int GetPetType(Pet pet, string petType);
 
-        string GetPetType(Pet pet, List<Pet> petList, List<PetTypes> petTypeList);
+        string GetPetType(int petTypeId, List<PetTypes> petTypeList);
+
+        List<Pet> GetPets(Person person, List<Pet> petList);
     }
 }
