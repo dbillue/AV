@@ -32,12 +32,10 @@ namespace FamilyApp.Model
         public DateTime CreateDate { get; set; }
 
         public string petType = string.Empty;
-        public List<PetTypes> petTypes;
 
         public Pet()
         {
             petType = string.Empty;
-            petTypes = new List<PetTypes>();
         }
     }
 }
