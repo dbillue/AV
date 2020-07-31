@@ -48,26 +48,6 @@ namespace XUnitTestFamilyApp
             Assert.True
                 (actual);
         }
-
-        [Fact]
-        public void TestGetPetType()
-        {
-            var pet = dataObjs.GetPet();
-            var person = dataObjs.GetPerson();
-            var petType = dataObjs.GetPetTypes(PetType.Cat.ToString());
-
-            // Arrange.
-            var petService = new Mock<IPetService>();
-            petService.Setup(ps => ps.GetPetType(pet, petType.ToString())).Returns(1);
-            var ps = petService.Object;
-
-            // Act.
-            var actual = ps.GetPetType(pet, petType.ToString());
-
-            // Assert.
-            Assert.Equal
-                (1, actual);
-        }
     }
 
     enum PetType

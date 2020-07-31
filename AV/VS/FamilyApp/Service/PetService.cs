@@ -17,12 +17,12 @@ namespace FamilyApp.Service
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
         }
 
-        public async Task<bool> AddNewPet(Person person, Pet pet, string petType)
+        public async Task<bool> AddNewPet(Person person, Pet pet, List<PetTypes> petTypeList, string petType)
         {
             // Assign default properties.
             pet.PersonId = person.PersonId;
             pet.CreateDate = DateTime.Now;
-            pet.PetTypeId = GetPetType(pet, petType);
+            pet.PetTypeId = GetPetType(petTypeList, petType);
             await _familyService.AddPet(pet);
             return true;
         }
@@ -33,24 +33,16 @@ namespace FamilyApp.Service
             return true;
         }
 
-        public int GetPetType(Pet pet, string petType)
+        public int GetPetType(List<PetTypes> petTypeList, string petTypeName)
         {
-            // TODO: Refactor to use petTypeList and remove switch statement
             int petTypeId = 0;
 
-            switch (petType)
+            foreach(var petType in petTypeList)
             {
-                case "Cat":
-                    petTypeId = 1;
-                    break;
-                case "Dog":
-                    petTypeId = 2;
-                    break;
-                case "Reptile":
-                    petTypeId = 3;
-                    break;
-                default:
-                    break;
+                if(petTypeName == petType.Type)
+                {
+                    petTypeId = petType.PetTypeId;
+                }
             }
 
             return petTypeId;

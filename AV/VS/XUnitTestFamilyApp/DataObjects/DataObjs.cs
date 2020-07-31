@@ -59,5 +59,15 @@ namespace XUnitTestFamilyApp.DataObjects
 
             return petType;
         }
+
+        public List<PetTypes> GetPetTypeList()
+        {
+            List<PetTypes> petTypeList = new List<PetTypes>();  
+            petTypeList.Add(GetPetTypes("cat"));
+            petTypeList.Add(GetPetTypes("dog"));
+            petTypeList.Add(GetPetTypes("reptile"));
+
+            return petTypeList;
+        }
     }
 }

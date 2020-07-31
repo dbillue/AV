@@ -8,11 +8,11 @@ namespace FamilyApp.Service
 {
     public interface IPetService
     {
-        Task<bool> AddNewPet(Person person, Pet pet, string petType);
+        Task<bool> AddNewPet(Person person, Pet pet, List<PetTypes> petTypeList, string petType);
 
         Task<bool> DeletePet(Pet pet);
 
-        int GetPetType(Pet pet, string petType);
+        int GetPetType(List<PetTypes> petTypeList, string petType);
 
         string GetPetType(int petTypeId, List<PetTypes> petTypeList);
 
