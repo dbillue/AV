@@ -51,8 +51,13 @@ namespace FamilyDemoAPIv2.Controllers
             // Map list of states to DTO.
             var birthstates = _mapper.Map<IEnumerable<GetBirthStateDTO>>(states);
 
+            var birthStatesCollection = new
+            {
+                value = birthstates,
+            };
+
             // Return states collection.
-            return Ok(birthstates);
+            return Ok(birthStatesCollection);
         }
     }
 }
