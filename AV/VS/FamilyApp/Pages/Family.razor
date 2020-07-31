@@ -114,7 +114,8 @@ else
                             </label>
                             <InputNumber id="intAge2"
                                          class="form-control"
-                                         @bind-Value="person.Age" />
+                                         @bind-Value="person.Age"
+                                         @onblur='(() => updateDOB("edit"))' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -275,7 +276,7 @@ else
 
 @if (showAddPerson)
 {
-    <EditForm Model="@person" OnValidSubmit="AddPerson">
+    <EditForm Model="@personDTO" OnValidSubmit="AddPerson">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
@@ -295,7 +296,7 @@ else
                                 First Name:
                             </label>
                             <input type="text" id="FirstName"
-                                       @bind="person.FirstName"
+                                       @bind="personDTO.FirstName"
                                        class="form-control"
                                        maxlength="50"
                                        placeholder="First Name" />
@@ -305,7 +306,7 @@ else
                                 Middle Name:
                             </label>
                             <input type="text" id="MiddleName"
-                                   @bind="person.MIddleName"
+                                   @bind="personDTO.MIddleName"
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Middle Name" />
@@ -315,7 +316,7 @@ else
                                 Last Name:
                             </label>
                             <input type="text" id="LastName"
-                                   @bind="person.LastName"
+                                   @bind="personDTO.LastName"
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Last Name" />
@@ -328,7 +329,7 @@ else
                             </label>
                             <select id="cboGender"
                                     class="form-control"
-                                    @bind="person.Gender">
+                                    @bind="personDTO.Gender">
                                 <option></option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -340,7 +341,8 @@ else
                             </label>
                             <input type="number" id="intAge2"
                                    class="form-control"
-                                   @bind="person.Age" />
+                                   @bind="personDTO.Age" 
+                                   @onblur='(() => updateDOB("add"))' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -348,7 +350,7 @@ else
                             </label>
                             <input type="date" id="DateOfBirth"
                                    class="form-control"
-                                   @bind="person.DateOfBirth" />
+                                   @bind="personDTO.DateOfBirth" />
 
                         </div>
                     </div>
@@ -361,7 +363,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="City"
-                                   @bind="person.City" />
+                                   @bind="personDTO.City" />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -369,7 +371,7 @@ else
                             </label>
                             <select id="cboState"
                                     class="form-control"
-                                    @bind="person.state">
+                                    @bind="personDTO.state">
                                 <option></option>
                                 @foreach (var state in birthStateList)
                                 {
@@ -385,7 +387,7 @@ else
                                    class="form-control"
                                    maxlength="50"
                                    placeholder="Country"
-                                   @bind="person.Country" />
+                                   @bind="personDTO.Country" />
                         </div>
                     </div>
                     <div class="form-row">
