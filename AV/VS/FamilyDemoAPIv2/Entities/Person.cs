@@ -49,11 +49,5 @@ namespace FamilyDemoAPIv2.Entities
 
         [Required]
         public DateTime CreateDate { get; set; }
-
-        public ICollection<Pet> Pets { get; set; }
-            = new List<Pet>();
-
-        public ICollection<BirthState> birthState { get; set; }
-            = new List<BirthState>();
     }
 }
