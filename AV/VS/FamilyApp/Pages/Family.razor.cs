@@ -1,4 +1,5 @@
 ﻿using FamilyApp.DTO;
+using FamilyApp.Extensions;
 using FamilyApp.Model;
 using FamilyApp.Utils;
 using System;
@@ -17,6 +18,7 @@ namespace FamilyApp.Pages
         Pet pet = new Pet();
         PetDTO petDTO = new PetDTO();
         Person person = new Person();
+        PersonDTO personDTO = new PersonDTO();
         SeriLog_Logger seriLogger = new SeriLog_Logger();
         JsonUtils jsonUtils = new JsonUtils();
         #endregion
@@ -86,38 +88,37 @@ namespace FamilyApp.Pages
         private void showAddPersonForm()
         {
             fullName = "";
-            //TODO: Add extension method to clear field values
-            petDTO.Name = string.Empty;
-            petDTO.NickName = string.Empty;
-            petDTO.petType = string.Empty;
-            person.FirstName = string.Empty;
-            person.LastName = string.Empty;
-            person.MIddleName = string.Empty;
-            person.Gender = string.Empty;
-            person.Age = 0;
-            person.Country = string.Empty;
-            person.StateId = 0;
-            person.state = string.Empty;
-            person.DateOfBirth = DateTime.Now;
-            person.City = string.Empty;
+            personDTO.DateOfBirth = DateTime.Now;
             showAddPerson = true;
         }
 
         private async Task AddPerson()
         {
+            //TODO: Add automapper for person
+            person.FirstName = personDTO.FirstName;
+            person.MIddleName = personDTO.MIddleName;
+            person.LastName = personDTO.LastName;
+            person.Gender = personDTO.Gender;
+            person.Age = personDTO.Age;
+            person.DateOfBirth = personDTO.DateOfBirth;
+            person.City = personDTO.City;
+            person.state = personDTO.state;
+            person.Country = personDTO.Country;
             person.StateId = GetBirthStateId(person);
             person.CreateDate = DateTime.Now;
             await FamilyService.AddPerson(person);
 
-            //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(petDTO.Name))
+            if (!string.IsNullOrEmpty(petDTO.Name) && !string.IsNullOrEmpty(petDTO.NickName) && !string.IsNullOrEmpty(petDTO.petType))
             {
-                //TODO: Add Automapper
+                //TODO: Add Automapper for pet
                 pet.Name = petDTO.Name;
                 pet.NickName = petDTO.NickName;
                 pet.petType = petDTO.petType;
-                var petAdded = await PetService.AddNewPet(person, pet, pet.petType);
+                var petAdded = await PetService.AddNewPet(person, pet, petTypeList, pet.petType);
             }
+
+            HelperExtensions.ClearObjectValues("personDTO", personDTO);
+            HelperExtensions.ClearObjectValues("petDTO", null, petDTO);
 
             showAddPerson = false;
 
@@ -133,10 +134,8 @@ namespace FamilyApp.Pages
             {
                 person = personProfile;
                 fullName = person.FirstName + " " + person.LastName;
-                //TODO: Add extension method to clear field values
-                petDTO.Name = string.Empty;
-                petDTO.NickName = string.Empty;
-                petDTO.petType = string.Empty;
+                HelperExtensions.ClearObjectValues("petDTO", null, petDTO);
+
                 showEditPerson = true;
             }
             catch (Exception ex)
@@ -159,21 +158,20 @@ namespace FamilyApp.Pages
 
         private async Task UpdatePerson()
         {
-            //TODO: Add additional field validation
-            if (!string.IsNullOrEmpty(petDTO.Name))
+            showEditPerson = false;
+            showAddPets = false;
+            showPets = false;
+
+            if (!string.IsNullOrEmpty(petDTO.Name) && !string.IsNullOrEmpty(petDTO.NickName) && !string.IsNullOrEmpty(petDTO.petType))
             {
                 pet.Name = petDTO.Name;
                 pet.NickName = petDTO.NickName;
                 pet.petType = petDTO.petType;
-                var petAdded = await PetService.AddNewPet(person, pet, pet.petType);
+                var petAdded = await PetService.AddNewPet(person, pet, petTypeList, pet.petType);
             }
 
             person.StateId = GetBirthStateId(person);
             await FamilyService.UpdatePerson(person);
-
-            showEditPerson = false;
-            showAddPets = false;
-            showPets = false;
 
             personList = await GetPersons();
         }
@@ -300,6 +298,24 @@ namespace FamilyApp.Pages
             }
 
             return stateId;
+        }
+
+        private void updateDOB(string action)
+        {
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+
+            switch (action)
+            {
+                case "add":
+                    personDTO.DateOfBirth = dt.AddYears(-personDTO.Age);
+                    break;
+                case "edit":
+                    person.DateOfBirth = dt.AddYears(-person.Age);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
