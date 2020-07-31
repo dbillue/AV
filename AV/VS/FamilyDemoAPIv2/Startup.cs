@@ -88,7 +88,7 @@ namespace FamilyDemoAPIv2
             #region // Configure database connection / context.
             services.AddDbContext<FamilyDemoAPIv2Context>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("connectionString"));
+                options.UseSqlServer(Configuration.GetConnectionString("connectionString_Azure"));
             });
             #endregion
 
