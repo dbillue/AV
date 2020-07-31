@@ -8,6 +8,6 @@ namespace FamilyApp.Service
 {
     public interface IFamilyAPIService
     {
-        Task<string> GetPeopleRaw();
+        Task<string> CallFamilyAPI(string dataType);
     }
 }
