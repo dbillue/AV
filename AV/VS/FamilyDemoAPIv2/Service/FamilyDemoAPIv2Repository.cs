@@ -5,6 +5,8 @@ using FamilyDemoAPIv2.ResourceParameters;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamilyDemoAPIv2.Service
 {
@@ -88,6 +90,11 @@ namespace FamilyDemoAPIv2.Service
         {
             var result = await _context.SaveChangesAsync() >= 0;
             return result;
+        }
+
+        public List<BirthState> GetBirthStates()
+        {
+            return _context.BirthStates.OrderBy(x => x.Abbreviation).ToList();
         }
 
         public void Dispose()

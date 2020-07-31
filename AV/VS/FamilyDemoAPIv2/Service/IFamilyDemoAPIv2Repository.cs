@@ -3,6 +3,7 @@ using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.ResourceParameters;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 
 namespace FamilyDemoAPIv2.Service
@@ -20,6 +21,8 @@ namespace FamilyDemoAPIv2.Service
         PagedList<Person> GetPersons(PersonResourceParameters authorsResourceParameters);
 
         Person UpdatePerson(Person person);
+
+        List<BirthState> GetBirthStates();
 
         void DeletePerson(Person person);
 
