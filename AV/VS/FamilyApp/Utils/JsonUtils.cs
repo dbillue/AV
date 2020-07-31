@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FamilyApp.Utils
 {
@@ -35,6 +36,24 @@ namespace FamilyApp.Utils
             }
 
             return person;
+        }
+
+        public async Task<List<BirthState>> DeserializeBirthStates(string jsonbirthStates)
+        {
+            List<BirthState> states = new List<BirthState>();
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(jsonbirthStates));
+
+            JObject jsonString = await JObject.LoadAsync(reader);
+            IList<JToken> results = jsonString["value"].Children().ToList();
+
+            foreach(var state in results)
+            {
+                BirthState stateToAdd = state.ToObject<BirthState>();
+                states.Add(stateToAdd);
+            }
+
+            return states;
         }
     }
 }
