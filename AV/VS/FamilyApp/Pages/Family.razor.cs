@@ -58,17 +58,16 @@ namespace FamilyApp.Pages
                 petList = await FamilyService.GetPets();
                 petTypeList = await FamilyService.GetPetTypes();
                 petDTO.petTypes = petTypeList;
-                pet.petTypes = petTypeList;
                 birthStateList = await FamilyService.GetBirthStates();
 
-                foreach (var petDTO in petList)
+                foreach (var pet in petList)
                 {
-                    petDTO.petType = PetService.GetPetType(pet, petList, petTypeList);
+                    pet.petType = PetService.GetPetType(pet.PetTypeId, petTypeList);
                 }
 
                 foreach (var person in personList)
                 {
-                    person.Pets = GetPets(person);
+                    person.Pets = PetService.GetPets(person, petList);
                     person.birthState = birthStateList;
                     person.state = GetBirthState(person);
                 }
@@ -79,19 +78,6 @@ namespace FamilyApp.Pages
             }
 
             return personList;
-        }
-
-        public List<Pet> GetPets(Person person)
-        {
-            foreach (var pet in petList)
-            {
-                if (person.PersonId == pet.PersonId)
-                {
-                    person.Pets.Add(pet);
-                }
-            }
-
-            return person.Pets;
         }
 
         #region // Add person
