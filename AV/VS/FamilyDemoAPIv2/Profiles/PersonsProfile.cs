@@ -16,6 +16,10 @@ namespace FamilyDemoAPIv2.Profiles
 
             // Get person mapping.
             CreateMap<Entities.Person, Models.GetPersonDTO>();
+
+            // Get birth state mapping.
+            CreateMap<Models.GetBirthStateDTO, Entities.BirthState>();
+            CreateMap<Entities.BirthState, Models.GetBirthStateDTO>();
         }
     }
 }
