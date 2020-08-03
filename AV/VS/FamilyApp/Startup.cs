@@ -43,6 +43,7 @@ namespace FamilyApp
             services.AddScoped<IFamilyService, FamilyService>();
             services.AddScoped<IFamilyAPIService, FamilyAPIService>();
             services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IBirthState, BirthState>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

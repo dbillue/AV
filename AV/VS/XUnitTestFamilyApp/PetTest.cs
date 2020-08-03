@@ -15,14 +15,15 @@ namespace XUnitTestFamilyApp
             var pet = dataObjs.GetPet();
             var person = dataObjs.GetPerson();
             var petType = dataObjs.GetPetTypes(PetType.Cat.ToString());
+            var petTypeList = dataObjs.GetPetTypeList();
 
             // Arrange.
             var petService = new Mock<IPetService>();
-            petService.Setup(ps => ps.AddNewPet(person, pet, petType.ToString())).ReturnsAsync(true);
+            petService.Setup(ps => ps.AddNewPet(person, pet, petTypeList, petType.ToString())).ReturnsAsync(true);
             var addPet = petService.Object;
 
             // Act.
-            var actual = await addPet.AddNewPet(person, pet, petType.ToString());
+            var actual = await addPet.AddNewPet(person, pet, petTypeList, petType.ToString());
 
             // Assert.
             Assert.True
