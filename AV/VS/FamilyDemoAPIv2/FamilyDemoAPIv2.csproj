@@ -50,10 +50,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="FamilyDemoAPIv2.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
