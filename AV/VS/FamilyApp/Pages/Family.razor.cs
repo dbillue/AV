@@ -26,6 +26,8 @@ namespace FamilyApp.Pages
         #region // Fields and properties
         private string people = string.Empty;
         private string birthStates = string.Empty;
+        private string pets = string.Empty;
+        private string pettypes = string.Empty;
         private string fullName = string.Empty;
         private bool showEditPerson = false;
         private bool showAddPerson = false;
@@ -52,7 +54,7 @@ namespace FamilyApp.Pages
             try
             {
                 // Pull from local SQL Server db.
-                //personList = await FamilyService.GetPeople();
+                // personList = await FamilyService.GetPeople();
 
                 // Pull from REST API end point that queries Azure SQL Server db.
                 people = await FamilyAPIService.CallFamilyAPI("persons");
@@ -60,8 +62,10 @@ namespace FamilyApp.Pages
                 birthStates = await FamilyAPIService.CallFamilyAPI("states");
                 birthStateList = await jsonUtils.DeserializeBirthStates(birthStates);
 
-                petList = await FamilyService.GetPets();
-                petTypeList = await FamilyService.GetPetTypes();
+                pets = await FamilyAPIService.CallFamilyAPI("pets");
+                petList = await jsonUtils.DeserializePets(pets);
+                pettypes = await FamilyAPIService.CallFamilyAPI("pettypes");
+                petTypeList = await jsonUtils.DeserializePetTypes(pettypes);
                 petDTO.petTypes = petTypeList;
 
                 foreach (var pet in petList)
