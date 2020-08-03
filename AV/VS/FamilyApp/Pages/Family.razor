@@ -3,6 +3,7 @@
 @inject IFamilyService FamilyService
 @inject IFamilyAPIService FamilyAPIService
 @inject IPetService PetService
+@inject IBirthState BirthState
 @inject ILogger<FetchData> logger
 
 @if (personList != null)
@@ -26,7 +27,7 @@
                     <td>@person.Age</td>
                     <td>@person.DateOfBirth.ToString("MM-dd-yyyy")</td>
                     <td>@person.City</td>
-                    <td>@GetBirthState(person)</td>
+                    <td>@BirthState.GetBirthState(person)</td>
                     <td>
                         <button type="button" class="btn btn-primary" @onclick="(() => ShowEditPersonForm(person))">Edit</button>
                         <button type="button" class="btn btn-primary" @onclick="(() => ShowDeletePersonForm(person))">Delete</button>
