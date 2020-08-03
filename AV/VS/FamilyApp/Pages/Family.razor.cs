@@ -231,8 +231,6 @@ namespace FamilyApp.Pages
                     showEditPerson = false;
                     showPets = false;
                     showAddPets = false;
-                    pet.Name = string.Empty;
-                    pet.NickName = string.Empty;
                     break;
                 case "Delete":
                     showDeletePerson = false;
