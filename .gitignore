@@ -146,3 +146,6 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/BlazorSignalRApp/Server/appsettings.json
 /AV/VS/XUnitTestFamilyApp/bin/Debug/netcoreapp3.1
 /AV/VS/XUnitTestFamilyApp/obj
+/AV/VS/EFFamily/bin/Debug
+/AV/VS/EFFamily/obj/Debug
+/AV/VS/EFFamily/packages/EntityFramework.6.2.0
