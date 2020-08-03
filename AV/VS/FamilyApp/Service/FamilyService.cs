@@ -18,11 +18,6 @@ namespace FamilyApp.Service
             _context = context;
         }
 
-        public async Task<List<BirthState>> GetBirthStates()
-        {
-            return await _context.birthState.OrderBy(x => x.StateId).ToListAsync();
-        }
-
         public async Task<List<Person>> GetPeople()
         {
             return await _context.person.OrderBy(x => x.LastName).ToListAsync();

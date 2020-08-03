@@ -8,8 +8,6 @@ namespace FamilyApp.Service
 {
     public interface IFamilyService
     {
-        Task<List<BirthState>> GetBirthStates();
-
         Task<List<Person>> GetPeople();
 
         Task<List<Pet>> GetPets();
