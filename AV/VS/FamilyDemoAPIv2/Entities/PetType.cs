@@ -12,7 +12,7 @@ namespace FamilyDemoAPIv2.Entities
     public class PetType
     {
         [Key]
-        public Guid PetTypeId { get; set; }
+        public Int32 PetTypeId { get; set; }
 
         [Required]
         [MaxLength(50)]
