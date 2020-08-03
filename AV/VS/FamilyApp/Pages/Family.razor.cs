@@ -73,7 +73,7 @@ namespace FamilyApp.Pages
                 {
                     person.Pets = PetService.GetPets(person, petList);
                     person.birthState = birthStateList;
-                    person.state = GetBirthState(person);
+                    person.state = BirthState.GetBirthState(person);
                 }
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace FamilyApp.Pages
             person.City = personDTO.City;
             person.state = personDTO.state;
             person.Country = personDTO.Country;
-            person.StateId = GetBirthStateId(person);
+            person.StateId = BirthState.GetBirthStateId(person, birthStateList);
             person.CreateDate = DateTime.Now;
             await FamilyService.AddPerson(person);
 
@@ -144,6 +144,18 @@ namespace FamilyApp.Pages
             }
         }
 
+        private void ShowPets()
+        {
+            if (showPets)
+            {
+                showPets = false;
+            }
+            else
+            {
+                showPets = true;
+            }
+        }
+
         private void ShowAddPetsForm()
         {
             if (showAddPets)
@@ -170,7 +182,7 @@ namespace FamilyApp.Pages
                 var petAdded = await PetService.AddNewPet(person, pet, petTypeList, pet.petType);
             }
 
-            person.StateId = GetBirthStateId(person);
+            person.StateId = BirthState.GetBirthStateId(person, birthStateList);
             await FamilyService.UpdatePerson(person);
 
             personList = await GetPersons();
@@ -238,64 +250,6 @@ namespace FamilyApp.Pages
                 default:
                     break;
             }
-        }
-
-        private void ShowPets()
-        {
-            if (showPets)
-            {
-                showPets = false;
-            }
-            else
-            {
-                showPets = true;
-            }
-        }
-
-        private string GetBirthState(Person person)
-        {
-            string stateName = string.Empty;
-
-            try
-            {
-                foreach (var state in person.birthState)
-                {
-                    if (person.StateId == state.StateId)
-                    {
-                        stateName = state.State;
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                seriLogger.WriteError(ex.Message);
-            }
-
-            return stateName;
-        }
-
-        private int GetBirthStateId(Person person)
-        {
-            int stateId = 1;
-
-            try
-            {
-                foreach (var state in birthStateList)
-                {
-                    if (person.state == state.State)
-                    {
-                        stateId = state.StateId;
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                seriLogger.WriteError(ex.Message);
-            }
-
-            return stateId;
         }
 
         private void updateDOB(string action)
