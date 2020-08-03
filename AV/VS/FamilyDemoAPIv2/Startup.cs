@@ -1,8 +1,7 @@
-using System;
-using System.IO;
-using System.Reflection;
+using AutoMapper;
+using FamilyDemoAPIv2.DBContext;
+using FamilyDemoAPIv2.Service;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using FamilyDemoAPIv2.Service;
-using FamilyDemoAPIv2.DBContext;
-using AutoMapper;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace FamilyDemoAPIv2
 {
