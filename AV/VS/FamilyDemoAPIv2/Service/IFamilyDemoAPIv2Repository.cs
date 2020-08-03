@@ -22,6 +22,10 @@ namespace FamilyDemoAPIv2.Service
 
         Person UpdatePerson(Person person);
 
+        List<Pet> GetPets();
+
+        List<PetType> GetPetTypes();
+
         List<BirthState> GetBirthStates();
 
         void DeletePerson(Person person);

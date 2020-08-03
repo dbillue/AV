@@ -86,6 +86,16 @@ namespace FamilyDemoAPIv2.Service
             _context.Persons.Remove(person);
         }
 
+        public List<Pet> GetPets()
+        {
+            return _context.Pets.ToList();
+        }
+
+        public List<PetType> GetPetTypes()
+        {
+            return _context.PetTypes.ToList();
+        }
+
         public async Task<bool> Save()
         {
             var result = await _context.SaveChangesAsync() >= 0;
