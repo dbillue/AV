@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.Models;
-using FamilyDemoAPIv2.ResourceParameters;
 using FamilyDemoAPIv2.Service;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace FamilyDemoAPIv2.Controllers
 {
@@ -51,6 +48,7 @@ namespace FamilyDemoAPIv2.Controllers
             // Map list of states to DTO.
             var birthstates = _mapper.Map<IEnumerable<GetBirthStateDTO>>(states);
 
+            // Add name to JSON array.
             var birthStatesCollection = new
             {
                 value = birthstates,
