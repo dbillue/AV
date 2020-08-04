@@ -18,17 +18,34 @@ namespace FamilyDemoAPIv2.Helpers
             _logger.LogInformation("Message:" + message);
         }
 
-        public void WriteInformation(string message, AddPersonDTO personToReturn)
+        public void WriteInformation(string message, AddPersonDTO personToReturn = null, AddPetDTO petToReturn = null)
         {
             _logger.LogInformation("Message:" + message);
-            _logger.LogInformation("Person:" +
-                                    personToReturn.PersonId + "," +
-                                    personToReturn.FirstName + "," +
-                                    personToReturn.MIddleName + "," +
-                                    personToReturn.LastName + "," +
-                                    personToReturn.Age + "," +
-                                    personToReturn.City + "," +
-                                    personToReturn.DateOfBirth);
+
+            switch(message)
+            {
+                case "New pet added":
+                    _logger.LogInformation("Pet:" +
+                                            petToReturn.PetId + "," +
+                                            petToReturn.Name + "," +
+                                            petToReturn.NickName + "," +
+                                            petToReturn.PetTypeId + "," +
+                                            petToReturn.PersonId + "," +
+                                            petToReturn.CreateDate);
+                    break;
+                case "New person added":
+                    _logger.LogInformation("Person:" +
+                                            personToReturn.PersonId + "," +
+                                            personToReturn.FirstName + "," +
+                                            personToReturn.MIddleName + "," +
+                                            personToReturn.LastName + "," +
+                                            personToReturn.Age + "," +
+                                            personToReturn.City + "," +
+                                            personToReturn.DateOfBirth);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void WriteError(string message, Exception ex)
