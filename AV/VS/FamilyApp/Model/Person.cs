@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace FamilyApp.Model
 {
@@ -49,8 +50,13 @@ namespace FamilyApp.Model
 
         public DateTime CreateDate { get; set; }
 
+        [JsonIgnore]
         public List<Pet> Pets;
+
+        [JsonIgnore]
         public List<BirthState> birthState;
+
+        [JsonIgnore]
         public string state;
 
         public Person()
