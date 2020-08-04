@@ -196,8 +196,8 @@ namespace FamilyApp.Pages
         {
             var petDeleted = await PetService.DeletePet(pet);
 
-            //TODO: Remove popup closure
-            ClosePopup("Edit");
+            petList.Remove(pet);
+            person.Pets.Remove(pet);
 
             personList = await GetPersons();
         }
