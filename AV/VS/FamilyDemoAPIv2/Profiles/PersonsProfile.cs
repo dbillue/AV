@@ -21,6 +21,10 @@ namespace FamilyDemoAPIv2.Profiles
             CreateMap<Models.GetBirthStateDTO, Entities.BirthState>();
             CreateMap<Entities.BirthState, Models.GetBirthStateDTO>();
 
+            // Add pet mapping.
+            CreateMap<Models.AddPetDTO, Entities.Pet>();
+            CreateMap<Entities.Pet, Models.AddPetDTO>();
+
             // Get pets mapping.
             CreateMap<Models.GetPetsDTO, Entities.Pet>();
             CreateMap<Entities.Pet, Models.GetPetsDTO>();
