@@ -93,10 +93,17 @@ namespace FamilyApp.Utils
             return petTypesList;
         }
 
+        // TODO: Add generics to consolidate methods / code
         public string SerializePerson(Person person)
         {
             string jsonPerson = string.Empty;
             return jsonPerson = JsonConvert.SerializeObject(person, Formatting.Indented);
+        }
+
+        public string SerializePet(Pet pet)
+        {
+            string jsonPet = string.Empty;
+            return jsonPet = JsonConvert.SerializeObject(pet, Formatting.Indented);
         }
     }
 }
