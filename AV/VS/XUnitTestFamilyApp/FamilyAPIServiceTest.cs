@@ -11,11 +11,11 @@ namespace XUnitTestFamilyApp
         {
             // Arrange.
             var familyAPIService = new Mock<IFamilyAPIService>();
-            familyAPIService.Setup(fsAPI => fsAPI.CallFamilyAPI("persons")).ReturnsAsync("");
+            familyAPIService.Setup(fsAPI => fsAPI.GetFamilyAPIData("persons")).ReturnsAsync("");
             var famAPIService = familyAPIService.Object;
 
             // Act.
-            var result = await famAPIService.CallFamilyAPI("persons");
+            var result = await famAPIService.GetFamilyAPIData("persons");
 
             // Assert.
             Assert.True
