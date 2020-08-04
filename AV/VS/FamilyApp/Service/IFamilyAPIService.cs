@@ -8,6 +8,8 @@ namespace FamilyApp.Service
 {
     public interface IFamilyAPIService
     {
-        Task<string> CallFamilyAPI(string dataType);
+        Task<string> GetFamilyAPIData(string dataType);
+
+        Task<bool> PostFamilyAPIData(string dataType, string data);
     }
 }

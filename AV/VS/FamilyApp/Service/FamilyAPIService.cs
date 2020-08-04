@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FamilyApp.Service
@@ -9,6 +11,7 @@ namespace FamilyApp.Service
     {
         IConfiguration configuration;
         string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path = string.Empty;
+        string uripath = string.Empty;
 
         public FamilyAPIService(IConfiguration _configuration)
         {
@@ -20,10 +23,8 @@ namespace FamilyApp.Service
             URI_PetTypes_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
         }
 
-        public async Task<string> CallFamilyAPI(string dataType)
+        public async Task<string> GetFamilyAPIData(string dataType)
         {
-            string uripath = string.Empty;
-
             switch (dataType)
             {
                 case "persons":
@@ -46,6 +47,35 @@ namespace FamilyApp.Service
             {
                 httpClient.BaseAddress = new Uri(URIEndPoint);
                 return await httpClient.GetStringAsync(uripath);
+            }
+        }
+
+        public async Task<bool> PostFamilyAPIData(string dataType, string data)
+        {
+            switch (dataType)
+            {
+                case "Person":
+                    uripath = URI_Persons_Path;
+                    break;
+                default:
+                    break;
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+                HttpContent httpContent = new StringContent(data, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+                var response = await httpClient.PostAsync(uripath, httpContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                return false;
             }
         }
     }
