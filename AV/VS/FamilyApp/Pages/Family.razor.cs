@@ -57,14 +57,14 @@ namespace FamilyApp.Pages
                 // personList = await FamilyService.GetPeople();
 
                 // Pull from REST API end point that queries Azure SQL Server db.
-                people = await FamilyAPIService.CallFamilyAPI("persons");
+                people = await FamilyAPIService.GetFamilyAPIData("persons");
                 personList = await jsonUtils.DeserializePeople(people);
-                birthStates = await FamilyAPIService.CallFamilyAPI("states");
+                birthStates = await FamilyAPIService.GetFamilyAPIData("states");
                 birthStateList = await jsonUtils.DeserializeBirthStates(birthStates);
 
-                pets = await FamilyAPIService.CallFamilyAPI("pets");
+                pets = await FamilyAPIService.GetFamilyAPIData("pets");
                 petList = await jsonUtils.DeserializePets(pets);
-                pettypes = await FamilyAPIService.CallFamilyAPI("pettypes");
+                pettypes = await FamilyAPIService.GetFamilyAPIData("pettypes");
                 petTypeList = await jsonUtils.DeserializePetTypes(pettypes);
                 petDTO.petTypes = petTypeList;
 
@@ -97,7 +97,7 @@ namespace FamilyApp.Pages
         }
 
         private async Task AddPerson()
-        {
+        {  
             //TODO: Add automapper for person
             person.FirstName = personDTO.FirstName;
             person.MIddleName = personDTO.MIddleName;
@@ -110,7 +110,14 @@ namespace FamilyApp.Pages
             person.Country = personDTO.Country;
             person.StateId = BirthState.GetBirthStateId(person, birthStateList);
             person.CreateDate = DateTime.Now;
-            await FamilyService.AddPerson(person);
+            person.PersonId = new Guid();
+
+            // Use FamilyAPI for adding person.
+            string jsonPerson = jsonUtils.SerializePerson(person);
+            bool response = await FamilyAPIService.PostFamilyAPIData("Person", jsonPerson);
+
+            // Use EFCore for adding person.
+            // await FamilyService.AddPerson(person);
 
             if (!string.IsNullOrEmpty(petDTO.Name) && !string.IsNullOrEmpty(petDTO.NickName) && !string.IsNullOrEmpty(petDTO.petType))
             {
