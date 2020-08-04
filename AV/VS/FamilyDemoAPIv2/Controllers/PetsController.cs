@@ -37,6 +37,12 @@ namespace FamilyDemoAPIv2.Controllers
             return "Hello from the Pets controller of the FamilyAPIService.";
         }
 
+        /// <summary>
+        /// Use this method to query for a list of pets.
+        /// </summary>
+        /// <param name="GetPets"></param>
+        /// <returns>List of pets</returns>
+        /// <remarks>HttpGet verb.</remarks>
         [HttpGet("{GetPets}", Name = "GetPets")]
         [Route("GetPets")]
         public ActionResult<IEnumerable<GetPetsDTO>> GetPets(string GetPets = "GetPets")
@@ -60,6 +66,12 @@ namespace FamilyDemoAPIv2.Controllers
             return Ok(petsListCollection);
         }
 
+        /// <summary>
+        /// Use this method to query for a list of pet types.
+        /// </summary>
+        /// <param name="GetPetTypes"></param>
+        /// <returns>List of pet types</returns>
+        /// <remarks>HttpGet verb.</remarks>
         [HttpGet("{GetPetTypes}", Name = "GetPetTypes")]
         [Route("GetPetTypes")]
         public ActionResult<IEnumerable<GetPetTypesDTO>> GetPetTypes(string GetPetTypes = "GetPetTypes")
@@ -81,6 +93,39 @@ namespace FamilyDemoAPIv2.Controllers
 
             // Return pet type collection.
             return Ok(petTypeListCollection);
+        }
+
+        /// <summary>
+        /// Use this method to add a new pet.
+        /// </summary>
+        /// <param name="pet"></param>
+        /// <returns>The newly created pet via 200 response.</returns>
+        /// <remarks>HttpPost verb.</remarks>
+        [HttpPost(Name = "AddPet")]
+        public ActionResult<AddPetDTO> AddPet(AddPetDTO pet)
+        {
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:PetsController,API:AddPet,DateTime:" + DateTime.Now.ToString());
+            
+            try
+            {
+                var petEntity = _mapper.Map<Entities.Pet>(pet); // Map to entity.
+                _familyDemoAPIv2Repository.AddPet(petEntity); // Add.
+                _familyDemoAPIv2Repository.Save(); // Save.
+
+                var petToReturn = _mapper.Map<AddPetDTO>(petEntity);
+
+                // Log addition of new pet.
+                _log.WriteInformation("New pet added", null, petToReturn);
+
+                // Return link in header.
+                return CreatedAtRoute("AddPet",
+                    new { petToReturn.PetId },
+                    petToReturn);
+            } catch (Exception ex) {
+                _log.WriteError(ex.Message, ex.InnerException);
+                return NoContent();
+            }
         }
     }
 }
