@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using FamilyApp.DTO;
 
 namespace FamilyApp.Utils
 {
@@ -90,6 +91,12 @@ namespace FamilyApp.Utils
             }
 
             return petTypesList;
+        }
+
+        public string SerializePerson(Person person)
+        {
+            string jsonPerson = string.Empty;
+            return jsonPerson = JsonConvert.SerializeObject(person, Formatting.Indented);
         }
     }
 }
