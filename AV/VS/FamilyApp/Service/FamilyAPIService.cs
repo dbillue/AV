@@ -10,7 +10,7 @@ namespace FamilyApp.Service
     public class FamilyAPIService : IFamilyAPIService
     {
         IConfiguration configuration;
-        string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path = string.Empty;
+        string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path, URI_AddPet_Path = string.Empty;
         string uripath = string.Empty;
 
         public FamilyAPIService(IConfiguration _configuration)
@@ -21,6 +21,7 @@ namespace FamilyApp.Service
             URI_BirthState_Path = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
             URI_PetList_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
             URI_PetTypes_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
+            URI_AddPet_Path = configuration.GetSection("FamilyAPI").GetSection("URI_AddPet_Path").Value;
         }
 
         public async Task<string> GetFamilyAPIData(string dataType)
@@ -56,6 +57,9 @@ namespace FamilyApp.Service
             {
                 case "Person":
                     uripath = URI_Persons_Path;
+                    break;
+                case "Pet":
+                    uripath = URI_AddPet_Path;
                     break;
                 default:
                     break;
