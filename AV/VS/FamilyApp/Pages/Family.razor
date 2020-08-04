@@ -171,7 +171,7 @@ else
                                 <label>
                                     Show pets
                                 </label>
-                                <input type="Checkbox" id="showPets" @onchange="ShowPets" />
+                                <input type="Checkbox" id="chkshowPets" @onchange="ShowPets" />
                             </div>
                         </div>
                         @if (showPets)
@@ -266,7 +266,7 @@ else
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <button type="submit" class="btn btn-group-sm btn-primary">Submit</button>
-                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Edit"))'>Cancel</button>
+                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Edit"))'>Close</button>
                         </div>
                     </div>
                 </div>
@@ -430,7 +430,7 @@ else
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <button type="submit" class="btn btn-group-sm btn-primary">Submit</button>
-                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Add"))'>Cancel</button>
+                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Add"))'>Close</button>
                         </div>
                     </div>
                 </div>
