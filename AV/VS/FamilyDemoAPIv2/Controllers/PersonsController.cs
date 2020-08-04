@@ -53,7 +53,7 @@ namespace FamilyDemoAPIv2.Controllers
                 var personToReturn = _mapper.Map<AddPersonDTO>(personEntity); // Map to DTO.
 
                 // Log addition of new person.
-                _log.WriteInformation("New person added", personToReturn);
+                _log.WriteInformation("New person added", personToReturn, null);
 
                 // Return person added.
                 // return Ok(personToReturn);
