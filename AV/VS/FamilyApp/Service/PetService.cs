@@ -9,12 +9,15 @@ namespace FamilyApp.Service
 {
     public class PetService : IPetService
     {
+        JsonUtils jsonUtils;
         SeriLog_Logger seriLogger = new SeriLog_Logger();
         private readonly FamilyService _familyService;
+        private readonly FamilyAPIService _familyAPIService;
 
         public PetService(IServiceProvider serviceProvider)
         {
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
+            _familyAPIService = (FamilyAPIService)serviceProvider.GetService<IFamilyAPIService>();
         }
 
         public async Task<bool> AddNewPet(Person person, Pet pet, List<PetTypes> petTypeList, string petType)
@@ -22,8 +25,16 @@ namespace FamilyApp.Service
             // Assign default properties.
             pet.PersonId = person.PersonId;
             pet.CreateDate = DateTime.Now;
+            // TODO: Determine if method call is needed
             pet.PetTypeId = GetPetType(petTypeList, petType);
-            await _familyService.AddPet(pet);
+
+            // Use FamilyAPI for adding pet.
+            jsonUtils = new JsonUtils();
+            string jsonPet = jsonUtils.SerializePet(pet);
+            bool response = await _familyAPIService.PostFamilyAPIData("Pet", jsonPet);
+
+            // Use EFCore for adding person.
+            //await _familyService.AddPet(pet);
             return true;
         }
 
