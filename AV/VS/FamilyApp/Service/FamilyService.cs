@@ -42,7 +42,12 @@ namespace FamilyApp.Service
 
         public async Task DeletePet(Pet pet)
         {
-            _context.Remove(pet);
+            var petRecord = _context.Set<Pet>()
+                .FirstOrDefault(entry => entry.PetId == pet.PetId);
+
+            // detach
+            _context.Entry(petRecord).State = EntityState.Detached;
+            _context.Remove(petRecord);
             await _context.SaveChangesAsync();
         }
 
