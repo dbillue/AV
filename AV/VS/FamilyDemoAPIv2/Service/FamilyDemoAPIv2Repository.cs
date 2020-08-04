@@ -86,6 +86,17 @@ namespace FamilyDemoAPIv2.Service
             _context.Persons.Remove(person);
         }
 
+        public async Task AddPet(Pet pet)
+        {
+            if(pet == null)
+            {
+                throw new ArgumentNullException(nameof(pet));
+            }
+
+            pet.PetId = Guid.NewGuid();
+            await _context.Pets.AddAsync(pet);
+        }
+
         public List<Pet> GetPets()
         {
             return _context.Pets.ToList();

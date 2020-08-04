@@ -30,6 +30,8 @@ namespace FamilyDemoAPIv2.Service
 
         void DeletePerson(Person person);
 
+        Task AddPet(Pet pet);
+
         Task<bool> Save();
     }
 }
