@@ -2,13 +2,10 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using FamilyApp.DTO;
+using System.Threading.Tasks;
 
 namespace FamilyApp.Utils
 {
@@ -30,7 +27,7 @@ namespace FamilyApp.Utils
             JObject jsonString = await JObject.LoadAsync(reader);
             IList<JToken> results = jsonString["value"].Children().ToList();
 
-            foreach(JToken result in results)
+            foreach (JToken result in results)
             {
                 Person apiPersonObjToAdd = result.ToObject<Person>();
                 person.Add(apiPersonObjToAdd);
@@ -48,7 +45,7 @@ namespace FamilyApp.Utils
             JObject jsonString = await JObject.LoadAsync(reader);
             IList<JToken> results = jsonString["value"].Children().ToList();
 
-            foreach(var state in results)
+            foreach (var state in results)
             {
                 BirthState stateToAdd = state.ToObject<BirthState>();
                 states.Add(stateToAdd);
@@ -66,7 +63,7 @@ namespace FamilyApp.Utils
             JObject jsonString = await JObject.LoadAsync(reader);
             IList<JToken> results = jsonString["value"].Children().ToList();
 
-            foreach(var pet in results)
+            foreach (var pet in results)
             {
                 Pet petToAdd = pet.ToObject<Pet>();
                 petsList.Add(petToAdd);
@@ -84,7 +81,7 @@ namespace FamilyApp.Utils
             JObject jsonString = await JObject.LoadAsync(reader);
             IList<JToken> results = jsonString["value"].Children().ToList();
 
-            foreach(var petType in results)
+            foreach (var petType in results)
             {
                 PetTypes petTypeObj = petType.ToObject<PetTypes>();
                 petTypesList.Add(petTypeObj);
