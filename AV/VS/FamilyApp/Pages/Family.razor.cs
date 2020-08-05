@@ -99,8 +99,7 @@ namespace FamilyApp.Pages
         }
 
         private async Task AddPerson()
-        {  
-            //TODO: Add automapper for person
+        {
             person.FirstName = personDTO.FirstName;
             person.MIddleName = personDTO.MIddleName;
             person.LastName = personDTO.LastName;
@@ -115,7 +114,7 @@ namespace FamilyApp.Pages
             person.PersonId = new Guid();
 
             // Use FamilyAPI for adding person.
-            jsonPerson = jsonUtils.SerializePerson(person);
+            jsonPerson = jsonUtils.SerializeObj<Person>(ref person);
             id = await FamilyAPIService.PostFamilyAPIData("Person", jsonPerson);
 
             // Use EFCore for adding person.
@@ -123,7 +122,6 @@ namespace FamilyApp.Pages
 
             if (!string.IsNullOrEmpty(petDTO.Name) && !string.IsNullOrEmpty(petDTO.NickName) && !string.IsNullOrEmpty(petDTO.petType))
             {
-                //TODO: Add Automapper for pet
                 pet.Name = petDTO.Name;
                 pet.NickName = petDTO.NickName;
                 pet.petType = petDTO.petType;
