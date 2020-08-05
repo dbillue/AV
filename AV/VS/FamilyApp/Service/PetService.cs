@@ -25,7 +25,6 @@ namespace FamilyApp.Service
             _familyAPIService = (FamilyAPIService)serviceProvider.GetService<IFamilyAPIService>();
         }
         
-        //TODO: Remove person parameter
         public async Task<bool> AddNewPet(Pet pet, List<PetTypes> petTypeList, string petType)
         {
             // Assign default properties.
@@ -34,11 +33,11 @@ namespace FamilyApp.Service
 
             // Use FamilyAPI for adding pet.
             jsonUtils = new JsonUtils();
-            jsonPet = jsonUtils.SerializePet(pet);
+            jsonPet = jsonUtils.SerializeObj<Pet>(ref pet);
             id = await _familyAPIService.PostFamilyAPIData("Pet", jsonPet);
 
             // Use EFCore for adding person.
-            //await _familyService.AddPet(pet);
+            // await _familyService.AddPet(pet);
             return true;
         }
 
