@@ -9,6 +9,11 @@ namespace FamilyApp.Service
 {
     public class PetService : IPetService
     {
+        string jsonPet = string.Empty;
+        string id = string.Empty;
+        string petTypeName = string.Empty;
+        int petTypeId = 0;
+
         JsonUtils jsonUtils;
         SeriLog_Logger seriLogger = new SeriLog_Logger();
         private readonly FamilyService _familyService;
@@ -19,19 +24,18 @@ namespace FamilyApp.Service
             _familyService = (FamilyService)serviceProvider.GetService<IFamilyService>();
             _familyAPIService = (FamilyAPIService)serviceProvider.GetService<IFamilyAPIService>();
         }
-
-        public async Task<bool> AddNewPet(Person person, Pet pet, List<PetTypes> petTypeList, string petType)
+        
+        //TODO: Remove person parameter
+        public async Task<bool> AddNewPet(Pet pet, List<PetTypes> petTypeList, string petType)
         {
             // Assign default properties.
-            pet.PersonId = person.PersonId;
             pet.CreateDate = DateTime.Now;
-            // TODO: Determine if method call is needed
             pet.PetTypeId = GetPetType(petTypeList, petType);
 
             // Use FamilyAPI for adding pet.
             jsonUtils = new JsonUtils();
-            string jsonPet = jsonUtils.SerializePet(pet);
-            bool response = await _familyAPIService.PostFamilyAPIData("Pet", jsonPet);
+            jsonPet = jsonUtils.SerializePet(pet);
+            id = await _familyAPIService.PostFamilyAPIData("Pet", jsonPet);
 
             // Use EFCore for adding person.
             //await _familyService.AddPet(pet);
@@ -46,8 +50,6 @@ namespace FamilyApp.Service
 
         public int GetPetType(List<PetTypes> petTypeList, string petTypeName)
         {
-            int petTypeId = 0;
-
             foreach(var petType in petTypeList)
             {
                 if(petTypeName == petType.Type)
@@ -61,8 +63,6 @@ namespace FamilyApp.Service
 
         public string GetPetType(int petTypeId, List<PetTypes> petTypeList)
         {
-            string petTypeName = string.Empty;
-
             try
             {
                 foreach (var petType in petTypeList)
