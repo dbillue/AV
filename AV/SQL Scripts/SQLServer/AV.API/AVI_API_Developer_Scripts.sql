@@ -22,8 +22,8 @@ SELECT * FROM Persons ORDER BY LastName, FirstName
 
 SELECT * FROM Persons
 WHERE 1 = 1
-	--AND PersonId IN ('8C11AFEA-F999-450E-A497-2F5545D038E7')
-	AND LastName <> 'Billue'
+	AND PersonId IN ('fb57dfe0-29cd-4b60-b54b-9343ec8a91dc')
+	--AND LastName <> 'Billue'
 
 SELECT person.*, bs.[State], pet.*
 FROM persons person LEFT OUTER JOIN pets pet ON person.PersonId = pet.PersonId

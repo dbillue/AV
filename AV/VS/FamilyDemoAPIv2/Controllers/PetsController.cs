@@ -1,18 +1,22 @@
 ﻿using AutoMapper;
 using FamilyDemoAPIv2.Helpers;
-using FamilyDemoAPIv2.Service;
 using FamilyDemoAPIv2.Models;
+using FamilyDemoAPIv2.ResourceParameters;
+using FamilyDemoAPIv2.Service;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace FamilyDemoAPIv2.Controllers
 {
     [Produces("application/json")]
     [Consumes("application/json")]
-    [Route("api/pets")]
     [ApiController]
+    [Route("api/pets")]
     public class PetsController : ControllerBase
     {
         private readonly IFamilyDemoAPIv2Repository _familyDemoAPIv2Repository;
@@ -102,7 +106,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>The newly created pet via 200 response.</returns>
         /// <remarks>HttpPost verb.</remarks>
         [HttpPost(Name = "AddPet")]
-        public ActionResult<AddPetDTO> AddPet(AddPetDTO pet)
+        public async Task<ActionResult<AddPetDTO>> AddPet(AddPetDTO pet)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:PetsController,API:AddPet,DateTime:" + DateTime.Now.ToString());
@@ -110,13 +114,16 @@ namespace FamilyDemoAPIv2.Controllers
             try
             {
                 var petEntity = _mapper.Map<Entities.Pet>(pet); // Map to entity.
-                _familyDemoAPIv2Repository.AddPet(petEntity); // Add.
-                _familyDemoAPIv2Repository.Save(); // Save.
+                await _familyDemoAPIv2Repository.AddPet(petEntity); // Add.
+                await _familyDemoAPIv2Repository.Save(); // Save.
 
                 var petToReturn = _mapper.Map<AddPetDTO>(petEntity);
 
                 // Log addition of new pet.
                 _log.WriteInformation("New pet added", null, petToReturn);
+
+                // Return person added.
+                //return Ok(petToReturn);
 
                 // Return link in header.
                 return CreatedAtRoute("AddPet",

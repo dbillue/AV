@@ -43,7 +43,6 @@ namespace FamilyDemoAPIv2.Service
 
             person.PersonId = Guid.NewGuid();
             person.CreateDate = DateTime.Parse(DateTime.Now.ToString());
-
             await _context.Persons.AddAsync(person);
         }
 

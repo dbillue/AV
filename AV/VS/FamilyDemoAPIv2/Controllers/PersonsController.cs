@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace FamilyDemoAPIv2.Controllers
 {
@@ -39,7 +40,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>The newly created person via 200 response.</returns>
         /// <remarks>HttpPost verb.</remarks>
         [HttpPost(Name = "AddPerson")]
-        public ActionResult<AddPersonDTO> AddPerson(AddPersonDTO person)
+        public async Task<ActionResult<AddPersonDTO>> AddPersonAsync(AddPersonDTO person)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Persons,API:AddPerson,DateTime:" + DateTime.Now.ToString());
@@ -47,8 +48,8 @@ namespace FamilyDemoAPIv2.Controllers
             try
             { 
                 var personEntity = _mapper.Map<Entities.Person>(person); // Map to entity.
-                _familyDemoAPIv2Repository.AddPerson(personEntity); // Add.
-                _familyDemoAPIv2Repository.Save(); // Save.
+                await _familyDemoAPIv2Repository.AddPerson(personEntity); // Add.
+                await _familyDemoAPIv2Repository.Save(); // Save.
 
                 var personToReturn = _mapper.Map<AddPersonDTO>(personEntity); // Map to DTO.
 
@@ -56,13 +57,14 @@ namespace FamilyDemoAPIv2.Controllers
                 _log.WriteInformation("New person added", personToReturn, null);
 
                 // Return person added.
-                // return Ok(personToReturn);
+                //return Ok(personToReturn);
 
                 // Return link in header.
                 return CreatedAtRoute("GetPerson",
                     new { personToReturn.PersonId },
                     personToReturn);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 _log.WriteError(ex.Message, ex.InnerException);
                 return NoContent();
             }
