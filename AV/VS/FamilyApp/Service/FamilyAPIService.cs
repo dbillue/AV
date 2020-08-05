@@ -3,20 +3,23 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
     public class FamilyAPIService : IFamilyAPIService
     {
         IConfiguration configuration;
-        string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path, URI_AddPet_Path = string.Empty;
+        string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path, URI_AddPet_Path, id = string.Empty;
         string uripath = string.Empty;
 
         public FamilyAPIService(IConfiguration _configuration)
         {
             configuration = _configuration;
-            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI").Value;
+            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI_Dev").Value;
             URI_Persons_Path = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
             URI_BirthState_Path = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
             URI_PetList_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
@@ -51,7 +54,7 @@ namespace FamilyApp.Service
             }
         }
 
-        public async Task<bool> PostFamilyAPIData(string dataType, string data)
+        public async Task<string> PostFamilyAPIData(string dataType, string data)
         {
             switch (dataType)
             {
@@ -72,14 +75,23 @@ namespace FamilyApp.Service
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 httpClient.BaseAddress = new Uri(URIEndPoint);
+
                 var response = await httpClient.PostAsync(uripath, httpContent);
+
+                // Extract GUID of newly created object.
+                var locationHeader = response.Headers.GetValues("Location");
+
+                foreach (string value in locationHeader)
+                {
+                    id = value.Substring(value.Length - 36, 36);
+                }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    return id;
                 }
 
-                return false;
+                return "error";
             }
         }
     }

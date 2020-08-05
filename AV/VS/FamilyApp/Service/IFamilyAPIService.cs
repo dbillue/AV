@@ -10,6 +10,6 @@ namespace FamilyApp.Service
     {
         Task<string> GetFamilyAPIData(string dataType);
 
-        Task<bool> PostFamilyAPIData(string dataType, string data);
+        Task<string> PostFamilyAPIData(string dataType, string data);
     }
 }
