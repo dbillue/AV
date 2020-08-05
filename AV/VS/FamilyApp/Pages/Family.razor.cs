@@ -29,6 +29,8 @@ namespace FamilyApp.Pages
         private string pets = string.Empty;
         private string pettypes = string.Empty;
         private string fullName = string.Empty;
+        private string jsonPerson = string.Empty;
+        private string id = string.Empty;
         private bool showEditPerson = false;
         private bool showAddPerson = false;
         private bool showDeletePerson = false;
@@ -113,8 +115,8 @@ namespace FamilyApp.Pages
             person.PersonId = new Guid();
 
             // Use FamilyAPI for adding person.
-            string jsonPerson = jsonUtils.SerializePerson(person);
-            bool response = await FamilyAPIService.PostFamilyAPIData("Person", jsonPerson);
+            jsonPerson = jsonUtils.SerializePerson(person);
+            id = await FamilyAPIService.PostFamilyAPIData("Person", jsonPerson);
 
             // Use EFCore for adding person.
             // await FamilyService.AddPerson(person);
@@ -125,7 +127,8 @@ namespace FamilyApp.Pages
                 pet.Name = petDTO.Name;
                 pet.NickName = petDTO.NickName;
                 pet.petType = petDTO.petType;
-                var petAdded = await PetService.AddNewPet(person, pet, petTypeList, pet.petType);
+                pet.PersonId = Guid.Parse(id);
+                var petAdded = await PetService.AddNewPet(pet, petTypeList, pet.petType);
             }
 
             HelperExtensions.ClearObjectValues("personDTO", personDTO);
@@ -190,7 +193,8 @@ namespace FamilyApp.Pages
                 pet.Name = petDTO.Name;
                 pet.NickName = petDTO.NickName;
                 pet.petType = petDTO.petType;
-                var petAdded = await PetService.AddNewPet(person, pet, petTypeList, pet.petType);
+                pet.PersonId = person.PersonId;
+                var petAdded = await PetService.AddNewPet(pet, petTypeList, pet.petType);
             }
 
             person.StateId = BirthState.GetBirthStateId(person, birthStateList);
