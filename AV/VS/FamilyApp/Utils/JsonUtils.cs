@@ -93,12 +93,6 @@ namespace FamilyApp.Utils
             return petTypesList;
         }
 
-        public string SerializePet(Pet pet)
-        {
-            string jsonPet = string.Empty;
-            return jsonPet = JsonConvert.SerializeObject(pet, Formatting.Indented);
-        }
-
         public string SerializeObj<T>(ref T obj)
         {
             string jsonPet = string.Empty;
