@@ -16,9 +16,11 @@ namespace FamilyApp.Pages
         List<Pet> petList;
         List<PetTypes> petTypeList;
         Pet pet = new Pet();
+        PetTypes petTypes = new PetTypes();
         PetDTO petDTO = new PetDTO();
         Person person = new Person();
         PersonDTO personDTO = new PersonDTO();
+        BirthState birthState = new BirthState();
         SeriLog_Logger seriLogger = new SeriLog_Logger();
         JsonUtils jsonUtils = new JsonUtils();
         #endregion
@@ -60,14 +62,15 @@ namespace FamilyApp.Pages
 
                 // Pull from REST API end point that queries Azure SQL Server db.
                 people = await FamilyAPIService.GetFamilyAPIData("persons");
-                personList = await jsonUtils.DeserializePeople(people);
+                personList = jsonUtils.Deserialize<Person>(ref person, people);
+
                 birthStates = await FamilyAPIService.GetFamilyAPIData("states");
-                birthStateList = await jsonUtils.DeserializeBirthStates(birthStates);
+                birthStateList = jsonUtils.Deserialize<BirthState>(ref birthState, birthStates);
 
                 pets = await FamilyAPIService.GetFamilyAPIData("pets");
-                petList = await jsonUtils.DeserializePets(pets);
+                petList = jsonUtils.Deserialize<Pet>(ref pet, pets);
                 pettypes = await FamilyAPIService.GetFamilyAPIData("pettypes");
-                petTypeList = await jsonUtils.DeserializePetTypes(pettypes);
+                petTypeList = jsonUtils.Deserialize<PetTypes>(ref petTypes, pettypes);
                 petDTO.petTypes = petTypeList;
 
                 foreach (var pet in petList)

@@ -18,76 +18,22 @@ namespace FamilyApp.Utils
             jsonOptions.PropertyNameCaseInsensitive = true;
         }
 
-        public async Task<List<Person>> DeserializePeople(string jsonPeople)
+        public List<T> Deserialize<T>(ref T obj, string data)
         {
-            List<Person> person = new List<Person>();
+            List<T> objModel = new List<T>();
 
-            JsonTextReader reader = new JsonTextReader(new StringReader(jsonPeople));
+            JsonTextReader reader = new JsonTextReader(new StringReader(data));
 
-            JObject jsonString = await JObject.LoadAsync(reader);
+            JObject jsonString = JObject.Load(reader);
             IList<JToken> results = jsonString["value"].Children().ToList();
 
-            foreach (JToken result in results)
+            foreach (var dataValue in results)
             {
-                Person apiPersonObjToAdd = result.ToObject<Person>();
-                person.Add(apiPersonObjToAdd);
+                var valueAdded = dataValue.ToObject<T>();
+                objModel.Add(valueAdded);
             }
 
-            return person;
-        }
-
-        public async Task<List<BirthState>> DeserializeBirthStates(string jsonbirthStates)
-        {
-            List<BirthState> states = new List<BirthState>();
-
-            JsonTextReader reader = new JsonTextReader(new StringReader(jsonbirthStates));
-
-            JObject jsonString = await JObject.LoadAsync(reader);
-            IList<JToken> results = jsonString["value"].Children().ToList();
-
-            foreach (var state in results)
-            {
-                BirthState stateToAdd = state.ToObject<BirthState>();
-                states.Add(stateToAdd);
-            }
-
-            return states;
-        }
-
-        public async Task<List<Pet>> DeserializePets(string jsonpets)
-        {
-            List<Pet> petsList = new List<Pet>();
-
-            JsonTextReader reader = new JsonTextReader(new StringReader(jsonpets));
-
-            JObject jsonString = await JObject.LoadAsync(reader);
-            IList<JToken> results = jsonString["value"].Children().ToList();
-
-            foreach (var pet in results)
-            {
-                Pet petToAdd = pet.ToObject<Pet>();
-                petsList.Add(petToAdd);
-            }
-
-            return petsList;
-        }
-
-        public async Task<List<PetTypes>> DeserializePetTypes(string jsonpettypes)
-        {
-            List<PetTypes> petTypesList = new List<PetTypes>();
-
-            JsonTextReader reader = new JsonTextReader(new StringReader(jsonpettypes));
-
-            JObject jsonString = await JObject.LoadAsync(reader);
-            IList<JToken> results = jsonString["value"].Children().ToList();
-
-            foreach (var petType in results)
-            {
-                PetTypes petTypeObj = petType.ToObject<PetTypes>();
-                petTypesList.Add(petTypeObj);
-            }
-
-            return petTypesList;
+            return objModel;
         }
 
         public string SerializeObj<T>(ref T obj)
