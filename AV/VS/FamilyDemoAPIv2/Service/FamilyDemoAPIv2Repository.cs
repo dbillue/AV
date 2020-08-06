@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FamilyDemoAPIv2.Service
 {
@@ -64,9 +65,7 @@ namespace FamilyDemoAPIv2.Service
                 throw new ArgumentNullException(nameof(authorsResourceParameters));
             }
 
-            var collection = _context.Persons as IQueryable<Person>;
-
-            // return _context.Persons.ToList();
+            var collection = _context.Persons.OrderBy(x => x.LastName).ThenBy(x => x.FirstName) as IQueryable<Person>;
 
             // Paging.
             return PagedList<Person>.Create(collection,
