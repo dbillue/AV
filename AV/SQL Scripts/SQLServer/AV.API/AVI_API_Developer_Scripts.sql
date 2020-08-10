@@ -28,7 +28,7 @@ WHERE 1 = 1
 SELECT person.*, bs.[State], pet.*
 FROM persons person LEFT OUTER JOIN pets pet ON person.PersonId = pet.PersonId
 	INNER JOIN birthstate bs ON bs.StateId = person.StateId
-ORDER BY person.FirstName, pet.Name
+ORDER BY person.LastName, person.FirstName, pet.Name
 
 INSERT INTO Persons (FirstName, MIddleName, LastName, Gender, Age, Country, City, StateId, DateOfBirth)
 VALUES ('Allison', 'Karly', 'Hope', 'Female', 34, 'USA', 'Unknown', 5, '1986-07-05 00:00:00')
