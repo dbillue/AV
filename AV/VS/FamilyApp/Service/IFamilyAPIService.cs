@@ -11,5 +11,7 @@ namespace FamilyApp.Service
         Task<string> GetFamilyAPIData(string dataType);
 
         Task<string> PostFamilyAPIData(string dataType, string data);
+
+        Task<bool> DeleteFamilyAPIData(string dataType, string objectKey);
     }
 }
