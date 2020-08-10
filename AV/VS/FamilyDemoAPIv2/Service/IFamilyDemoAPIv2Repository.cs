@@ -22,13 +22,19 @@ namespace FamilyDemoAPIv2.Service
 
         Person UpdatePerson(Person person);
 
+        void DeletePerson(Person person);
+
+        bool PetExists(Guid petId);
+
+        Pet GetPet(Guid petId);
+
         List<Pet> GetPets();
 
         List<PetType> GetPetTypes();
 
         List<BirthState> GetBirthStates();
 
-        void DeletePerson(Person person);
+        void DeletePet(Pet pet);
 
         Task AddPet(Pet pet);
 

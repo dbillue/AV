@@ -84,6 +84,27 @@ namespace FamilyDemoAPIv2.Service
             _context.Persons.Remove(person);
         }
 
+        public bool PetExists(Guid petId)
+        {
+            if (petId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(petId));
+            }
+
+            return _context.Pets.Any(a => a.PetId == petId);
+        }
+
+        public Pet GetPet(Guid petId)
+        {
+            if (petId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(petId));
+            }
+
+            return _context.Pets
+              .Where(c => c.PetId == petId).FirstOrDefault();
+        }
+
         public async Task AddPet(Pet pet)
         {
             if(pet == null)
@@ -103,6 +124,12 @@ namespace FamilyDemoAPIv2.Service
         public List<PetType> GetPetTypes()
         {
             return _context.PetTypes.ToList();
+        }
+
+        public void DeletePet(Pet pet)
+        {
+            _context.Pets.Remove(pet);
+            _context.SaveChanges();
         }
 
         public async Task<bool> Save()

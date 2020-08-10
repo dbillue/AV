@@ -13,6 +13,7 @@ namespace FamilyApp.Service
         string id = string.Empty;
         string petTypeName = string.Empty;
         int petTypeId = 0;
+        bool deleted = false;
 
         JsonUtils jsonUtils;
         SeriLog_Logger seriLogger = new SeriLog_Logger();
@@ -43,8 +44,12 @@ namespace FamilyApp.Service
 
         public async Task<bool> DeletePet(Pet pet)
         {
-            await _familyService.DeletePet(pet);
-            return true;
+            // Use FamilyAPI for deleting pet.
+            deleted = await _familyAPIService.DeleteFamilyAPIData("Pet", pet.PetId.ToString());
+
+            // Use EFCore for adding person.
+            // await _familyService.DeletePet(pet);
+            return deleted;
         }
 
         public int GetPetType(List<PetTypes> petTypeList, string petTypeName)
