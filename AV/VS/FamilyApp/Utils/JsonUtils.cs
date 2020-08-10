@@ -38,8 +38,8 @@ namespace FamilyApp.Utils
 
         public string SerializeObj<T>(ref T obj)
         {
-            string jsonPet = string.Empty;
-            return jsonPet = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            string jsonObject = string.Empty;
+            return jsonObject = JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
     }
 }
