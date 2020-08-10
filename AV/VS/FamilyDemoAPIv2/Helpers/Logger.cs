@@ -18,7 +18,7 @@ namespace FamilyDemoAPIv2.Helpers
             _logger.LogInformation("Message:" + message);
         }
 
-        public void WriteInformation(string message, AddPersonDTO personToReturn = null, AddPetDTO petToReturn = null)
+        public void WriteInformation(string message, AddPersonDTO personToReturn = null, PetDTO petToReturn = null)
         {
             _logger.LogInformation("Message:" + message);
 
