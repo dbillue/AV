@@ -13,18 +13,13 @@ namespace FamilyApp.Service
     public class FamilyAPIService : IFamilyAPIService
     {
         IConfiguration configuration;
-        string URIEndPoint, URI_Persons_Path, URI_BirthState_Path, URI_PetList_Path, URI_PetTypes_Path, URI_AddPet_Path, id = string.Empty;
+        string URIEndPoint, id = string.Empty;
         string uripath = string.Empty;
 
         public FamilyAPIService(IConfiguration _configuration)
         {
             configuration = _configuration;
-            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI_Dev").Value;
-            URI_Persons_Path = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
-            URI_BirthState_Path = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
-            URI_PetList_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
-            URI_PetTypes_Path = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
-            URI_AddPet_Path = configuration.GetSection("FamilyAPI").GetSection("URI_AddPet_Path").Value;
+            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI").Value;
         }
 
         public async Task<string> GetFamilyAPIData(string dataType)
@@ -32,16 +27,16 @@ namespace FamilyApp.Service
             switch (dataType)
             {
                 case "persons":
-                    uripath = URI_Persons_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
                     break;
                 case "states":
-                    uripath = URI_BirthState_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
                     break;
                 case "pets":
-                    uripath = URI_PetList_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
                     break;
                 case "pettypes":
-                    uripath = URI_PetTypes_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
                     break;
                 default:
                     break;
@@ -59,10 +54,10 @@ namespace FamilyApp.Service
             switch (dataType)
             {
                 case "Person":
-                    uripath = URI_Persons_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
                     break;
                 case "Pet":
-                    uripath = URI_AddPet_Path;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_AddPet_Path").Value;
                     break;
                 default:
                     break;
@@ -92,6 +87,30 @@ namespace FamilyApp.Service
                 }
 
                 return "error";
+            }
+        }
+
+        public async Task<bool> DeleteFamilyAPIData(string dataType, string objectKey)
+        {
+            switch(dataType)
+            {
+                case "Pet":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
+                    break;
+                default:
+                    break;
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+                HttpContent httpContent = new StringContent(objectKey, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+
+                var response = await httpClient.DeleteAsync(uripath);
+                return response.IsSuccessStatusCode;
             }
         }
     }
