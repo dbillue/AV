@@ -22,12 +22,12 @@ namespace FamilyDemoAPIv2.Profiles
             CreateMap<Entities.BirthState, Models.GetBirthStateDTO>();
 
             // Add pet mapping.
-            CreateMap<Models.AddPetDTO, Entities.Pet>();
-            CreateMap<Entities.Pet, Models.AddPetDTO>();
+            CreateMap<Models.PetDTO, Entities.Pet>();
+            CreateMap<Entities.Pet, Models.PetDTO>();
 
             // Get pets mapping.
-            CreateMap<Models.GetPetsDTO, Entities.Pet>();
-            CreateMap<Entities.Pet, Models.GetPetsDTO>();
+            CreateMap<Models.PetDTO, Entities.Pet>();
+            CreateMap<Entities.Pet, Models.PetDTO>();
 
             // Get pet type mapping.
             CreateMap<Models.GetPetTypesDTO, Entities.PetType>();

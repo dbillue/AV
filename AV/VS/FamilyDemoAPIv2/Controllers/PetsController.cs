@@ -49,7 +49,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <remarks>HttpGet verb.</remarks>
         [HttpGet("{GetPets}", Name = "GetPets")]
         [Route("GetPets")]
-        public ActionResult<IEnumerable<GetPetsDTO>> GetPets(string GetPets = "GetPets")
+        public ActionResult<IEnumerable<PetDTO>> GetPets(string GetPets = "GetPets")
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Pets,API:GetPets,DateTime:" + DateTime.Now.ToString());
@@ -58,7 +58,7 @@ namespace FamilyDemoAPIv2.Controllers
             var pets = _familyDemoAPIv2Repository.GetPets();
 
             // Map list of pets to DTO.
-            var petsList = _mapper.Map<IEnumerable<GetPetsDTO>>(pets);
+            var petsList = _mapper.Map<IEnumerable<PetDTO>>(pets);
 
             // Add name to JSON array.
             var petsListCollection = new
@@ -106,7 +106,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>The newly created pet via 200 response.</returns>
         /// <remarks>HttpPost verb.</remarks>
         [HttpPost(Name = "AddPet")]
-        public async Task<ActionResult<AddPetDTO>> AddPet(AddPetDTO pet)
+        public async Task<ActionResult<PetDTO>> AddPet(PetDTO pet)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:PetsController,API:AddPet,DateTime:" + DateTime.Now.ToString());
@@ -117,7 +117,7 @@ namespace FamilyDemoAPIv2.Controllers
                 await _familyDemoAPIv2Repository.AddPet(petEntity); // Add.
                 await _familyDemoAPIv2Repository.Save(); // Save.
 
-                var petToReturn = _mapper.Map<AddPetDTO>(petEntity);
+                var petToReturn = _mapper.Map<PetDTO>(petEntity);
 
                 // Log addition of new pet.
                 _log.WriteInformation("New pet added", null, petToReturn);
@@ -133,6 +133,38 @@ namespace FamilyDemoAPIv2.Controllers
                 _log.WriteError(ex.Message, ex.InnerException);
                 return NoContent();
             }
+        }
+
+        /// <summary>
+        /// Use this method to delete a pet.
+        /// </summary>
+        /// <param name="petId"></param>
+        /// <returns>Whether the pet was deleted or not.</returns>
+        /// <remarks>HttpDelete verb.</remarks>
+        [HttpDelete("{petId}", Name = "DeletePet")]
+        [Route("DeletePet")]
+        public ActionResult DeletePet(Guid petId)
+        {
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:PetsController,API:AddDeletePetPet,DateTime:" + DateTime.Now.ToString());
+            
+            try
+            {
+                // Ensure pet exists.
+                if (!_familyDemoAPIv2Repository.PetExists(petId))
+                {
+                    return NotFound();
+                }
+
+                var petToDelete = _familyDemoAPIv2Repository.GetPet(petId); // Obtain record via DbContext query and store in entity.
+                _familyDemoAPIv2Repository.DeletePet(petToDelete); // Call to repository delete method.
+                _familyDemoAPIv2Repository.Save();
+            } catch (Exception ex) {
+                _log.WriteError(ex.Message, ex.InnerException);
+                return NoContent();
+            }
+
+            return Ok();
         }
     }
 }
