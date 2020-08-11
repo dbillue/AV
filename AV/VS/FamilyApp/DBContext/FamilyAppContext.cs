@@ -13,7 +13,6 @@ namespace FamilyApp.DBContext
             : base(options)
         { }
 
-        public DbSet<WeatherForecast> weatherForeCast {  get; set; }
         public DbSet<BirthState> birthState { get; set; }
         public DbSet<Person> person { get; set; }
         public DbSet<Pet> pet { get; set; }
