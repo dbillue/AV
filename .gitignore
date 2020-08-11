@@ -149,3 +149,4 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/EFFamily/bin/Debug
 /AV/VS/EFFamily/obj/Debug
 /AV/VS/EFFamily/packages/EntityFramework.6.2.0
+/AV/VS/FamilyApp/appsettings.Staging.json
