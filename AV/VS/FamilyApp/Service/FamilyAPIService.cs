@@ -97,6 +97,9 @@ namespace FamilyApp.Service
                 case "Pet":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
                     break;
+                case "Person":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePerson_Path").Value + "/" + objectKey;
+                    break;
                 default:
                     break;
             }
