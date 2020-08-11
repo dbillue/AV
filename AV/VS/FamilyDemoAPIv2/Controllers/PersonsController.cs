@@ -199,6 +199,9 @@ namespace FamilyDemoAPIv2.Controllers
         [HttpDelete("{personId}", Name = "DeletePerson")]
         public ActionResult DeletePerson(Guid personId)
         {
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:Persons,API:DeletePerson,DateTime:" + DateTime.Now.ToString());
+
             // Ensure person exists.
             if (!_familyDemoAPIv2Repository.PersonExists(personId))
             {
