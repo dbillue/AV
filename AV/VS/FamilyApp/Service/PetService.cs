@@ -37,7 +37,7 @@ namespace FamilyApp.Service
             jsonPet = jsonUtils.SerializeObj<Pet>(ref pet);
             id = await _familyAPIService.PostFamilyAPIData("Pet", jsonPet);
 
-            // Use EFCore for adding person.
+            // Use EFCore for adding pet.
             // await _familyService.AddPet(pet);
             return true;
         }
@@ -47,7 +47,7 @@ namespace FamilyApp.Service
             // Use FamilyAPI for deleting pet.
             deleted = await _familyAPIService.DeleteFamilyAPIData("Pet", pet.PetId.ToString());
 
-            // Use EFCore for adding person.
+            // Use EFCore for deleting pet.
             // await _familyService.DeletePet(pet);
             return deleted;
         }
