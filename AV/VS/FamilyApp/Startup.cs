@@ -39,7 +39,6 @@ namespace FamilyApp
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddScoped<IWeatherForeCastService, WeatherForecastService>();
             services.AddScoped<IFamilyService, FamilyService>();
             services.AddScoped<IFamilyAPIService, FamilyAPIService>();
             services.AddScoped<IPetService, PetService>();
