@@ -38,6 +38,7 @@ namespace FamilyApp.Pages
         private bool showDeletePerson = false;
         private bool showAddPets = false;
         private bool showPets = false;
+        private bool deleted = false;
         #endregion
 
         protected override async Task OnInitializedAsync()
@@ -230,7 +231,11 @@ namespace FamilyApp.Pages
                 await DeletePet(person);
             }
 
-            await FamilyService.DeletePerson(person);
+            // Use FamilyAPI for deleting person.
+            deleted = await FamilyAPIService.DeleteFamilyAPIData("Person", person.PersonId.ToString());
+
+            // Use EFCore for deleting person.
+            // await FamilyService.DeletePerson(person);
             showDeletePerson = false;
 
             personList = await GetPersons();
@@ -268,7 +273,7 @@ namespace FamilyApp.Pages
             }
         }
 
-        private void updateDOB(string action)
+        private void UpdateDOB(string action)
         {
             DateTime dt = new DateTime();
             dt = DateTime.Now;

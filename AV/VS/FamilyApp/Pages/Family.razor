@@ -4,7 +4,6 @@
 @inject IFamilyAPIService FamilyAPIService
 @inject IPetService PetService
 @inject IBirthState BirthState
-@inject ILogger<FetchData> logger
 
 @if (personList != null)
 {
@@ -116,7 +115,7 @@ else
                             <InputNumber id="intAge2"
                                          class="form-control"
                                          @bind-Value="person.Age"
-                                         @onblur='(() => updateDOB("edit"))' />
+                                         @onblur='(() => UpdateDOB("edit"))' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
@@ -343,7 +342,7 @@ else
                             <input type="number" id="intAge2"
                                    class="form-control"
                                    @bind="personDTO.Age" 
-                                   @onblur='(() => updateDOB("add"))' />
+                                   @onblur='(() => UpdateDOB("add"))' />
                         </div>
                         <div class="form-group col-md-4">
                             <label>
