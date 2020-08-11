@@ -6,12 +6,12 @@ Clear
 
 iisreset /stop
 
-$IISAppPool = "FamilyDemoAPIv2"
-$IISSiteName = "FamilyDemoAPIv2"
+$IISAppPool = "FamilyRESTAPI"
+$IISSiteName = "FamilyRESTAPI"
 $FamilyAPIRESTIISAppPool = Get-IISAppPool $IISsiteName
 $IISAppPoolState = Get-WebAppPoolState $IISAppPool
 $solutionPath = "C:\Users\dbill\source\repos\AV\AV\VS\FamilyDemoAPIv2\FamilyDemoAPIv2.sln"
-$outputPath = "C:\inetpub\wwwroot\FamilyDemoAPIv2\"
+$outputPath = "C:\inetpub\wwwroot\FamilyRESTAPI\"
 
 Write-Host "Begin build and publish..."
 Write-Host "Solution name and directory:" $solutionPath
