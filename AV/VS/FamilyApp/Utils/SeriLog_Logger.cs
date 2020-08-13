@@ -1,8 +1,5 @@
 ﻿using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FamilyApp.Utils
 {
@@ -15,7 +12,8 @@ namespace FamilyApp.Utils
             try
             {
                 Log.Information(msg);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -26,7 +24,8 @@ namespace FamilyApp.Utils
             try
             {
                 Log.Fatal(msg);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
