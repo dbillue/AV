@@ -28,7 +28,7 @@ docker rm c84db1136924
 # Docker remove images
 docker rmi mcr.microsoft.com/dotnet/nightly/sdk:5.0 # Repository:Tag
 
-docker rmi e0b780badaf5 # Image Id
+docker rmi cdb881d7666c # Image Id
 Clear
 Docker images
 
