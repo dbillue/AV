@@ -1,8 +1,6 @@
-using FamilyApp.Areas.Identity;
 using FamilyApp.DBContext;
 using FamilyApp.Service;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +36,6 @@ namespace FamilyApp
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<IFamilyService, FamilyService>();
             services.AddScoped<IFamilyAPIService, FamilyAPIService>();
             services.AddScoped<IPetService, PetService>();
