@@ -1,19 +1,10 @@
 ﻿Clear
 
 # Login to Azure
-# Connect-AzureRmAccount
+#Connect-AzureRmAccount
 
-# Set database variables
-$resourceGroup = "AVSQLDemo"
-$server = Get-AzureRMSqlServer -ResourceGroupName $resourceGroup
-$logical_server = $server.ServerName
-$databaseName = Get-AzureRmSqlDatabase `
-                -ResourceGroupName $resourceGroup `
-                -ServerName $logical_server `
-                | Where DatabaseName -Like "Adventure*"
-$databaseName = $databaseName.DatabaseName
+# Change server connection type
+az sql server conn-policy update --connection-type Default
 
-# Set resrouce group and azure server
-az configure --defaults resource-group=$resourceGroup sql-server=$logical_server
-
-az configure --list-defaults
+# Obtain server connection policy
+az sql server conn-policy show
