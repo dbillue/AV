@@ -17,18 +17,18 @@ docker build -t familyapp .
 
 # Start container
 # docker run --rm -p 3000:3000 familyapp
-# docker run --rm -p 8000:80 --name blazordock_container blazordock
+# docker run --rm -p 8000:80 --name blazordock_container blazordock:2020
 
 # Stop image
-Docker stop ddac733ff690
+Docker stop c0a2d518211e
 
 # Remove containers
-docker rm c84db1136924
+docker rm 4b49520ff7a2
 
 # Docker remove images
 docker rmi mcr.microsoft.com/dotnet/nightly/sdk:5.0 # Repository:Tag
 
-docker rmi cdb881d7666c # Image Id
+docker rmi 4b49520ff7a2 # Image Id
 Clear
 Docker images
 
