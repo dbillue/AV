@@ -24,23 +24,7 @@ namespace FamilyApp.Service
 
         public async Task<string> GetFamilyAPIData(string dataType)
         {
-            switch (dataType)
-            {
-                case "persons":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
-                    break;
-                case "states":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
-                    break;
-                case "pets":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
-                    break;
-                case "pettypes":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
-                    break;
-                default:
-                    break;
-            }
+            uripath = GetURIPath(dataType);
 
             using (var httpClient = new HttpClient())
             {
@@ -51,17 +35,7 @@ namespace FamilyApp.Service
 
         public async Task<string> PostFamilyAPIData(string dataType, string data)
         {
-            switch (dataType)
-            {
-                case "Person":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
-                    break;
-                case "Pet":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_AddPet_Path").Value;
-                    break;
-                default:
-                    break;
-            }
+            uripath = GetURIPath(dataType);
 
             using (var httpClient = new HttpClient())
             {
@@ -92,17 +66,7 @@ namespace FamilyApp.Service
 
         public async Task<bool> DeleteFamilyAPIData(string dataType, string objectKey)
         {
-            switch(dataType)
-            {
-                case "Pet":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
-                    break;
-                case "Person":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePerson_Path").Value + "/" + objectKey;
-                    break;
-                default:
-                    break;
-            }
+            uripath = GetURIPath(dataType);
 
             using (var httpClient = new HttpClient())
             {
@@ -115,6 +79,36 @@ namespace FamilyApp.Service
                 var response = await httpClient.DeleteAsync(uripath);
                 return response.IsSuccessStatusCode;
             }
+        }
+
+        private string GetURIPath(string dataType, string objectKey = null)
+        {
+            // TODO: Add method to consolidate repeated function / code.
+            switch (dataType)
+            {
+                case "person":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                    break;
+                case "persons":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                    break;
+                case "states":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
+                    break;
+                case "Pet":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
+                    break;
+                case "pets":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
+                    break;
+                case "pettypes":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
+                    break;
+                default:
+                    break;
+            }
+
+            return uripath;
         }
     }
 }
