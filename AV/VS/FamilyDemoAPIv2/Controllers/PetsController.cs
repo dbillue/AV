@@ -150,9 +150,8 @@ namespace FamilyDemoAPIv2.Controllers
             
             try
             {
-                var petExists = _familyDemoAPIv2Repository.PetExists(petId).Result;
                 // Ensure pet exists.
-                if (!petExists)
+                if (!_familyDemoAPIv2Repository.PetExists(petId).Result)
                 {
                     return NotFound();
                 }

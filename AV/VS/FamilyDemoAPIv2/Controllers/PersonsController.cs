@@ -90,12 +90,12 @@ namespace FamilyDemoAPIv2.Controllers
         public ActionResult UpdatePerson(Guid personId, JsonPatchDocument<UpdatePersonDTO> patchDocument)
         {
             // Ensure person exists.
-            if (!_familyDemoAPIv2Repository.PersonExists(personId))
+            if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
             {
                 return NotFound();
             }
 
-            var personFromRepo = _familyDemoAPIv2Repository.GetPerson(personId); // Obtain record via DbContext query and store in entity.
+            var personFromRepo = _familyDemoAPIv2Repository.GetPerson(personId).Result; // Obtain record via DbContext query and store in entity.
             var personToPatch = _mapper.Map<UpdatePersonDTO>(personFromRepo); // Map populated entity to DTO.
             patchDocument.ApplyTo(personToPatch, ModelState); // Apply (patch) new values to populated DTO.
 
@@ -128,7 +128,7 @@ namespace FamilyDemoAPIv2.Controllers
         public ActionResult GetPerson(Guid personId)
         {
             // Ensure person exists.
-            if (!_familyDemoAPIv2Repository.PersonExists(personId))
+            if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
             {
                 return NotFound();
             }
@@ -203,12 +203,12 @@ namespace FamilyDemoAPIv2.Controllers
             _log.WriteInformation("Controller:Persons,API:DeletePerson,DateTime:" + DateTime.Now.ToString());
 
             // Ensure person exists.
-            if (!_familyDemoAPIv2Repository.PersonExists(personId))
+            if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
             {
                 return NotFound();
             }
 
-            var personToDelete = _familyDemoAPIv2Repository.GetPerson(personId); // Obtain record via DbContext query and store in entity.
+            var personToDelete = _familyDemoAPIv2Repository.GetPerson(personId).Result; // Obtain record via DbContext query and store in entity.
             _familyDemoAPIv2Repository.DeletePerson(personToDelete); // Call to repository delete method.
             _familyDemoAPIv2Repository.Save();
 
