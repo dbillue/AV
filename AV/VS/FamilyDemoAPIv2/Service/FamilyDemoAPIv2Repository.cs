@@ -25,14 +25,14 @@ namespace FamilyDemoAPIv2.Service
             return "Response from service repository class FamilyDemoAPIv2Repository()";
         }
 
-        public bool PersonExists(Guid personId)
+        public async Task<bool> PersonExists(Guid personId)
         {
             if (personId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(personId));
             }
 
-            return _context.Persons.Any(a => a.PersonId == personId);
+            return await _context.Persons.AnyAsync(a => a.PersonId == personId);
         }
 
         public async Task AddPerson(Person person)
@@ -47,15 +47,15 @@ namespace FamilyDemoAPIv2.Service
             await _context.Persons.AddAsync(person);
         }
 
-        public Person GetPerson(Guid personId)
+        public async Task<Person> GetPerson(Guid personId)
         {
             if (personId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(personId));
             }
 
-            return _context.Persons
-              .Where(c => c.PersonId == personId).FirstOrDefault();
+            return await _context.Persons
+              .Where(c => c.PersonId == personId).FirstOrDefaultAsync();
         }
 
         public PagedList<Person> GetPersons(PersonResourceParameters authorsResourceParameters)
@@ -73,10 +73,10 @@ namespace FamilyDemoAPIv2.Service
                 authorsResourceParameters.PageSize);
         }
 
-        public Person UpdatePerson(Person person)
+        public async Task<Person> UpdatePerson(Person person)
         {
-            return _context.Persons
-              .Where(a => a.PersonId == person.PersonId).FirstOrDefault();
+            return await _context.Persons
+              .Where(a => a.PersonId == person.PersonId).FirstOrDefaultAsync();
         }
 
         public void DeletePerson(Person person)
@@ -84,25 +84,25 @@ namespace FamilyDemoAPIv2.Service
             _context.Persons.Remove(person);
         }
 
-        public bool PetExists(Guid petId)
+        public async Task<bool> PetExists(Guid petId)
         {
             if (petId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            return _context.Pets.Any(a => a.PetId == petId);
+            return await _context.Pets.AnyAsync(a => a.PetId == petId);
         }
 
-        public Pet GetPet(Guid petId)
+        public async Task<Pet> GetPet(Guid petId)
         {
             if (petId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            return _context.Pets
-              .Where(c => c.PetId == petId).FirstOrDefault();
+            return await _context.Pets
+              .Where(c => c.PetId == petId).FirstOrDefaultAsync();
         }
 
         public async Task AddPet(Pet pet)
@@ -116,14 +116,14 @@ namespace FamilyDemoAPIv2.Service
             await _context.Pets.AddAsync(pet);
         }
 
-        public List<Pet> GetPets()
+        public async Task<List<Pet>> GetPets()
         {
-            return _context.Pets.ToList();
+            return await _context.Pets.ToListAsync();
         }
 
-        public List<PetType> GetPetTypes()
+        public async Task<List<PetType>> GetPetTypes()
         {
-            return _context.PetTypes.ToList();
+            return await _context.PetTypes.ToListAsync();
         }
 
         public void DeletePet(Pet pet)
@@ -138,9 +138,9 @@ namespace FamilyDemoAPIv2.Service
             return result;
         }
 
-        public List<BirthState> GetBirthStates()
+        public async Task<List<BirthState>> GetBirthStates()
         {
-            return _context.BirthStates.OrderBy(x => x.Abbreviation).ToList();
+            return await _context.BirthStates.OrderBy(x => x.Abbreviation).ToListAsync();
         }
 
         public void Dispose()

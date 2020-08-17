@@ -12,27 +12,27 @@ namespace FamilyDemoAPIv2.Service
     {
         string Response();
 
-        bool PersonExists(Guid personId);
+        Task<bool> PersonExists(Guid personId);
 
         Task AddPerson(Person person);
 
-        Person GetPerson(Guid personId);
+        Task<Person> GetPerson(Guid personId);
 
         PagedList<Person> GetPersons(PersonResourceParameters authorsResourceParameters);
 
-        Person UpdatePerson(Person person);
+        Task<Person> UpdatePerson(Person person);
 
         void DeletePerson(Person person);
 
-        bool PetExists(Guid petId);
+        Task<bool> PetExists(Guid petId);
 
-        Pet GetPet(Guid petId);
+        Task<List<Pet>> GetPets();
 
-        List<Pet> GetPets();
+        Task<Pet> GetPet(Guid petId);
 
-        List<PetType> GetPetTypes();
+        Task<List<PetType>> GetPetTypes();
 
-        List<BirthState> GetBirthStates();
+        Task<List<BirthState>> GetBirthStates();
 
         void DeletePet(Pet pet);
 
