@@ -43,7 +43,7 @@ namespace FamilyDemoAPIv2.Controllers
             _log.WriteInformation("Controller:BirthState,API:GetStates,DateTime:" + DateTime.Now.ToString());
 
             // Obtain list of states.
-            var states = _familyDemoAPIv2Repository.GetBirthStates();
+            var states = _familyDemoAPIv2Repository.GetBirthStates().Result;
 
             // Map list of states to DTO.
             var birthstates = _mapper.Map<IEnumerable<GetBirthStateDTO>>(states);

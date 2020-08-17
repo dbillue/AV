@@ -58,17 +58,17 @@ namespace FamilyDemoAPIv2.Service
               .Where(c => c.PersonId == personId).FirstOrDefaultAsync();
         }
 
-        public PagedList<Person> GetPersons(PersonResourceParameters authorsResourceParameters)
+        public async Task<PagedList<Person>> GetPersons(PersonResourceParameters authorsResourceParameters)
         {
             if (authorsResourceParameters == null)
             {
                 throw new ArgumentNullException(nameof(authorsResourceParameters));
             }
 
-            var collection = _context.Persons.OrderBy(x => x.LastName).ThenBy(x => x.FirstName) as IQueryable<Person>;
+            var collection = await _context.Persons.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToListAsync<Person>();
 
             // Paging.
-            return PagedList<Person>.Create(collection,
+            return PagedList<Person>.Create(collection.AsQueryable<Person>(),
                 authorsResourceParameters.PageNumber,
                 authorsResourceParameters.PageSize);
         }
@@ -79,9 +79,10 @@ namespace FamilyDemoAPIv2.Service
               .Where(a => a.PersonId == person.PersonId).FirstOrDefaultAsync();
         }
 
-        public void DeletePerson(Person person)
+        public async Task DeletePerson(Person person)
         {
             _context.Persons.Remove(person);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> PetExists(Guid petId)
@@ -118,18 +119,18 @@ namespace FamilyDemoAPIv2.Service
 
         public async Task<List<Pet>> GetPets()
         {
-            return await _context.Pets.ToListAsync();
+            return await _context.Pets.ToListAsync<Pet>();
         }
 
         public async Task<List<PetType>> GetPetTypes()
         {
-            return await _context.PetTypes.ToListAsync();
+            return await _context.PetTypes.ToListAsync<PetType>();
         }
 
-        public void DeletePet(Pet pet)
+        public async Task DeletePet(Pet pet)
         {
             _context.Pets.Remove(pet);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> Save()
@@ -140,7 +141,7 @@ namespace FamilyDemoAPIv2.Service
 
         public async Task<List<BirthState>> GetBirthStates()
         {
-            return await _context.BirthStates.OrderBy(x => x.Abbreviation).ToListAsync();
+            return await _context.BirthStates.OrderBy(x => x.Abbreviation).ToListAsync<BirthState>();
         }
 
         public void Dispose()

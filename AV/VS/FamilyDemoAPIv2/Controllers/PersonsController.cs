@@ -151,13 +151,13 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>A collection of persons.</returns>
         /// <remarks>HttpGet verb.</remarks>
         [HttpGet(Name = "GetPersons")]
-        public ActionResult<IEnumerable<GetPersonDTO>> GetPersons([FromQuery] PersonResourceParameters authorsResourceParameters) // Pass in paged parameters via URI.
+        public async Task<OkObjectResult> GetPersons([FromQuery] PersonResourceParameters authorsResourceParameters) // Pass in paged parameters via URI.
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Persons,API:GetPersons,DateTime:" + DateTime.Now.ToString());
 
             // Obtain list of persons (PagedList<T>) using paged parameter values.
-            var personsFromRepo = _familyDemoAPIv2Repository.GetPersons(authorsResourceParameters);
+            var personsFromRepo = await _familyDemoAPIv2Repository.GetPersons(authorsResourceParameters);
 
             // Map list of persons to DTO.
             var persons = _mapper.Map<IEnumerable<GetPersonDTO>>(personsFromRepo);
@@ -197,7 +197,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>An ok status if deleted, else a not found status.</returns>
         /// <remarks>HttpDelete verb.</remarks>
         [HttpDelete("{personId}", Name = "DeletePerson")]
-        public ActionResult DeletePerson(Guid personId)
+        public async Task<ActionResult> DeletePerson(Guid personId)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Persons,API:DeletePerson,DateTime:" + DateTime.Now.ToString());
@@ -209,8 +209,7 @@ namespace FamilyDemoAPIv2.Controllers
             }
 
             var personToDelete = _familyDemoAPIv2Repository.GetPerson(personId).Result; // Obtain record via DbContext query and store in entity.
-            _familyDemoAPIv2Repository.DeletePerson(personToDelete); // Call to repository delete method.
-            _familyDemoAPIv2Repository.Save();
+            await _familyDemoAPIv2Repository.DeletePerson(personToDelete); // Call to repository delete method.
 
             // Return ok status.
             return Ok();

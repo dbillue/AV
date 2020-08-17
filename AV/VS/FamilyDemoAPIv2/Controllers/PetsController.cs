@@ -55,7 +55,7 @@ namespace FamilyDemoAPIv2.Controllers
             _log.WriteInformation("Controller:Pets,API:GetPets,DateTime:" + DateTime.Now.ToString());
 
             // Obtain list of pets.
-            var pets = _familyDemoAPIv2Repository.GetPets();
+            var pets = _familyDemoAPIv2Repository.GetPets().Result;
 
             // Map list of pets to DTO.
             var petsList = _mapper.Map<IEnumerable<PetDTO>>(pets);
@@ -84,7 +84,7 @@ namespace FamilyDemoAPIv2.Controllers
             _log.WriteInformation("Controller:Pets,API:GetPetTypes,DateTime:" + DateTime.Now.ToString());
 
             // Obtain list of pet types.
-            var petTypeList = _familyDemoAPIv2Repository.GetPetTypes();
+            var petTypeList = _familyDemoAPIv2Repository.GetPetTypes().Result;
 
             // Map list of pet types to DTO.
             var petTypeListMapping = _mapper.Map<IEnumerable<GetPetTypesDTO>>(petTypeList);

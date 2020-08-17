@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-
 namespace FamilyDemoAPIv2.Service
 {
     public interface IFamilyDemoAPIv2Repository
@@ -18,11 +17,11 @@ namespace FamilyDemoAPIv2.Service
 
         Task<Person> GetPerson(Guid personId);
 
-        PagedList<Person> GetPersons(PersonResourceParameters authorsResourceParameters);
+        Task<PagedList<Person>> GetPersons(PersonResourceParameters authorsResourceParameters);
 
         Task<Person> UpdatePerson(Person person);
 
-        void DeletePerson(Person person);
+        Task DeletePerson(Person person);
 
         Task<bool> PetExists(Guid petId);
 
@@ -34,7 +33,7 @@ namespace FamilyDemoAPIv2.Service
 
         Task<List<BirthState>> GetBirthStates();
 
-        void DeletePet(Pet pet);
+        Task DeletePet(Pet pet);
 
         Task AddPet(Pet pet);
 
