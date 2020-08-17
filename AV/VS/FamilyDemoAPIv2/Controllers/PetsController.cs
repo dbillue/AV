@@ -150,13 +150,14 @@ namespace FamilyDemoAPIv2.Controllers
             
             try
             {
+                var petExists = _familyDemoAPIv2Repository.PetExists(petId).Result;
                 // Ensure pet exists.
-                if (!_familyDemoAPIv2Repository.PetExists(petId))
+                if (!petExists)
                 {
                     return NotFound();
                 }
 
-                var petToDelete = _familyDemoAPIv2Repository.GetPet(petId); // Obtain record via DbContext query and store in entity.
+                var petToDelete = _familyDemoAPIv2Repository.GetPet(petId).Result; // Obtain record via DbContext query and store in entity.
                 _familyDemoAPIv2Repository.DeletePet(petToDelete); // Call to repository delete method.
                 _familyDemoAPIv2Repository.Save();
             } catch (Exception ex) {
