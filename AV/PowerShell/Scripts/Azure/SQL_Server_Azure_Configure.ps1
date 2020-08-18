@@ -1,7 +1,7 @@
 ﻿Clear
 
 # Login to Azure
-#Connect-AzureRmAccount
+ Connect-AzAccount
 
 # Change server connection type
 az sql server conn-policy update --connection-type Default

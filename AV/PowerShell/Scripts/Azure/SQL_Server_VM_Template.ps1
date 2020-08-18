@@ -4,8 +4,14 @@
 # Description: Azure SQL Server VM template
 ###########################################################
 
+Clear
+
+# Login to Azure
+#Connect-AzureRmAccount
+
 $adminSqlLogin = "av"
-$password = Read-Host "Your username is 'av'. Please enter a password for your Azure SQL Database server that meets the password requirements"
+# $password = Read-Host "Your username is 'av'. Please enter a password for your Azure SQL Database server that meets the password requirements"
+$password = "All13B1llu3"
 # Prompt for local ip address
 $ipAddress = "73.184.17.17"
 # Get resource group and location and random string

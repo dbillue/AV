@@ -1,7 +1,7 @@
 ﻿Clear
 
 # Login to Azure
-#Connect-AzureRmAccount
+Connect-AzureRmAccount
 
 # Set database variables
 $resourceGroup = "AVSQLDemo2"
