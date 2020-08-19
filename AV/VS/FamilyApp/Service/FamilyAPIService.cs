@@ -66,7 +66,7 @@ namespace FamilyApp.Service
 
         public async Task<bool> DeleteFamilyAPIData(string dataType, string objectKey)
         {
-            uripath = GetURIPath(dataType);
+            uripath = GetURIPath(dataType, objectKey);
 
             using (var httpClient = new HttpClient())
             {
@@ -86,16 +86,16 @@ namespace FamilyApp.Service
             // TODO: Add method to consolidate repeated function / code.
             switch (dataType)
             {
-                case "person":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
-                    break;
                 case "persons":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                    break;
+                case "deleteperson":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
                     break;
                 case "states":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
                     break;
-                case "Pet":
+                case "pet":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
                     break;
                 case "pets":
