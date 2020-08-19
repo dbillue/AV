@@ -119,7 +119,7 @@ namespace FamilyApp.Pages
 
             // Use FamilyAPI for adding person.
             jsonPerson = jsonUtils.SerializeObj<Person>(ref person);
-            id = await FamilyAPIService.PostFamilyAPIData("Person", jsonPerson);
+            id = await FamilyAPIService.PostFamilyAPIData("persons", jsonPerson);
 
             // Use EFCore for adding person.
             // await FamilyService.AddPerson(person);
@@ -200,6 +200,7 @@ namespace FamilyApp.Pages
             }
 
             person.StateId = BirthState.GetBirthStateId(person, birthStateList);
+            // TODO: Add UpdatePerson function to REST API
             await FamilyService.UpdatePerson(person);
 
             personList = await GetPersons();
@@ -232,7 +233,7 @@ namespace FamilyApp.Pages
             }
 
             // Use FamilyAPI for deleting person.
-            deleted = await FamilyAPIService.DeleteFamilyAPIData("Person", person.PersonId.ToString());
+            deleted = await FamilyAPIService.DeleteFamilyAPIData("deleteperson", person.PersonId.ToString());
 
             // Use EFCore for deleting person.
             // await FamilyService.DeletePerson(person);
