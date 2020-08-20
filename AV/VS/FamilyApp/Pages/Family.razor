@@ -209,6 +209,7 @@ else
                                                    @bind-Value="pet.petType" />
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <button type="button" class="btn-primary" @onclick="(() => UpdatePet(pet))">Update</button>
                                         <button type="button" class="btn-primary" @onclick="(() => DeletePet(pet))">Delete</button>
                                     </div>
                                 </div>

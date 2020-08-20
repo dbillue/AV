@@ -42,6 +42,15 @@ namespace FamilyApp.Service
             return true;
         }
 
+        public async Task<bool> UpdatePet(Pet pet)
+        {
+            jsonUtils = new JsonUtils();
+            jsonPet = jsonUtils.CreatePatchDocument("pet", null, pet);
+            await _familyAPIService.PatchFamilyAPIData("patchpet", pet.PetId.ToString(), jsonPet);
+
+            return true;
+        }
+
         public async Task<bool> DeletePet(Pet pet)
         {
             // Use FamilyAPI for deleting pet.

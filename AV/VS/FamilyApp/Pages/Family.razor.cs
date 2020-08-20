@@ -39,6 +39,7 @@ namespace FamilyApp.Pages
         private bool showAddPets = false;
         private bool showPets = false;
         private bool deleted = false;
+        private bool updated = false;
         #endregion
 
         protected override async Task OnInitializedAsync()
@@ -184,6 +185,22 @@ namespace FamilyApp.Pages
             }
         }
 
+        private async Task UpdatePet(Pet pet)
+        {
+            updated = await PetService.UpdatePet(pet);
+            await GetPersons();
+        }
+
+        private async Task DeletePet(Pet pet)
+        {
+            var petDeleted = await PetService.DeletePet(pet);
+
+            petList.Remove(pet);
+            person.Pets.Remove(pet);
+
+            personList = await GetPersons();
+        }
+
         private async Task UpdatePerson()
         {
             showEditPerson = false;
@@ -200,18 +217,8 @@ namespace FamilyApp.Pages
             }
 
             person.StateId = BirthState.GetBirthStateId(person, birthStateList);
-            // TODO: Add UpdatePerson function to REST API
-            await FamilyService.UpdatePerson(person);
-
-            personList = await GetPersons();
-        }
-
-        private async Task DeletePet(Pet pet)
-        {
-            var petDeleted = await PetService.DeletePet(pet);
-
-            petList.Remove(pet);
-            person.Pets.Remove(pet);
+            jsonPerson = jsonUtils.CreatePatchDocument("person", person);
+            await FamilyAPIService.PatchFamilyAPIData("patchperson", person.PersonId.ToString(), jsonPerson);
 
             personList = await GetPersons();
         }

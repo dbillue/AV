@@ -64,6 +64,24 @@ namespace FamilyApp.Service
             }
         }
 
+        public async Task<string> PatchFamilyAPIData(string dataType, string objectkey, string data)
+        {
+            uripath = GetURIPath(dataType, objectkey);
+
+            using (var httpClient = new HttpClient())
+            {
+                HttpContent httpContent = new StringContent(data, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+
+                var response = await httpClient.PatchAsync(uripath, httpContent);
+
+                return "";
+            }
+        }
+
         public async Task<bool> DeleteFamilyAPIData(string dataType, string objectKey)
         {
             uripath = GetURIPath(dataType, objectKey);
@@ -83,7 +101,6 @@ namespace FamilyApp.Service
 
         private string GetURIPath(string dataType, string objectKey = null)
         {
-            // TODO: Add method to consolidate repeated function / code.
             switch (dataType)
             {
                 case "persons":
@@ -92,11 +109,17 @@ namespace FamilyApp.Service
                 case "deleteperson":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
                     break;
+                case "patchperson":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
+                    break;
                 case "states":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
                     break;
                 case "pet":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_DeletePet_Path").Value + "/" + objectKey;
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
+                    break;
+                case "patchpet":
+                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
                     break;
                 case "pets":
                     uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
