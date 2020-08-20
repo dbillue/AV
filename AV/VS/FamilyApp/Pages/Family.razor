@@ -28,14 +28,14 @@
                     <td>@person.City</td>
                     <td>@BirthState.GetBirthState(person)</td>
                     <td>
-                        <button type="button" class="btn btn-primary" @onclick="(() => ShowEditPersonForm(person))">Edit</button>
-                        <button type="button" class="btn btn-primary" @onclick="(() => ShowDeletePersonForm(person))">Delete</button>
+                        <button type="button" class="btn btn-primary btn-sm" @onclick="(() => ShowEditPersonForm(person))">Edit</button>
+                        <button type="button" class="btn btn-primary btn-sm" @onclick="(() => ShowDeletePersonForm(person))">Delete</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="showAddPersonForm">Add Person</button>
+    <button class="btn btn-primary btn-sm" @onclick="showAddPersonForm">Add Person</button>
 }
 else
 {
@@ -209,8 +209,8 @@ else
                                                    @bind-Value="pet.petType" />
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <button type="button" class="btn-primary" @onclick="(() => UpdatePet(pet))">Update</button>
-                                        <button type="button" class="btn-primary" @onclick="(() => DeletePet(pet))">Delete</button>
+                                        <button type="button" class="btn btn-primary btn-sm" @onclick="(() => UpdatePet(pet))">Update</button>
+                                        <button type="button" class="btn btn-primary btn-sm" @onclick="(() => DeletePet(pet))">Delete</button>
                                     </div>
                                 </div>
                             }
@@ -265,8 +265,8 @@ else
                     }
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-group-sm btn-primary">Submit</button>
-                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Edit"))'>Close</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <button type="button" class="btn btn-primary btn-sm" @onclick='(() => ClosePopup("Edit"))'>Close</button>
                         </div>
                     </div>
                 </div>
@@ -429,8 +429,8 @@ else
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-group-sm btn-primary">Submit</button>
-                            <button type="button" class="btn btn-group-sm btn-primary" @onclick='(() => ClosePopup("Add"))'>Close</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <button type="button" class="btn btn-primary btn-sm" @onclick='(() => ClosePopup("Add"))'>Close</button>
                         </div>
                     </div>
                 </div>
@@ -449,8 +449,8 @@ else
                         Delete @fullName
                     </div>
                     <div class="modal-body">
-                        <button type="submit" class="btn btn-primary">Yes</button>
-                        <button type="button" class="btn btn-primary" @onclick='(() => ClosePopup("Delete"))'>No</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Yes</button>
+                        <button type="button" class="btn btn-primary btn-sm" @onclick='(() => ClosePopup("Delete"))'>No</button>
                     </div>
                 </div>
             </div>
