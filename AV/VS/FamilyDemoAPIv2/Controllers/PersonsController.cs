@@ -86,7 +86,7 @@ namespace FamilyDemoAPIv2.Controllers
         ///     } \
         /// ]
         /// </remarks>
-        [HttpPatch("{personId}", Name = "UpdatePerson")]
+        [HttpPatch("{personId}", Name = "UpdatePersonAsync")]
         public async Task<ActionResult> UpdatePersonAsync(Guid personId, JsonPatchDocument<UpdatePersonDTO> patchDocument)
         {
             // Ensure person exists.
@@ -151,8 +151,8 @@ namespace FamilyDemoAPIv2.Controllers
         /// </summary>
         /// <returns>A collection of persons.</returns>
         /// <remarks>HttpGet verb.</remarks>
-        [HttpGet(Name = "GetPersons")]
-        public async Task<OkObjectResult> GetPersons([FromQuery] PersonResourceParameters authorsResourceParameters) // Pass in paged parameters via URI.
+        [HttpGet(Name = "GetPersonsAsync")]
+        public async Task<OkObjectResult> GetPersonsAsync([FromQuery] PersonResourceParameters authorsResourceParameters) // Pass in paged parameters via URI.
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Persons,API:GetPersons,DateTime:" + DateTime.Now.ToString());
@@ -197,8 +197,8 @@ namespace FamilyDemoAPIv2.Controllers
         /// <param name="personId">The person's Id.</param>
         /// <returns>An ok status if deleted, else a not found status.</returns>
         /// <remarks>HttpDelete verb.</remarks>
-        [HttpDelete("{personId}", Name = "DeletePerson")]
-        public async Task<ActionResult> DeletePerson(Guid personId)
+        [HttpDelete("{personId}", Name = "DeletePersonAsync")]
+        public async Task<ActionResult> DeletePersonAsync(Guid personId)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:Persons,API:DeletePerson,DateTime:" + DateTime.Now.ToString());

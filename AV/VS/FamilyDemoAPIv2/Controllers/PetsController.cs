@@ -106,8 +106,8 @@ namespace FamilyDemoAPIv2.Controllers
         /// <param name="pet"></param>
         /// <returns>The newly created pet via 200 response.</returns>
         /// <remarks>HttpPost verb.</remarks>
-        [HttpPost(Name = "AddPet")]
-        public async Task<ActionResult<PetDTO>> AddPet(PetDTO pet)
+        [HttpPost(Name = "AddPetAsync")]
+        public async Task<ActionResult<PetDTO>> AddPetAsync(PetDTO pet)
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:PetsController,API:AddPet,DateTime:" + DateTime.Now.ToString());
@@ -127,7 +127,7 @@ namespace FamilyDemoAPIv2.Controllers
                 //return Ok(petToReturn);
 
                 // Return link in header.
-                return CreatedAtRoute("AddPet",
+                return CreatedAtRoute("AddPetAsync",
                     new { petToReturn.PetId },
                     petToReturn);
             } catch (Exception ex) {
