@@ -26,8 +26,8 @@ namespace FamilyDemoAPIv2.Profiles
             CreateMap<Entities.Pet, Models.PetDTO>();
 
             // Get pets mapping.
-            CreateMap<Models.PetDTO, Entities.Pet>();
             CreateMap<Entities.Pet, Models.PetDTO>();
+            CreateMap<Models.PetDTO, Entities.Pet>();
 
             // Get pet type mapping.
             CreateMap<Models.GetPetTypesDTO, Entities.PetType>();

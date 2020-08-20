@@ -31,6 +31,8 @@ namespace FamilyDemoAPIv2.Service
 
         Task<List<PetType>> GetPetTypes();
 
+        Task<Pet> UpdatePet(Pet pet);
+
         Task<List<BirthState>> GetBirthStates();
 
         Task DeletePet(Pet pet);

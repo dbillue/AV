@@ -127,6 +127,12 @@ namespace FamilyDemoAPIv2.Service
             return await _context.PetTypes.ToListAsync<PetType>();
         }
 
+        public async Task<Pet> UpdatePet(Pet pet)
+        {
+            return await _context.Pets
+                .Where(x => x.PetId == pet.PetId).FirstOrDefaultAsync();
+        }
+
         public async Task DeletePet(Pet pet)
         {
             _context.Pets.Remove(pet);

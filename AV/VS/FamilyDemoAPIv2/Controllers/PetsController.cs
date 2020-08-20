@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FamilyDemoAPIv2.Entities;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.Models;
 using FamilyDemoAPIv2.ResourceParameters;
@@ -133,6 +134,51 @@ namespace FamilyDemoAPIv2.Controllers
                 _log.WriteError(ex.Message, ex.InnerException);
                 return NoContent();
             }
+        }
+
+        /// <summary>
+        /// Use this method to update a pet.
+        /// </summary>
+        /// <param name="petId">The pet's Guid Id</param>
+        /// <param name="patchDocument">The pets information in JSON patch format.</param>
+        /// <returns>The updated pet's information via 200 response.</returns>
+        /// <remarks>HttpPatch verb. \
+        /// pet/petId \
+        /// [ \
+        ///     { \
+        ///         "op": "replace", \
+        ///         "path": "/Name", \
+        ///         "value": "Pet's name." \
+        ///     } \
+        /// ]
+        /// </remarks>
+        [HttpPatch("{petId}", Name = "UpdatePetAsync")]
+        public async Task<ActionResult> UpdatePetAsync(Guid petId, JsonPatchDocument<PetDTO> patchDocument)
+        {
+            // Ensure pet exists.
+            if (!_familyDemoAPIv2Repository.PetExists(petId).Result)
+            {
+                return NotFound();
+            }
+
+            var petFromRepo = _familyDemoAPIv2Repository.GetPet(petId).Result; // Obtain record via DbContext query and store in entity.
+            var petToPatch = _mapper.Map<PetDTO>(petFromRepo); // Map populated entity to DTO.
+            patchDocument.ApplyTo(petToPatch, ModelState); // Apply (patch) new values to populated DTO.
+
+            // Validate model using ControllerBase.
+            if (!TryValidateModel(petToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(petToPatch, petFromRepo); // Map new values from patched DTO to populated entity.
+            await _familyDemoAPIv2Repository.UpdatePet(petFromRepo); // Call repo and update context with with populated entity.
+            await _familyDemoAPIv2Repository.Save();
+
+            // Return link in header.
+            return CreatedAtRoute("UpdatePetAsync",
+                new { petFromRepo.PetId },
+                petFromRepo);
         }
 
         /// <summary>

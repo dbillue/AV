@@ -39,7 +39,7 @@ namespace FamilyDemoAPIv2.Controllers
         /// <param name="person">The persons information.</param>
         /// <returns>The newly created person via 200 response.</returns>
         /// <remarks>HttpPost verb.</remarks>
-        [HttpPost(Name = "AddPerson")]
+        [HttpPost(Name = "AddPersonAsync")]
         public async Task<ActionResult<AddPersonDTO>> AddPersonAsync(AddPersonDTO person)
         {
             // Log Api call.  Could be moved to database for future anayltics.
@@ -77,17 +77,17 @@ namespace FamilyDemoAPIv2.Controllers
         /// <param name="patchDocument">The persons information in JSON patch format.</param>
         /// <returns>The updated person's information via 200 response.</returns>
         /// <remarks>HttpPatch verb. \
-        /// persons/personId \
+        /// person/personId \
         /// [ \
         ///     { \
         ///         "op": "replace", \
-        ///         "path": "/firstname", \
+        ///         "path": "/FirstName", \
         ///         "value": "Person's new first name." \
         ///     } \
         /// ]
         /// </remarks>
         [HttpPatch("{personId}", Name = "UpdatePerson")]
-        public ActionResult UpdatePerson(Guid personId, JsonPatchDocument<UpdatePersonDTO> patchDocument)
+        public async Task<ActionResult> UpdatePersonAsync(Guid personId, JsonPatchDocument<UpdatePersonDTO> patchDocument)
         {
             // Ensure person exists.
             if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
@@ -106,8 +106,8 @@ namespace FamilyDemoAPIv2.Controllers
             }
 
             _mapper.Map(personToPatch, personFromRepo); // Map new values from patched DTO to populated entity.
-            _familyDemoAPIv2Repository.UpdatePerson(personFromRepo); // Call repo and update context with with populated entity.
-            _familyDemoAPIv2Repository.Save();
+            await _familyDemoAPIv2Repository.UpdatePerson(personFromRepo); // Call repo and update context with with populated entity.
+            await _familyDemoAPIv2Repository.Save();
 
             // Return updated person.
             // return Ok(personFromRepo);
@@ -127,6 +127,7 @@ namespace FamilyDemoAPIv2.Controllers
         [HttpGet("{personId}", Name = "GetPerson")]
         public ActionResult GetPerson(Guid personId)
         {
+            // TODO: Make method async with a Task
             // Ensure person exists.
             if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
             {
