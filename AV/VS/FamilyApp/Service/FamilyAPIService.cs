@@ -3,10 +3,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using FamilyApp.Model;
 
 namespace FamilyApp.Service
 {
@@ -19,7 +16,7 @@ namespace FamilyApp.Service
         public FamilyAPIService(IConfiguration _configuration)
         {
             configuration = _configuration;
-            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI").Value;
+            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI_Dev").Value;
         }
 
         public async Task<string> GetFamilyAPIData(string dataType)

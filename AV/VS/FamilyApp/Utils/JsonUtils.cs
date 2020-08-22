@@ -15,7 +15,6 @@ namespace FamilyApp.Utils
     {
         private readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
         private string patchDocument = string.Empty;
-        private string personPatchDocument = string.Empty;
 
         public JsonUtils()
         {
@@ -67,66 +66,66 @@ namespace FamilyApp.Utils
         // TODO: Add system reflection
         public string BuildPatchDocumentPerson(Person person)
         {
-            personPatchDocument = @"[{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/FirstName"",";
-            personPatchDocument += @"""value"": """ + person.FirstName + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/MIddleName"",";
-            personPatchDocument += @"""value"": """ + person.MIddleName + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/LastName"",";
-            personPatchDocument += @"""value"": """ + person.LastName + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/Gender"",";
-            personPatchDocument += @"""value"": """ + person.Gender + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/Age"",";
-            personPatchDocument += @"""value"": """ + person.Age.ToString() + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/Country"",";
-            personPatchDocument += @"""value"": """ + person.Country + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/City"",";
-            personPatchDocument += @"""value"": """ + person.City + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/StateId"",";
-            personPatchDocument += @"""value"": """ + person.StateId.ToString() + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/DateOfBirth"",";
-            personPatchDocument += @"""value"": """ + person.DateOfBirth.ToString() + "";
-            personPatchDocument += @"""}]";
+            patchDocument = @"[{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/FirstName"",";
+            patchDocument += @"""value"": """ + person.FirstName + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/MIddleName"",";
+            patchDocument += @"""value"": """ + person.MIddleName + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/LastName"",";
+            patchDocument += @"""value"": """ + person.LastName + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/Gender"",";
+            patchDocument += @"""value"": """ + person.Gender + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/Age"",";
+            patchDocument += @"""value"": """ + person.Age.ToString() + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/Country"",";
+            patchDocument += @"""value"": """ + person.Country + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/City"",";
+            patchDocument += @"""value"": """ + person.City + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/StateId"",";
+            patchDocument += @"""value"": """ + person.StateId.ToString() + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/DateOfBirth"",";
+            patchDocument += @"""value"": """ + person.DateOfBirth.ToString() + "";
+            patchDocument += @"""}]";
 
-            return personPatchDocument;
+            return patchDocument;
         }
 
         public string BuildPatchDocumentPet(Pet pet)
         {
-            personPatchDocument = @"[{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/Name"",";
-            personPatchDocument += @"""value"": """ + pet.Name + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/NickName"",";
-            personPatchDocument += @"""value"": """ + pet.NickName + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/PetTypeId"",";
-            personPatchDocument += @"""value"": """ + pet.PetTypeId.ToString() + "";
-            personPatchDocument += @"""},";
-            personPatchDocument += @"{""op"": ""replace"",";
-            personPatchDocument += @"""path"": ""/PersonId"",";
-            personPatchDocument += @"""value"": """ + pet.PersonId + "";
-            personPatchDocument += @"""}]";
+            patchDocument = @"[{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/Name"",";
+            patchDocument += @"""value"": """ + pet.Name + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/NickName"",";
+            patchDocument += @"""value"": """ + pet.NickName + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/PetTypeId"",";
+            patchDocument += @"""value"": """ + pet.PetTypeId.ToString() + "";
+            patchDocument += @"""},";
+            patchDocument += @"{""op"": ""replace"",";
+            patchDocument += @"""path"": ""/PersonId"",";
+            patchDocument += @"""value"": """ + pet.PersonId + "";
+            patchDocument += @"""}]";
 
-            return personPatchDocument;
+            return patchDocument;
         }
     }
 }

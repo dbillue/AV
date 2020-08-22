@@ -47,7 +47,7 @@ else
     <EditForm Model="@person" OnValidSubmit="UpdatePerson">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
+        <div class="card; modal" tabindex="-1" style="display:block;font-size:medium" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -280,7 +280,7 @@ else
     <EditForm Model="@personDTO" OnValidSubmit="AddPerson">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
+        <div class="card; modal" tabindex="-1" style="display:block;font-size:medium" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -442,7 +442,7 @@ else
 @if (showDeletePerson)
 {
     <EditForm Model="@person" OnValidSubmit="DeletePerson">
-        <div class="card; modal" tabindex="-1" style="display:block" role="dialog">
+        <div class="card; modal" tabindex="-1" style="display:block;font-size:medium" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

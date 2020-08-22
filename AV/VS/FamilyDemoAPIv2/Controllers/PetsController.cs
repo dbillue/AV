@@ -193,7 +193,7 @@ namespace FamilyDemoAPIv2.Controllers
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:PetsController,API:AddDeletePetPet,DateTime:" + DateTime.Now.ToString());
-            
+
             try
             {
                 // Ensure pet exists.
@@ -205,7 +205,9 @@ namespace FamilyDemoAPIv2.Controllers
                 var petToDelete = _familyDemoAPIv2Repository.GetPet(petId).Result; // Obtain record via DbContext query and store in entity.
                 _familyDemoAPIv2Repository.DeletePet(petToDelete); // Call to repository delete method.
                 _familyDemoAPIv2Repository.Save();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 _log.WriteError(ex.Message, ex.InnerException);
                 return NoContent();
             }
