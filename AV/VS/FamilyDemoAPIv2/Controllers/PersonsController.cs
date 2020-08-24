@@ -134,7 +134,7 @@ namespace FamilyDemoAPIv2.Controllers
                 return NotFound();
             }
 
-            var personFromRepo = _familyDemoAPIv2Repository.GetPerson(personId); // Obtain record via DbContext query and store in entity.
+            var personFromRepo = _familyDemoAPIv2Repository.GetPerson(personId).Result; // Obtain record via DbContext query and store in entity.
             var personToReturn = _mapper.Map<GetPersonDTO>(personFromRepo); // Map entity to return DTO.
 
             // Return person.
