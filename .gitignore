@@ -151,3 +151,8 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/EFFamily/packages/EntityFramework.6.2.0
 /AV/VS/FamilyApp/appsettings.Staging.json
 /AV/Docker/NodeJS
+/AV/VS/FamilyAPITestHarness/.vs
+/AV/VS/FamilyAPITestHarness/bin
+/AV/VS/FamilyAPITestHarness/obj
+/AV/VS/FamilyAPITestHarness/Properties
+/AV/VS/FamilyAPITestHarness/appsettings.json
