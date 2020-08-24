@@ -9,14 +9,14 @@ namespace FamilyApp.Service
 {
     public class FamilyAPIService : IFamilyAPIService
     {
-        IConfiguration configuration;
+        IConfiguration _configuration;
         string URIEndPoint, id = string.Empty;
         string uripath = string.Empty;
 
-        public FamilyAPIService(IConfiguration _configuration)
+        public FamilyAPIService(IConfiguration configuration)
         {
-            configuration = _configuration;
-            URIEndPoint = configuration.GetSection("FamilyAPI").GetSection("URI_Dev").Value;
+            _configuration = configuration;
+            URIEndPoint = _configuration.GetSection("FamilyAPI").GetSection("URI").Value;
         }
 
         public async Task<string> GetFamilyAPIData(string dataType)
@@ -101,28 +101,28 @@ namespace FamilyApp.Service
             switch (dataType)
             {
                 case "persons":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
                     break;
                 case "deleteperson":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
                     break;
                 case "patchperson":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
                     break;
                 case "states":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
                     break;
                 case "pet":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
                     break;
                 case "patchpet":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
                     break;
                 case "pets":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
                     break;
                 case "pettypes":
-                    uripath = configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
                     break;
                 default:
                     break;
