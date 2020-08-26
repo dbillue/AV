@@ -20,10 +20,23 @@ sp_helpindex Persons
 
 SELECT * FROM Persons ORDER BY LastName, FirstName
 
+SELECT * FROM Persons ORDER BY CreateDate
+
 SELECT * FROM Persons
 WHERE 1 = 1
-	AND PersonId IN ('fb57dfe0-29cd-4b60-b54b-9343ec8a91dc')
+	AND PersonId IN ('19C7017C-EE2D-411D-A72C-D8222DE47790')
 	--AND LastName <> 'Billue'
+	--AND CONVERT(Date, CreateDate, 101) >= '2020-08-24'
+ORDER BY CreateDate
+
+SELECT  COUNT(PersonID) RecCnt, 
+			MIN(CreateDate) 'BeginTime', 
+			MAX(CreateDate) 'FinishTime', 
+			DATEDIFF(ss, MIN(CreateDate), MAX(CreateDate)) 'Seconds',
+			DATEDIFF(n, MIN(CreateDate), MAX(CreateDate)) 'Minutes'
+FROM Persons
+WHERE 1 = 1
+	AND FirstName = 'April'
 
 SELECT person.*, bs.[State], pet.*
 FROM persons person LEFT OUTER JOIN pets pet ON person.PersonId = pet.PersonId
@@ -35,10 +48,12 @@ VALUES ('Allison', 'Karly', 'Hope', 'Female', 34, 'USA', 'Unknown', 5, '1986-07-
 
 DELETE FROM Persons
 WHERE 1 = 1
-	AND PersonId IN ('490B6892-DD11-4451-C3A8-08D829D6DD05')
-	--AND FirstName IN ('Alex', 'asda')
+	--AND PersonId IN ('490B6892-DD11-4451-C3A8-08D829D6DD05')
+	AND FirstName IN ('April')
 
--- DELETE FROM Persons WHERE PersonId IN ('D4803493-168C-409A-9D50-08D82A51E516')
+-- DELETE FROM Persons
+
+-- TRUNCATE TABLE Persons
 
 -- DROP TABLE Family_Seed
 
@@ -60,6 +75,8 @@ VALUES ('MountainBelly', 'BellyBaby', 2, 'A3442212-DA30-4ECF-A730-005014A63C9F')
 
 -- DELETE FROM Pets WHERE PetId IN ('4F433572-A144-4E05-64D0-08D82A51E544')
 
+-- TRUNCATE TABLE Pets
+
 
 /************
 PetTypes
@@ -78,7 +95,7 @@ sp_helpindex BirthState
 
 SELECT * FROM BirthState ORDER BY State
 
-TRUNCATE TABLE BirthState
+--TRUNCATE TABLE BirthState
 
 
 /************
