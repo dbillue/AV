@@ -34,7 +34,7 @@ namespace FamilyAPITestHarness.Controllers
                     await UpdatePerson();
                     break;
                 case "DeletePerson":
-                    DeletePerson();
+                    await DeletePerson();
                     break;
                 default:
                     break;
@@ -144,15 +144,14 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Delete Persons
-        public void DeletePerson()
+        public async Task DeletePerson()
         {
             Log.Information("PersonContoller.DeletePerson()");
 
-            var lstPersons = _harnessDbService.GetPersons();
-
-            foreach (var person in lstPersons)
+            var lstPersonsIds = await _harnessDbService.GetPersonIds();
+            foreach (var person in lstPersonsIds)
             {
-                _personService.DeletePerson("DeletePerson", person.PersonId.ToString());
+                _personService.DeletePerson("DeletePerson", person.personId.ToString());
             }
         }
     }

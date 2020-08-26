@@ -10,6 +10,6 @@ namespace FamilyAPITestHarness.Interfaces
 
         Task UpdatePerson();
 
-        void DeletePerson();
+        Task DeletePerson();
     }
 }

@@ -68,7 +68,7 @@ namespace FamilyAPITestHarness.Services
 
                 httpClient.BaseAddress = new Uri(URIEndPoint);
 
-                var response = httpClient.DeleteAsync(route);
+                var response = httpClient.DeleteAsync(route).Result;
             }
         }
 

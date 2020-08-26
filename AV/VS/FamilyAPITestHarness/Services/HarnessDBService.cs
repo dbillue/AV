@@ -1,9 +1,11 @@
 ﻿using FamilyAPITestHarness.DBContext;
-using FamilyAPITestHarness.Entites;
 using FamilyAPITestHarness.DTO;
+using FamilyAPITestHarness.Entites;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FamilyAPITestHarness.Services
 {
@@ -18,7 +20,7 @@ namespace FamilyAPITestHarness.Services
         }
 
         // Query for list all Person.personId values
-        public IQueryable<PersonGuidDTO> GetPersonIds()
+        public async Task<IQueryable<PersonGuidDTO>> GetPersonIds()
         {
             var PersonIds = from person in _dbContext.Person
                             select new PersonGuidDTO
@@ -26,12 +28,12 @@ namespace FamilyAPITestHarness.Services
                                 personId = (Guid)person.PersonId
                             };
 
-            return PersonIds.AsQueryable<PersonGuidDTO>();
+            return (IQueryable<PersonGuidDTO>)await PersonIds.ToListAsync();
         }
 
-        public List<Person> GetPersons()
+        public async Task<List<Person>> GetPersons()
         {
-            var lstPerson = _dbContext.Person.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList<Person>();
+            var lstPerson = await _dbContext.Person.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToListAsync<Person>();
             return lstPerson;
         }
     }

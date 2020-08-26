@@ -31,10 +31,13 @@ namespace FamilyAPITestHarness
 
             var serviceProvider = services.BuildServiceProvider();
 
-            Console.WriteLine("Begin API call test...");
+            Console.WriteLine("Begin FamilyAPITestHarness call test");
 
             // Calls the Run method in App, which is replacing Main
             await serviceProvider.GetService<App>().TestEntity();
+
+            Console.WriteLine("End FamilyAPITestHarness call test");
+            //Console.ReadLine();
         }
 
         private static IServiceCollection ConfigureServices()
@@ -72,12 +75,14 @@ namespace FamilyAPITestHarness
             if(!string.IsNullOrEmpty(personId)) Log.Information("personId: " + personId);
             #endregion
 
+            #region // Register services
             // Register services and configuration(s)
             services.AddSingleton(config);
             services.AddTransient<IPersonController, PersonController>();
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IHarnessDBService, HarnessDBService>();
             services.AddTransient<App>();
+            #endregion
 
             return services;
         }
