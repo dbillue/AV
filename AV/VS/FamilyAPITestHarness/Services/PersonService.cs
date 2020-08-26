@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FamilyAPITestHarness.Entites;
+using FamilyAPITestHarness.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -9,44 +12,30 @@ namespace FamilyAPITestHarness.Services
 {
     public class PersonService : IPersonService
     {
-        IConfigurationRoot _configurationRoot;
+        IConfiguration _configuration;
         string URIEndPoint, id = string.Empty;
-        string uripath = string.Empty;
+        string route = string.Empty;
 
         // CTOR.
-        public PersonService(IConfigurationRoot configurationRoot)
+        public PersonService(IConfiguration configuration)
         {
-            _configurationRoot = configurationRoot;
-            URIEndPoint = _configurationRoot.GetSection("FamilyAPI").GetSection("URI").Value;
+            _configuration = configuration;
+            URIEndPoint = _configuration.GetSection("FamilyAPI").GetSection("URI").Value;
         }
 
-        public async Task AddPerson(string dataType)
+        public async Task AddPerson(string route, string data)
         {
-            uripath = GetURIPath(dataType);
+            route = GetURIPath(route);
 
-            // TODO: Add record counter to MiddleName
             using (var httpClient = new HttpClient())
             {
-                // TODO: Add method to return in memory data.
-                string data = @"{
-                    ""age"": 25,
-                    ""city"": ""Atlanta"",
-                    ""country"": ""USA"",
-                    ""dateOfBirth"": ""1975 -01-11"",
-                    ""firstName"": ""April"",
-                    ""gender"": ""Female"",
-                    ""lastName"": ""Showers"",
-                    ""mIddleName"": ""May"",
-                    ""stateId"": 51,
-                    ""createdate"": """ + DateTime.Now.ToString() + @"""}";
-
                 HttpContent httpContent = new StringContent(data, Encoding.UTF8);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 httpClient.BaseAddress = new Uri(URIEndPoint);
 
-                var response = await httpClient.PostAsync(uripath, httpContent);
+                var response = await httpClient.PostAsync(route, httpContent);
 
                 #region // Response header parse
                 // Extract GUID of newly created object.
@@ -67,18 +56,69 @@ namespace FamilyAPITestHarness.Services
             }
         }
 
-        private string GetURIPath(string dataType, string objectKey = null)
+        public void DeletePerson(string route, string objectKey)
         {
-            switch (dataType)
+            route = GetURIPath(route, objectKey);
+
+            using (var httpClient = new HttpClient())
             {
-                case "Persons":
-                    uripath = _configurationRoot.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                HttpContent httpContent = new StringContent(objectKey, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+
+                var response = httpClient.DeleteAsync(route);
+            }
+        }
+
+        public async Task UpdatePerson(string route, string objectKey, string updateData)
+        {
+            route = GetURIPath(route, objectKey);
+
+            using (var httpClient = new HttpClient())
+            {
+                HttpContent httpContent = new StringContent(updateData, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+
+                var response = await httpClient.PatchAsync(route, httpContent);
+            }
+        }
+
+        // TODO: Complete call to QueryPerson()
+        public void QueryPerson(Guid personId)
+        {
+
+        }
+
+        // TODO: Complete call to QueryPersons()
+        public void QueryPersons()
+        {
+
+        }
+
+        // TODO: Add as extension / helper method
+        private string GetURIPath(string route, string objectKey = null)
+        {
+            switch (route)
+            {
+                case "AddPerson":
+                    route = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value;
+                    break;
+                case "UpdatePerson":
+                    route = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
+                    break;
+                case "DeletePerson":
+                    route = _configuration.GetSection("FamilyAPI").GetSection("URI_Persons_Path").Value + "/" + objectKey;
                     break;
                 default:
                     break;
             }
 
-            return uripath;
+            return route;
         }
     }
 }
