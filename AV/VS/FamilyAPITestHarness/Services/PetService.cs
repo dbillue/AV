@@ -95,9 +95,15 @@ namespace FamilyAPITestHarness.Services
             }
         }
 
-        public void GetPetTypes()
+        public async Task<string> GetPetTypes(string route)
         {
+            route = await _utilties.GetURIPath(route);
 
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+                return await httpClient.GetStringAsync(route);
+            }
         }
 
         public async Task DeletePet(string route, string objectKey)

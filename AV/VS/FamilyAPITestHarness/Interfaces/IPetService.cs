@@ -10,7 +10,7 @@ namespace FamilyAPITestHarness.Interfaces
 
         Task<string> GetPets(string route);
 
-        public void GetPetTypes();
+        Task<string> GetPetTypes(string route);
 
         Task UpdatePet(string route, string objectKey, string updateData);
 

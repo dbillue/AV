@@ -39,6 +39,9 @@ namespace FamilyAPITestHarness.Controllers
                 case "GetPets":
                     await GetPets();
                     break;
+                case "GetPetTypes":
+                    await GetPetTypes();
+                    break;
                 case "DeletePet":
                     await DeletePet();
                     break;
@@ -168,6 +171,21 @@ namespace FamilyAPITestHarness.Controllers
             {
                 var _pets = await _petService.GetPets("GetPets");
                 Console.WriteLine(_pets);
+            }
+            finishTime = DateTime.Now;
+            Log.Information("Test time end: " + finishTime.ToString());
+        }
+
+        // Test Case: Get PetTypes
+        public async Task GetPetTypes()
+        {
+            Log.Information("PetController.GetPetTypes()");
+
+            startTime = DateTime.Now;
+            for (Int32 iCnt = 1; iCnt <= intTestRunCount; iCnt++)
+            {
+                var returnPetTypes = await _petService.GetPetTypes("GetPetTypes");
+                Console.WriteLine(returnPetTypes);
             }
             finishTime = DateTime.Now;
             Log.Information("Test time end: " + finishTime.ToString());
