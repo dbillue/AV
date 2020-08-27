@@ -1,10 +1,9 @@
 ﻿using FamilyAPITestHarness.Interfaces;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System;
-using Serilog;
-using System.Text;
 using FamilyAPITestHarness.Services;
+using Serilog;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FamilyAPITestHarness.Controllers
 {
@@ -12,8 +11,9 @@ namespace FamilyAPITestHarness.Controllers
     {
         private readonly IPersonService _personService;
         private readonly IHarnessDBService _harnessDbService;
+        private DateTime startTime, finishTime;
 
-        Int32 intTestRunCount = 100;
+        Int32 intTestRunCount = 1000;
 
         // CTOR.
         public PersonController(IPersonService personService, IHarnessDBService harnessDbService)
@@ -35,6 +35,12 @@ namespace FamilyAPITestHarness.Controllers
                     break;
                 case "DeletePerson":
                     await DeletePerson();
+                    break;
+                case "QueryPerson":
+                    await GetPerson();
+                    break;
+                case "QueryPersons":
+                    await GetPersons();
                     break;
                 default:
                     break;
@@ -149,10 +155,47 @@ namespace FamilyAPITestHarness.Controllers
             Log.Information("PersonContoller.DeletePerson()");
 
             var lstPersonsIds = await _harnessDbService.GetPersonIds();
+
+            startTime = DateTime.Now;
+            Log.Information("Test time start: " + startTime.ToString());
             foreach (var person in lstPersonsIds)
             {
-                _personService.DeletePerson("DeletePerson", person.personId.ToString());
+                await _personService.DeletePerson("DeletePerson", person.personId.ToString());
             }
+            finishTime = DateTime.Now;
+            Log.Information("Test time end: " + finishTime.ToString());
+        }
+
+        // Test Case: Get Person
+        public async Task GetPerson()
+        {
+            var lstPersonsIds = await _harnessDbService.GetPersonIds();
+
+            startTime = DateTime.Now;
+            Log.Information("Test time start: " + startTime.ToString());
+            foreach (var person in lstPersonsIds)
+            {
+                var _person = await _personService.GetPerson("QueryPerson", person.personId.ToString());
+                Console.WriteLine(_person);
+            }
+            finishTime = DateTime.Now;
+            Log.Information("Test time end: " + finishTime.ToString());
+        }
+
+        // Test Case: Get Persons
+        public async Task GetPersons()
+        {
+            Log.Information("PersonContoller.QueryPersons()");
+
+            startTime = DateTime.Now;
+            Log.Information("Test time start: " + startTime.ToString());
+            for (Int32 iCnt = 1; iCnt <= intTestRunCount; iCnt++)
+            {
+                var _persons = await _personService.GetPersons("QueryPersons");
+                Console.WriteLine(_persons);
+            }
+            finishTime = DateTime.Now;
+            Log.Information("Test time end: " + finishTime.ToString());
         }
     }
 }

@@ -8,12 +8,12 @@ namespace FamilyAPITestHarness.Interfaces
     {
         Task AddPerson(string route, string data);
 
-        void DeletePerson(string route, string personId);
+        Task DeletePerson(string route, string objectKey);
 
         Task UpdatePerson(string route, string objectKey, string updateData);
 
-        void QueryPerson(Guid personId);
+        Task<string> GetPerson(string route, string objectKey);
 
-        void QueryPersons();
+        Task<string> GetPersons(string route);
     }
 }

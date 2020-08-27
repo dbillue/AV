@@ -1,5 +1,6 @@
 ﻿using FamilyAPITestHarness.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FamilyAPITestHarness.Services
 {
-    public class PersonService : IPersonService
+    public class PetService : IPetService
     {
         IConfiguration _configuration;
         IUtilties _utilties;
@@ -16,14 +17,14 @@ namespace FamilyAPITestHarness.Services
         string route = string.Empty;
 
         // CTOR.
-        public PersonService(IConfiguration configuration, IUtilties utilties)
+        public PetService(IConfiguration configuration, IUtilties utilties)
         {
             _configuration = configuration;
             _utilties = utilties;
             URIEndPoint = _configuration.GetSection("FamilyAPI").GetSection("URI").Value;
         }
 
-        public async Task AddPerson(string route, string data)
+        public async Task AddPet(string route, string data)
         {
             route = await _utilties.GetURIPath(route);
 
@@ -56,23 +57,29 @@ namespace FamilyAPITestHarness.Services
             }
         }
 
-        public async Task DeletePerson(string route, string objectKey)
+        public async Task<string> GetPet(string route, string objectKey)
         {
             route = await _utilties.GetURIPath(route, objectKey);
 
             using (var httpClient = new HttpClient())
             {
-                HttpContent httpContent = new StringContent(objectKey, Encoding.UTF8);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
                 httpClient.BaseAddress = new Uri(URIEndPoint);
-
-                var response = await httpClient.DeleteAsync(route);
+                return await httpClient.GetStringAsync(route);
             }
         }
 
-        public async Task UpdatePerson(string route, string objectKey, string updateData)
+        public async Task<string> GetPets(string route)
+        {
+            route = await _utilties.GetURIPath(route);
+
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = new Uri(URIEndPoint);
+                return await httpClient.GetStringAsync(route);
+            }
+        }
+
+        public async Task UpdatePet(string route, string objectKey, string updateData)
         {
             route = await _utilties.GetURIPath(route, objectKey);
 
@@ -88,25 +95,24 @@ namespace FamilyAPITestHarness.Services
             }
         }
 
-        public async Task<string> GetPerson(string route, string objectKey)
+        public void GetPetTypes()
+        {
+
+        }
+
+        public async Task DeletePet(string route, string objectKey)
         {
             route = await _utilties.GetURIPath(route, objectKey);
 
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(URIEndPoint);
-                return await httpClient.GetStringAsync(route);
-            }
-        }
+                HttpContent httpContent = new StringContent(objectKey, Encoding.UTF8);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        public async Task<string> GetPersons(string route)
-        {
-            route = await _utilties.GetURIPath(route);
-
-            using (var httpClient = new HttpClient())
-            {
                 httpClient.BaseAddress = new Uri(URIEndPoint);
-                return await httpClient.GetStringAsync(route);
+
+                var response = await httpClient.DeleteAsync(route);
             }
         }
     }

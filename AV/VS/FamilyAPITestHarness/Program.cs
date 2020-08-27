@@ -2,13 +2,13 @@
 using FamilyAPITestHarness.DBContext;
 using FamilyAPITestHarness.Interfaces;
 using FamilyAPITestHarness.Services;
+using FamilyAPITestHarness.Utils;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using Serilog;
 using System;
 using System.Threading.Tasks;
-using Serilog;
-using Microsoft.EntityFrameworkCore;
 
 namespace FamilyAPITestHarness
 {
@@ -17,6 +17,7 @@ namespace FamilyAPITestHarness
         public static string entity { get; set; }
         public static string action { get; set; }
         public static string personId { get; set; }
+        public static string petId { get; set; }
 
         static async Task Main(string[] args)
         {
@@ -24,6 +25,8 @@ namespace FamilyAPITestHarness
             action = args[1].ToString().Trim();
 
             if (args.Length > 2) personId = args[2].ToString().Trim();
+
+            if (args.Length > 3) petId = args[3].ToString().Trim();
 
             if (string.IsNullOrEmpty(entity)) return;
 
@@ -59,8 +62,8 @@ namespace FamilyAPITestHarness
             // Setup Serilog
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config)
-                .WriteTo.File(new Serilog.Formatting.Json.JsonFormatter(), 
-                                config["LogFileDirectory"] + "FamiyAPITestHarness.log", 
+                .WriteTo.File(new Serilog.Formatting.Json.JsonFormatter(),
+                                config["LogFileDirectory"] + "FamiyAPITestHarness.log",
                                 rollingInterval: RollingInterval.Day,
                                 retainedFileCountLimit: 15)
                 .CreateLogger();
@@ -72,7 +75,8 @@ namespace FamilyAPITestHarness
 
             Log.Information("entity: " + entity);
             Log.Information("action: " + action);
-            if(!string.IsNullOrEmpty(personId)) Log.Information("personId: " + personId);
+            if (!string.IsNullOrEmpty(personId)) Log.Information("personId: " + personId);
+            if (!string.IsNullOrEmpty(personId)) Log.Information("petId: " + petId);
             #endregion
 
             #region // Register services
@@ -80,8 +84,11 @@ namespace FamilyAPITestHarness
             services.AddSingleton(config);
             services.AddTransient<IPersonController, PersonController>();
             services.AddTransient<IPersonService, PersonService>();
+            services.AddTransient<IPetController, PetController>();
+            services.AddTransient<IPetService, PetService>();
             services.AddTransient<IHarnessDBService, HarnessDBService>();
             services.AddTransient<App>();
+            services.AddSingleton<IUtilties, Utilities>();
             #endregion
 
             return services;

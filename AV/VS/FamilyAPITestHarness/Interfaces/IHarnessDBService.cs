@@ -1,5 +1,5 @@
 ﻿using FamilyAPITestHarness.Entites;
-using FamilyAPITestHarness.DTO;
+using FamilyAPITestHarness.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
@@ -8,7 +8,9 @@ namespace FamilyAPITestHarness.Services
 {
     public interface IHarnessDBService
     {
-        Task<IQueryable<PersonGuidDTO>> GetPersonIds();
+        Task<List<PersonGuid>> GetPersonIds();
+
+        Task<List<PetGuid>> GetPetIds();
 
         Task<List<Person>> GetPersons();
     }

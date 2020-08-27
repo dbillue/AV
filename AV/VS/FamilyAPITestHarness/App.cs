@@ -1,7 +1,4 @@
-﻿using FamilyAPITestHarness.Controllers;
-using FamilyAPITestHarness.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using FamilyAPITestHarness.Interfaces;
 using System.Threading.Tasks;
 
 namespace FamilyAPITestHarness
@@ -9,11 +6,13 @@ namespace FamilyAPITestHarness
     public class App
     {
         private readonly IPersonController _personController;
+        private readonly IPetController _petController;
 
         //Ctor.
-        public App(IPersonController personController)
+        public App(IPersonController personController, IPetController petController)
         {
             _personController = personController;
+            _petController = petController;
         }
 
         // Determine which controller to call based on test entity.
@@ -24,8 +23,8 @@ namespace FamilyAPITestHarness
                 case "Person":
                     await _personController.TestAction();
                     break;
-                case "Pets":
-                    //TODO: Create controller to call PetService
+                case "Pet":
+                    await _petController.TestAction();
                     break;
                 default:
                     break;

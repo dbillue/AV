@@ -1,5 +1,5 @@
 ﻿using FamilyAPITestHarness.DBContext;
-using FamilyAPITestHarness.DTO;
+using FamilyAPITestHarness.Model;
 using FamilyAPITestHarness.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,18 +19,31 @@ namespace FamilyAPITestHarness.Services
             _dbContext = dbContext;
         }
 
-        // Query for list all Person.personId values
-        public async Task<IQueryable<PersonGuidDTO>> GetPersonIds()
+        // Query for list all Person.PersonId values
+        public async Task<List<PersonGuid>> GetPersonIds()
         {
             var PersonIds = from person in _dbContext.Person
-                            select new PersonGuidDTO
+                            select new PersonGuid
                             {
                                 personId = (Guid)person.PersonId
                             };
 
-            return (IQueryable<PersonGuidDTO>)await PersonIds.ToListAsync();
+            return await PersonIds.ToListAsync();
         }
 
+        // Query for list all Pet.PetId values
+        public async Task<List<PetGuid>> GetPetIds()
+        {
+            var PetIds = from pet in _dbContext.Pet
+                            select new PetGuid
+                            {
+                                petId = (Guid)pet.PetId
+                            };
+
+            return await PetIds.ToListAsync();
+        }
+
+        // Return Person model
         public async Task<List<Person>> GetPersons()
         {
             var lstPerson = await _dbContext.Person.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToListAsync<Person>();

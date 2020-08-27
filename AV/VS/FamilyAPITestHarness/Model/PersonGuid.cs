@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FamilyAPITestHarness.DTO
+namespace FamilyAPITestHarness.Model
 {
-    public class PersonGuidDTO
+    public class PersonGuid
     {
         public Guid personId { get; set; }
     }
