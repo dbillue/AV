@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
-using FamilyDemoAPIv2.Entities;
 using FamilyDemoAPIv2.Helpers;
 using FamilyDemoAPIv2.Models;
-using FamilyDemoAPIv2.ResourceParameters;
 using FamilyDemoAPIv2.Service;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FamilyDemoAPIv2.Controllers
@@ -72,6 +69,36 @@ namespace FamilyDemoAPIv2.Controllers
         }
 
         /// <summary>
+        /// Use this method to query for a pet
+        /// </summary>
+        /// <param name="petId"></param>
+        /// <param name="GetPet"></param>
+        /// <returns>A pet</returns>
+        /// <remarks>HttpGet verb.</remarks>
+        [HttpGet("{GetPet}", Name = "GetPet")]
+        [Route("GetPet")]
+        public async Task<ActionResult> GetPet([FromQuery] Guid petId, string GetPet = "GetPet")
+        {
+            // Guid petId = new Guid();
+
+            // Log Api call.  Could be moved to database for future anayltics.
+            _log.WriteInformation("Controller:Pets,API:GetPet,DateTime:" + DateTime.Now.ToString());
+
+
+            // Ensure person exists.
+            if (!_familyDemoAPIv2Repository.PetExists(petId).Result)
+            {
+                return NotFound();
+            }
+
+            var petFromRepo = await _familyDemoAPIv2Repository.GetPet(petId); // Obtain record via DbContext query and store in entity.
+            var petToReturn = _mapper.Map<PetDTO>(petFromRepo); // Map entity to return DTO.
+
+            // Return person.
+            return Ok(petToReturn);
+        }
+
+        /// <summary>
         /// Use this method to query for a list of pet types.
         /// </summary>
         /// <param name="GetPetTypes"></param>
@@ -111,7 +138,7 @@ namespace FamilyDemoAPIv2.Controllers
         {
             // Log Api call.  Could be moved to database for future anayltics.
             _log.WriteInformation("Controller:PetsController,API:AddPet,DateTime:" + DateTime.Now.ToString());
-            
+
             try
             {
                 var petEntity = _mapper.Map<Entities.Pet>(pet); // Map to entity.
@@ -130,7 +157,9 @@ namespace FamilyDemoAPIv2.Controllers
                 return CreatedAtRoute("AddPetAsync",
                     new { petToReturn.PetId },
                     petToReturn);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 _log.WriteError(ex.Message, ex.InnerException);
                 return NoContent();
             }
@@ -156,7 +185,8 @@ namespace FamilyDemoAPIv2.Controllers
         public async Task<ActionResult> UpdatePetAsync(Guid petId, JsonPatchDocument<PetDTO> patchDocument)
         {
             // Ensure pet exists.
-            if (!_familyDemoAPIv2Repository.PetExists(petId).Result)
+            var exists = await _familyDemoAPIv2Repository.PetExists(petId);
+            if (!exists)
             {
                 return NotFound();
             }

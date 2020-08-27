@@ -125,16 +125,15 @@ namespace FamilyDemoAPIv2.Controllers
         /// <returns>The person queried for.</returns>
         /// <remarks>HttpGet verb.</remarks>
         [HttpGet("{personId}", Name = "GetPerson")]
-        public ActionResult GetPerson(Guid personId)
+        public async Task<ActionResult> GetPerson(Guid personId)
         {
-            // TODO: Make method async with a Task
             // Ensure person exists.
             if (!_familyDemoAPIv2Repository.PersonExists(personId).Result)
             {
                 return NotFound();
             }
 
-            var personFromRepo = _familyDemoAPIv2Repository.GetPerson(personId).Result; // Obtain record via DbContext query and store in entity.
+            var personFromRepo = await _familyDemoAPIv2Repository.GetPerson(personId); // Obtain record via DbContext query and store in entity.
             var personToReturn = _mapper.Map<GetPersonDTO>(personFromRepo); // Map entity to return DTO.
 
             // Return person.
