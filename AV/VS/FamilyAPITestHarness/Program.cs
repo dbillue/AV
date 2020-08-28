@@ -40,7 +40,6 @@ namespace FamilyAPITestHarness
             await serviceProvider.GetService<App>().TestEntity();
 
             Console.WriteLine("End FamilyAPITestHarness call test");
-            //Console.ReadLine();
         }
 
         private static IServiceCollection ConfigureServices()
