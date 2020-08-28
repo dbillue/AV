@@ -5,15 +5,5 @@ namespace FamilyAPITestHarness.Interfaces
     public interface IPersonController
     {
         Task TestAction();
-
-        Task AddPerson();
-
-        Task UpdatePerson();
-
-        Task DeletePerson();
-
-        Task GetPerson();
-
-        Task GetPersons();
     }
 }
