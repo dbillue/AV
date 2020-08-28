@@ -48,7 +48,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Add Person
-        public async Task AddPerson()
+        private async Task AddPerson()
         {
             Log.Information("PersonContoller.AddPerson()");
             string data = @"{
@@ -70,7 +70,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Update Person
-        public async Task UpdatePerson()
+        private async Task UpdatePerson()
         {
             Log.Information("PersonContoller.UpdatePerson()");
 
@@ -150,7 +150,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Delete Persons
-        public async Task DeletePerson()
+        private async Task DeletePerson()
         {
             Log.Information("PersonContoller.DeletePerson()");
 
@@ -167,7 +167,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Get Person
-        public async Task GetPerson()
+        private async Task GetPerson()
         {
             var lstPersonsIds = await _harnessDbService.GetPersonIds();
 
@@ -183,7 +183,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Get Persons
-        public async Task GetPersons()
+        private async Task GetPersons()
         {
             Log.Information("PersonContoller.QueryPersons()");
 

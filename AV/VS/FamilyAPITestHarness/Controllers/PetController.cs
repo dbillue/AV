@@ -51,7 +51,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Add Pet
-        public async Task AddPet()
+        private async Task AddPet()
         {
             Log.Information("PetController.AddPet()");
             string data = @"{
@@ -76,7 +76,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         //Test Case: Update pet
-        public async Task UpdatePet()
+        private async Task UpdatePet()
         {
             Log.Information("PetController.UpdatePet()");
 
@@ -128,7 +128,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Delete Pet
-        public async Task DeletePet()
+        private async Task DeletePet()
         {
             Log.Information("PetController.DeletePet()");
 
@@ -145,7 +145,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Get Pet
-        public async Task GetPet()
+        private async Task GetPet()
         {
             Log.Information("PetController.GetPet()");
 
@@ -161,7 +161,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Get pets
-        public async Task GetPets()
+        private async Task GetPets()
         {
             Log.Information("PetsController.GetPets()");
 
@@ -177,7 +177,7 @@ namespace FamilyAPITestHarness.Controllers
         }
 
         // Test Case: Get PetTypes
-        public async Task GetPetTypes()
+        private async Task GetPetTypes()
         {
             Log.Information("PetController.GetPetTypes()");
 
