@@ -12,7 +12,6 @@ namespace FamilyAPITestHarness.Controllers
         private readonly IPetService _petService;
         private readonly IHarnessDBService _harnessDbService;
         private DateTime startTime, finishTime;
-
         Int32 intTestRunCount = 2000;
 
         // Ctor.
