@@ -7,12 +7,14 @@ namespace FamilyAPITestHarness
     {
         private readonly IPersonController _personController;
         private readonly IPetController _petController;
+        private readonly IBirthStateController _birthstateController;
 
         //Ctor.
-        public App(IPersonController personController, IPetController petController)
+        public App(IPersonController personController, IPetController petController, IBirthStateController birthstateController)
         {
             _personController = personController;
             _petController = petController;
+            _birthstateController = birthstateController;
         }
 
         // Determine which controller to call based on test entity.
@@ -25,6 +27,9 @@ namespace FamilyAPITestHarness
                     break;
                 case "Pet":
                     await _petController.TestAction();
+                    break;
+                case "BirthState":
+                    await _birthstateController.TestAction();
                     break;
                 default:
                     break;

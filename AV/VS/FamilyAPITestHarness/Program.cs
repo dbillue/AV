@@ -85,6 +85,8 @@ namespace FamilyAPITestHarness
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IPetController, PetController>();
             services.AddTransient<IPetService, PetService>();
+            services.AddTransient<IBirthStateController, BirthStateController>();
+            services.AddTransient<IBirthStateService, BirthStateService>();
             services.AddTransient<IHarnessDBService, HarnessDBService>();
             services.AddTransient<App>();
             services.AddSingleton<IUtilties, Utilities>();
