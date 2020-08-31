@@ -132,6 +132,8 @@ namespace FamilyDemoAPIv2
 
             app.UseHttpsRedirection();
 
+            app.UseHsts();
+
             app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
