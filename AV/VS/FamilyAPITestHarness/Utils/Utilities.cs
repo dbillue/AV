@@ -51,6 +51,9 @@ namespace FamilyAPITestHarness.Utils
                 case "DeletePet":
                     route = _configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
                     break;
+                case "GetStates":
+                    route = _configuration.GetSection("FamilyAPI").GetSection("URI_BirthState_Path").Value;
+                    break;
                 default:
                     break;
             }
