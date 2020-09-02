@@ -143,7 +143,6 @@ namespace FamilyDemoAPIv2.Controllers
             {
                 var petEntity = _mapper.Map<Entities.Pet>(pet); // Map to entity.
                 await _familyDemoAPIv2Repository.AddPet(petEntity); // Add.
-                await _familyDemoAPIv2Repository.Save(); // Save.
 
                 var petToReturn = _mapper.Map<PetDTO>(petEntity);
 
@@ -203,7 +202,6 @@ namespace FamilyDemoAPIv2.Controllers
 
             _mapper.Map(petToPatch, petFromRepo); // Map new values from patched DTO to populated entity.
             await _familyDemoAPIv2Repository.UpdatePet(petFromRepo); // Call repo and update context with with populated entity.
-            await _familyDemoAPIv2Repository.Save();
 
             // Return link in header.
             return CreatedAtRoute("UpdatePetAsync",
@@ -234,7 +232,6 @@ namespace FamilyDemoAPIv2.Controllers
 
                 var petToDelete = _familyDemoAPIv2Repository.GetPet(petId).Result; // Obtain record via DbContext query and store in entity.
                 _familyDemoAPIv2Repository.DeletePet(petToDelete); // Call to repository delete method.
-                _familyDemoAPIv2Repository.Save();
             }
             catch (Exception ex)
             {

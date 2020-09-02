@@ -44,6 +44,7 @@ namespace FamilyDemoAPIv2.Service
 
             person.PersonId = Guid.NewGuid();
             person.CreateDate = DateTime.Parse(DateTime.Now.ToString());
+            await Save();
             await _context.Persons.AddAsync(person);
         }
 
@@ -75,8 +76,10 @@ namespace FamilyDemoAPIv2.Service
 
         public async Task<Person> UpdatePerson(Person person)
         {
-            return await _context.Persons
+            var _person = await _context.Persons
               .Where(a => a.PersonId == person.PersonId).FirstOrDefaultAsync();
+            await Save();
+            return _person;
         }
 
         public async Task DeletePerson(Person person)
@@ -114,6 +117,7 @@ namespace FamilyDemoAPIv2.Service
             }
 
             pet.PetId = Guid.NewGuid();
+            await Save();
             await _context.Pets.AddAsync(pet);
         }
 
@@ -129,8 +133,10 @@ namespace FamilyDemoAPIv2.Service
 
         public async Task<Pet> UpdatePet(Pet pet)
         {
-            return await _context.Pets
+            var _pet = await _context.Pets
                 .Where(x => x.PetId == pet.PetId).FirstOrDefaultAsync();
+            await Save();
+            return _pet;
         }
 
         public async Task DeletePet(Pet pet)
@@ -139,7 +145,7 @@ namespace FamilyDemoAPIv2.Service
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> Save()
+        private async Task<bool> Save()
         {
             var result = await _context.SaveChangesAsync() >= 0;
             return result;

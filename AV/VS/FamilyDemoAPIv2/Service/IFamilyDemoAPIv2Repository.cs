@@ -38,7 +38,5 @@ namespace FamilyDemoAPIv2.Service
         Task DeletePet(Pet pet);
 
         Task AddPet(Pet pet);
-
-        Task<bool> Save();
     }
 }

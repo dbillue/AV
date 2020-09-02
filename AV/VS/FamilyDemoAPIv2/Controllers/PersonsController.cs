@@ -49,7 +49,6 @@ namespace FamilyDemoAPIv2.Controllers
             { 
                 var personEntity = _mapper.Map<Entities.Person>(person); // Map to entity.
                 await _familyDemoAPIv2Repository.AddPerson(personEntity); // Add.
-                await _familyDemoAPIv2Repository.Save(); // Save.
 
                 var personToReturn = _mapper.Map<AddPersonDTO>(personEntity); // Map to DTO.
 
@@ -107,7 +106,6 @@ namespace FamilyDemoAPIv2.Controllers
 
             _mapper.Map(personToPatch, personFromRepo); // Map new values from patched DTO to populated entity.
             await _familyDemoAPIv2Repository.UpdatePerson(personFromRepo); // Call repo and update context with with populated entity.
-            await _familyDemoAPIv2Repository.Save();
 
             // Return updated person.
             // return Ok(personFromRepo);
