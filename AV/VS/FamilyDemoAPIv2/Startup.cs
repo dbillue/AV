@@ -99,7 +99,7 @@ namespace FamilyDemoAPIv2
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Library API",
-                        Version = "1",
+                        Version = "2",
                         Description = "Access, update and create family members and their beloved pets ::))",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
