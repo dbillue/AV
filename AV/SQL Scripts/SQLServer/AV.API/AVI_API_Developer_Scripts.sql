@@ -42,7 +42,7 @@ SELECT person.*, bs.[State], pet.*
 FROM persons person LEFT OUTER JOIN pets pet ON person.PersonId = pet.PersonId
 	INNER JOIN birthstate bs ON bs.StateId = person.StateId
 WHERE 1 = 1
-		AND person.PersonId IN ('15E6D638-768F-4609-9CB4-49D49B24F9C4')
+		--AND person.PersonId IN ('15E6D638-768F-4609-9CB4-49D49B24F9C4')
 ORDER BY person.LastName, person.FirstName, pet.Name
 
 INSERT INTO Persons (FirstName, MIddleName, LastName, Gender, Age, Country, City, StateId, DateOfBirth)
