@@ -156,3 +156,6 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/FamilyAPITestHarness/obj
 /AV/VS/FamilyAPITestHarness/Properties
 /AV/VS/FamilyAPITestHarness/appsettings.json
+/AV/VS/FizzBust/.vs/FizzBust/DesignTimeBuild
+/AV/VS/FizzBust/bin/Debug/netcoreapp3.1
+/AV/VS/FizzBust/obj
