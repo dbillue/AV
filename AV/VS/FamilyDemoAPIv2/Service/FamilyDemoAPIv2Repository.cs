@@ -44,8 +44,8 @@ namespace FamilyDemoAPIv2.Service
 
             person.PersonId = Guid.NewGuid();
             person.CreateDate = DateTime.Parse(DateTime.Now.ToString());
-            await Save();
             await _context.Persons.AddAsync(person);
+            await Save();
         }
 
         public async Task<Person> GetPerson(Guid personId)
@@ -117,8 +117,8 @@ namespace FamilyDemoAPIv2.Service
             }
 
             pet.PetId = Guid.NewGuid();
-            await Save();
             await _context.Pets.AddAsync(pet);
+            await Save();
         }
 
         public async Task<List<Pet>> GetPets()
