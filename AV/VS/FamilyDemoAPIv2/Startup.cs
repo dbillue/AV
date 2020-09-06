@@ -98,21 +98,21 @@ namespace FamilyDemoAPIv2
                     "LibraryOpenAPISpecification",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "Library API",
-                        Version = "2",
-                        Description = "Access, update and create family members and their beloved pets ::))",
+                        Title = Configuration.GetSection("SwaggerDocumenation").GetSection("Title").Value.ToString(),
+                        Version = Configuration.GetSection("SwaggerDocumenation").GetSection("APIVersion").Value.ToString(),
+                        Description = Configuration.GetSection("SwaggerDocumenation").GetSection("Description").Value.ToString(),
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                         {
-                            Email = "duanebillue@yahoo.com",
-                            Name = "Duane Billue",
-                            Url = new Uri("https://www.linkedin.com/in/duanebillue/")
+                            Email = Configuration.GetSection("SwaggerDocumenation").GetSection("Email").Value.ToString(),
+                            Name = Configuration.GetSection("SwaggerDocumenation").GetSection("Name").Value.ToString(),
+                            Url = new Uri(Configuration.GetSection("SwaggerDocumenation").GetSection("Url").Value.ToString())
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense()
                         {
-                            Name = "MIT License",
-                            Url = new Uri("https://opensource.org/licenses/MIT")
+                            Name = Configuration.GetSection("SwaggerDocumenation").GetSection("LicenseName").Value.ToString(),
+                            Url = new Uri(Configuration.GetSection("SwaggerDocumenation").GetSection("LicenseUrl").Value.ToString())
                         }
-                    });
+                    });;
 
                 // Integrate XML documentation with Swagger.
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
