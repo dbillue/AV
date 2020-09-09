@@ -10,7 +10,8 @@ $IISAppPool = "FamilyRESTAPI"
 $IISSiteName = "FamilyRESTAPI"
 $FamilyAPIRESTIISAppPool = Get-IISAppPool $IISsiteName
 $IISAppPoolState = Get-WebAppPoolState $IISAppPool
-$solutionPath = "C:\Users\dbill\source\repos\AV\AV\VS\FamilyDemoAPIv2\FamilyDemoAPIv2.sln"
+#$solutionPath = "C:\Users\dbill\source\repos\AV\AV\VS\FamilyDemoAPIv2\FamilyDemoAPIv2.sln"
+$solutionPath = "C:\Users\dbill\source\repos\FamilyDemoApiV2\FamilyDemoAPIv2.sln"
 $outputPath = "C:\inetpub\wwwroot\FamilyRESTAPI\"
 
 Write-Host "Begin build and publish..."
