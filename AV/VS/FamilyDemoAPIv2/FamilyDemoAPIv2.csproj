@@ -8,6 +8,7 @@
   <PropertyGroup>
     <DocumentationFile>FamilyDemoAPIv2.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+    <UserSecretsId>0514f071-9dc1-45d5-b396-e60cfbef418d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
