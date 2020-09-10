@@ -74,7 +74,7 @@ namespace FamilyAPITestHarness.Controllers
             }
         }
 
-        //Test Case: Update pet
+        // Test Case: Update pet
         private async Task UpdatePet()
         {
             Log.Information("PetController.UpdatePet()");
