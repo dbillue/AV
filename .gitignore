@@ -160,3 +160,4 @@ AV/SQL Scripts/SQLServer/CourseLibrary/CourseLibrary_Main.sql
 /AV/VS/FizzBust/bin/Debug/netcoreapp3.1
 /AV/VS/FizzBust/obj
 /AV/VS/EFFamily/obj/Release
+/AV/VS/FamilyApp/appsettings.Production.json
