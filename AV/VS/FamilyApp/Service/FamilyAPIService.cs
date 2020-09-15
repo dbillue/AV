@@ -119,7 +119,7 @@ namespace FamilyApp.Service
                     uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value + "/" + objectKey;
                     break;
                 case "pets":
-                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_PetList_Path").Value;
+                    uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_Pet_Path").Value;
                     break;
                 case "pettypes":
                     uripath = _configuration.GetSection("FamilyAPI").GetSection("URI_PetTypes_Path").Value;
