@@ -159,7 +159,7 @@ namespace FamilyAPITestHarness.Controllers
             Log.Information("Test time end: " + finishTime.ToString());
         }
 
-        // Test Case: Get pets
+        // Test Case: Get Pets
         private async Task GetPets()
         {
             Log.Information("PetsController.GetPets()");
